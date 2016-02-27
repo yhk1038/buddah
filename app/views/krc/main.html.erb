@@ -1,0 +1,233 @@
+<!-- 상단 시작 { -->
+<div id="hd">
+    <h1 id="hd_h1">그누보드5 테마데모</h1>
+    <div id="skip_to_container">
+        <a href="#container">본문 바로가기</a>
+    </div>
+    <%= render :partial => 'main_navbar' %>
+    <hr>
+</div>
+<!-- } 상단 끝 -->
+
+<hr>
+
+<!-- 콘텐츠 시작 { -->
+<div id="idx_wrapper">
+    <!--메인배너-->
+    <div id="main_bn">
+        <ul class="bn_ul">
+            <li class="bn_bg1">
+                <div class="bn_wr">
+                    <div class="bn_txt">
+                        <h2>교단자정센터 <br>교단자정소식</h2>
+                        <p>우리의 원대한 도전,<br>새로운 100년이 깨어납니다</p>
+                    </div>
+                </div>
+            </li>
+            <li class="bn_bg1">
+                <div class="bn_wr">
+                    <div class="bn_txt">
+                        <h2>노출하고싶은 <br>컨텐츠2</h2>
+                        <p>컨텐츠에 관한 설명을<br>짤막하게 넣어주세요</p>
+                    </div>
+                </div>
+            </li>
+            <li class="bn_bg1">
+                <div class="bn_wr">
+                    <div class="bn_txt">
+                        <h2>노출하고싶은 <br>컨텐츠3</h2>
+                        <p>컨텐츠에 관한 설명을<br>짤막하게 넣어주세요</p>
+                    </div>
+                </div>
+            </li>
+            <li class="bn_bg1">
+                <div class="bn_wr">
+                    <div class="bn_txt">
+                        <h2>노출하고싶은 <br>컨텐츠4</h2>
+                        <p>컨텐츠에 관한 설명을<br>짤막하게 넣어주세요</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="bn_btn">
+            <a href="#" class="unslider-arrow prev">Previous slide</a>
+            <a href="#" class="unslider-arrow next">Next slide</a>
+        </div>
+    </div>
+    <!--메인배너-->
+    <script>
+    $(function() {
+        var unslider = $("#main_bn").unslider({
+            speed: 700,               //  The speed to animate each slide (in milliseconds)
+            delay: 5000,              //  The delay between slide animations (in milliseconds)
+            keys: true,               //  Enable keyboard (left, right) arrow shortcuts
+            dots: true,               //  Display dot navigation
+            fluid: false              //  Support responsive design. May break non-responsive designs
+        });
+        
+        $('.unslider-arrow').click(function() {
+            var fn = this.className.split(' ')[1];
+
+            //  Either do unslider.data('unslider').next() or .prev() depending on the className
+            unslider.data('unslider')[fn]();
+        });
+    });
+    </script>
+
+    <div id="idx_container">
+        <ul id="comp_bn">
+            <li>
+                <button type="button" class="accordion-toggle bubn_btn">
+                    수행나눔 갤러리<span>사업보기</span>
+                </button>
+                <div class="accordion-content default bubn_img">
+                    <img src="/theme/krc/img/bu01.jpg" alt="회사설명"/>
+                    <div class="bubn_img_ov">
+                        <h3>수행나눔 갤러리</h3>
+                        <p>수행에 관한 정보를 나눕니다<br>
+                            <span>
+                                <span>새글 12</span> | <span>조회수 8</span>
+                            </span>
+                        </p>
+                        <a href="#">상세보기</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <button type="button" class="accordion-toggle bubn_btn">갤러리 02<span>사업보기</span></button>
+                <div class="accordion-content  bubn_img">
+                    <img src="/theme/krc/img/bu01.jpg" alt="회사설명">
+                    <div class="bubn_img_ov">
+                        <h3>갤러리 02</h3>
+                        <p>갤러리 02 에 관한 안내문구<br>
+                            <span>
+                                <span>새글 12</span> | <span>조회수 8</span>
+                            </span>
+                        </p>
+                        <a href="#">상세보기</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <button type="button" class="accordion-toggle bubn_btn">갤러리 03<span>사업보기</span></button>
+                <div class="accordion-content  bubn_img">
+                    <img src="/theme/krc/img/bu01.jpg" alt="회사설명">
+                    <div class="bubn_img_ov">
+                        <h3>갤러리 03</h3>
+                        <p>갤러리 03 에 관한 안내문구<br>
+                            <span>
+                                <span>새글 12</span> | <span>조회수 8</span>
+                            </span>
+                        </p>
+                        <a href="#">상세보기</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <script type="text/javascript">
+          $(document).ready(function($) {
+            $("#comp_bn").find(".accordion-toggle").click(function(){
+                $(this).next().slideToggle('fast');
+                $(".accordion-content").not($(this).next()).slideUp('fast');
+            });
+          });
+        </script>
+        <ul id="comp_if">
+            <li  class="com_bg1">
+                <h2>교단자정센터 소개</h2>
+                <p>대한불교조계종의 양심 <br>
+                올바름을 이끄는 원동력</p>
+                <a href="#">바로가기</a>
+            </li>
+            <li  class="com_bg2">
+                <h2>후원하기</h2>
+                <p>여러분의 참여로 만드는 <br>
+                교단자정과 교단개혁</p>
+                <a href="#">바로가기</a>
+            </li>
+            <li class="com_bg3">
+                <h2>보도자료</h2>
+                <p>언론의 소식과 <br>
+                교단자정의 보도자료</p>
+                <a href="#">바로가기</a>
+            </li>
+        </ul>
+        <div id="comp_lt">
+            <div class="li_notice">
+                <!-- 공지사항 최신글 시작 { -->
+                <div class="lt">
+                    <strong class="lt_title">
+                        <a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice">공지사항</a>
+                    </strong>
+                    <ul>
+                        <li>
+                            <a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice&amp;wr_id=7">공지사항1<span class="cnt_cmt">1</span></a><span class="lt_date">10-08</span>
+                        </li>
+                            <li>
+                            <a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice&amp;wr_id=6">공지사항2<span class="cnt_cmt">4</span></a><span class="lt_date">09-25</span>
+                        </li>
+                            <li>
+                            <a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice&amp;wr_id=1">공지사항3<span class="cnt_cmt">6</span></a><span class="lt_date">07-28</span>
+                        </li>
+                    
+                        </ul>
+                
+                    <div class="lt_more"><a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice"><span class="sound_only">공지사항</span>더보기</a></div>
+                </div>
+                <!-- } 공지사항 최신글 끝 -->    
+            </div>
+            <div class="li_gall">
+                
+        <!-- 베스트 메뉴 최신글 시작 { -->
+        <div class="lt_gal">
+            <strong class="lt_title"><a href="#">교단자정 소식지</a></strong>
+            <ul>
+                <li>
+                    <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>
+                    <a href="#" class="It_tit">7월 웹진</a>
+                    <p class="lt_detail">메뉴입니다.&nbsp;&nbsp;메뉴입니다.&nbsp;</p>
+                </li>
+                <li>
+                    <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>
+                    <a href="#" class="lt_tit">7,500원</a>
+                    <p class="lt_detail">인기상품입니다.&nbsp;두줄에서 세줄까지 작성합니다.나머지 부가 설명은…</p>
+                </li>
+                <li>
+                    <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>
+                    <a href="#" class="lt_tit">인기상품</a>
+                    <p class="lt_detail">ㅋㅋ&nbsp;내용을 입력하세요.</p>
+                </li>
+            
+                </ul>
+        
+            <div class="lt_more"><a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=gallery"><span class="sound_only">베스트 메뉴</span>더보기</a></div>
+        </div>
+        <!-- } 베스트 메뉴 최신글 끝 -->    </div>
+        </div>
+        <a href="#hd" id="top_btn">상단으로</a>
+    </div>
+</div>
+
+<!-- } 콘텐츠 끝 -->
+
+<hr>
+
+<%= render :partial => 'footer' %>
+
+
+
+<!-- ie6,7에서 사이드뷰가 게시판 목록에서 아래 사이드뷰에 가려지는 현상 수정 -->
+<!--[if lte IE 7]>
+<script>
+$(function() {
+    var $sv_use = $(".sv_use");
+    var count = $sv_use.length;
+
+    $sv_use.each(function() {
+        $(this).css("z-index", count);
+        $(this).css("position", "relative");
+        count = count - 1;
+    });
+});
+</script>
+<![endif]-->

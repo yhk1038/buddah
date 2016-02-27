@@ -1,0 +1,181 @@
+<!-- 상단 시작 { -->
+<div id="hd">
+    <h1 id="hd_h1">그누보드5 테마데모</h1>
+    <div id="skip_to_container">
+        <a href="#container">본문 바로가기</a>
+    </div>
+    <%= render :partial => '/krc/main_navbar' %>
+    <hr>
+</div>
+<!-- } 상단 끝 -->
+
+<hr>
+
+<!-- 콘텐츠 시작 { -->
+<div id="wrapper">
+    <div id="sub_tit">
+        <h2 id="ctn_title">&nbsp</h2>
+    </div>
+    <div id="container">
+        <div id="container_title">공개자료</div>
+        <article id="ctt" class="ctt_contact">
+            <div id="ctt_con">
+                <div class="col-md-3">
+                    <a href="/board/introduce"><span><p class="ctt_con_menu">센터소개</p></span></a>
+                    <a href="/board/map"><span><p class="ctt_con_menu">오시는 길</p></span></a>
+                    <a href="/board/org"><span><p class="ctt_con_menu">참여불교 재가연대</p></span></a>
+                    <a href="/board/data"><span><p class="ctt_con_menuselect">공개자료</p></span></a>
+                </div>
+                <div class="col-md-9">
+                    <div class="intro">
+                        <p class="intro_title">공개자료</p>
+                        <span class="site_navi">Home &gt; 교단자정센터 &gt; <strong>공개자료</strong></span>
+                    </div>
+                    <!-- 게시판 카테고리 시작 { -->
+                    <!-- } 게시판 카테고리 끝 -->
+                
+                    <!-- 게시판 목록 시작 { -->
+                    <div id="bo_list" style="width:100%; margin-top:20px;">
+                        <!-- 게시판 페이지 정보 { -->
+                        <div id="bo_list_total">
+                            <span>Total 3건</span> 1 페이지
+                        </div>
+                        <!-- 게시판 검색 시작 { -->
+                        <fieldset id="bo_sch">
+                            <legend>게시물 검색</legend>
+                    
+                            <form name="fsearch" method="get">
+                            <input type="hidden" name="bo_table" value="notice">
+                            <input type="hidden" name="sca" value="">
+                            <input type="hidden" name="sop" value="and">
+                            <label for="sfl" class="sound_only">검색대상</label>
+                            
+                            <div class="fancy-select">
+                                <select name="sfl" id="sfl" class="fancified" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
+                                    <option value="wr_subject">제목</option>
+                                    <option value="wr_content">내용</option>
+                                    <option value="wr_subject||wr_content">제목+내용</option>
+                                    <option value="mb_id,1">회원아이디</option>
+                                    <option value="mb_id,0">회원아이디(코)</option>
+                                    <option value="wr_name,1">글쓴이</option>
+                                    <option value="wr_name,0">글쓴이(코)</option>
+                                </select>
+                            <div class="trigger">제목</div>
+                                <ul class="options overflowing">
+                                    <li data-raw-value="wr_subject" class="selected">제목</li>
+                                    <li data-raw-value="wr_content" class="">내용</li><li data-raw-value="wr_subject||wr_content" class="">제목+내용</li>
+                                    <li data-raw-value="mb_id,1" class="">회원아이디</li><li data-raw-value="mb_id,0">회원아이디(코)</li>
+                                    <li data-raw-value="wr_name,1">글쓴이</li><li data-raw-value="wr_name,0">글쓴이(코)</li>
+                                </ul>
+                            </div>
+                            <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
+                            <input type="text" name="stx" value="" required id="stx" class="frm_input required" size="26" maxlength="20">
+                            <input type="submit" value="검색" class="btn_submit">
+                            </form>
+                        </fieldset>
+                        <script type="text/javascript">
+                            $('#sfl').fancySelect();
+                        </script>
+                        <!-- } 게시판 검색 끝 -->
+                        <!-- } 게시판 페이지 정보 및 버튼 끝 -->
+                    
+                        <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post">
+                        <input type="hidden" name="bo_table" value="notice">
+                        <input type="hidden" name="sfl" value="">
+                        <input type="hidden" name="stx" value="">
+                        <input type="hidden" name="spt" value="">
+                        <input type="hidden" name="sca" value="">
+                        <input type="hidden" name="sst" value="wr_num, wr_reply">
+                        <input type="hidden" name="sod" value="">
+                        <input type="hidden" name="page" value="1">
+                        <input type="hidden" name="sw" value="">
+                    
+                        <div class="tbl_head01 tbl_wrap">
+                            <table>
+                            <caption>공지사항 목록</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">글쓴이</th>
+                                    <th scope="col"><a href="/gnuboard5/bbs/board.php?bo_table=notice&amp;sop=and&amp;sst=wr_datetime&amp;sod=desc&amp;sfl=&amp;stx=&amp;page=1">날짜</a></th>
+                                    <th scope="col"><a href="/gnuboard5/bbs/board.php?bo_table=notice&amp;sop=and&amp;sst=wr_hit&amp;sod=desc&amp;sfl=&amp;stx=&amp;page=1">조회</a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td class="td_num">3</td>
+                                    <td class="td_subject">
+                                    <a href="/krc/readpost">
+                                        테마 공지사항 테스트글입니다
+                                    <span class="sound_only">댓글</span><span class="cnt_cmt">1</span><span class="sound_only">개</span></a></td>
+                                    <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
+                                    <td class="td_date">10-08</td>
+                                    <td class="td_num">1491</td>
+                                </tr>
+                                <tr class="">
+                                    <td class="td_num">2</td>
+                                    <td class="td_subject">
+                                    
+                                    <a href="/krc/readpost">
+                                        SIR 테마 미리보기 사이트입니다.<span class="sound_only">댓글</span><span class="cnt_cmt">4</span><span class="sound_only">개</span></a></td>
+                                    <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
+                                    <td class="td_date">09-25</td>
+                                    <td class="td_num">726</td>
+                                </tr>
+                                <tr class="">
+                                    <td class="td_num">1</td>
+                                    <td class="td_subject">
+                                    <a href="/krc/readpost">
+                                        SIR 테마 미리보기 사이트입니다.<span class="sound_only">댓글</span><span class="cnt_cmt">6</span><span class="sound_only">개</span></a></td>
+                                    <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
+                                    <td class="td_date">07-28</td>
+                                    <td class="td_num">2038</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                        </form>
+                        <!-- 글쓰기 버튼 시작 -->
+                        <div id="bo_v_bot">
+                            <ul class="bo_v_com">
+                                <li><a href="/krc/writepost"><p class="wo_btn_b01">글쓰기</p></a></li>
+                             </ul>
+                        </div>
+                        <!-- 글쓰기 버튼 끝 -->
+                    </div>
+                    <!-- } 게시판 목록 끝 -->
+                    
+                    <a href="#hd" id="top_btn">상단으로</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
+<!-- } 콘텐츠 끝 -->
+
+
+<hr>
+
+<!-- 하단 시작 { -->
+    <%= render :partial => '/krc/footer' %>
+<!-- } 하단 끝 -->
+
+
+
+<!-- ie6,7에서 사이드뷰가 게시판 목록에서 아래 사이드뷰에 가려지는 현상 수정 -->
+<!--[if lte IE 7]>
+<script>
+$(function() {
+    var $sv_use = $(".sv_use");
+    var count = $sv_use.length;
+
+    $sv_use.each(function() {
+        $(this).css("z-index", count);
+        $(this).css("position", "relative");
+        count = count - 1;
+    });
+});
+</script>
+<![endif]-->
