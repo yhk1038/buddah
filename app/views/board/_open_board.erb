@@ -1,0 +1,121 @@
+<!--바디 스크립트 시작-->
+<body onload="InitializeM();">
+<!--바디 스크립트 끝-->
+
+<!-- pc 버전 시작 -->
+<!-- 상단 시작 { -->
+<div id="hd">
+    <h1 id="hd_h1">교단 자정 센터</h1>
+    <div id="skip_to_container">
+        <a href="#container">본문 바로가기</a>
+    </div>
+    <%= render :partial => '/krc/main_navbar' %>
+    <hr>
+</div>
+<!-- } 상단 끝 -->
+
+<!-- 콘텐츠 시작 { -->
+<div id="wrapper">
+    <div id="sub_tit">
+        <h2 id="ctn_title"><%= @tab.name %></h2>
+    </div>
+    <div id="container">
+        <div id="container_title">.</div>
+
+        <article id="ctt" class="ctt_contact">
+            <div id="ctt_con">
+            
+                <div class="col-md-10 col-sm-9">
+                    <div class="intro">
+                        <p class="intro_title"><%= @intab.name %></p>
+                        <span class="site_navi">Home &gt; <strong><%= @intab.name %></strong></span>
+                    </div>
+                    
+                    
+                    <!--게시판 그룹 시작-->
+                    
+                    <div id="container" style="margin-top:30px;">
+                        <div id="container_title">게시판</div>
+                        <% nnn = 0 %>
+                        <% @tab.intabs.all.order('turn asc').all.each do |intab| %>
+                            <% next if intab.id == @tab.intabs.first.id %>
+                            <!-- 메인화면 최신글 시작 -->
+                            <div style="float:left;<%= "margin-left:20px;" if nnn % 2 == 1 %>">
+                            <!-- 공지사항 최신글 시작 { -->
+                            <div class="lt">
+                                <strong class="lt_title"><a href="/board/page/<%= intab.id %>"><%= intab.name %></a></strong>
+                                <!--http://theme.sir.kr/gnuboard5/bbs/board.php?bo_table=notice-->
+                                <ul>
+                                    <% intab.posts.last(5).reverse.each do |pt| %>
+                                    <li><a href="/board/post_read/<%= pt.id %>"><%= pt.title %><span class="cnt_cmt"><%= pt.replies.count %></span></a>  <img src="/theme/krc/img/icon_hot.gif" alt="인기글"></li>
+                                    <% end %>
+                                </ul>
+                                <div class="lt_more"><a href="/board/page/<%= intab.id %>"><span class="sound_only">공지사항</span>더보기</a></div>
+                            </div>
+                            <!--  공지사항 최신글 끝 -->
+                            </div>
+                            <% nnn = nnn + 1 %>
+                        <% end %>
+                    </div>
+                    <!--게시판 그룹 끝-->
+                </div>
+               
+               
+                <div class="col-md-2 col-sm-3">
+                    <%= render :partial => '/board/banner' %>    
+                </div>
+                
+                <p style="text-align: center; " align="center">&nbsp;</p>
+                <p style="text-align: center; " align="center">&nbsp;</p><p>&nbsp;</p>
+                <div style="text-align: center;" align="center"><br></div>
+                <div style="text-align: center;" align="center"><span style="line-height: 1.5;">&nbsp;</span>
+            </div>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            </div>
+        
+        </article>
+        <a href="#hd" id="top_btn">상단으로</a>
+    </div>
+</div>
+
+<!--  콘텐츠 끝 -->
+<!-- pc 버전 끝 -->
+
+
+<!-- 모바일 버전 시작 -->
+<%= render :partial => '/krc/mobile_navbar' %>
+<div id="mobile_ob_container">
+        <div id="mobile_ob_container_title"><%= @tab.name %></div>
+<!-- 메인화면 최신글 시작 -->
+<% nnn = 0 %>
+<% @tab.intabs.all.each do |intab| %>
+<% next if intab.id == @tab.intabs.first.id %>
+<div class="mobile_ob_lt">
+    <a href="/board/page/<%= intab.id %>" class="mobile_ob_lt_title"><strong><%= intab.name %></strong></a>
+    <ul>
+        <% intab.posts.last(5).reverse.each do |pt| %>
+        <li><a href="/board/post_read/<%= pt.id %>"><%= pt.title %><span class="cnt_cmt"><span class="cnt_cmt"><%= pt.replies.count %></span></span>  <img src="/theme/krc/img/icon_hot.gif" alt="인기글">  </a></li>
+        <% end %>
+    </ul>
+    <div class="mobile_ob_lt_more"><a href="/board/page/<%= intab.id %>"><span class="sound_only">공지사항</span>더보기</a></div>
+</div>
+<% nnn = nnn + 1 %>
+<% end %>
+<!-- 메인화면 최신글 끝 -->
+
+    </div>
+<!-- 모바일 버전 끝 -->
+
+
+<!-- 하단 시작 { -->
+    <%= render :partial => 'krc/footer' %>
+<!-- } 하단 끝 -->
+
+
+
+
+</body>

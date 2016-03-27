@@ -1,0 +1,48 @@
+<div class="border-form-div">
+  <h1><strong>로그인</strong></h1>
+  
+
+
+<fieldset id="login_fs">  
+  <form class="new_user" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post">
+    <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    
+    <div class="field">
+      <label for="user_email">이메일</label><br>
+      <input autofocus="autofocus" type="email" value="" name="user[email]" id="user_email" class="frm_input">
+    </div>
+  
+    <div class="field">
+      <label for="user_password">비밀번호</label><br>
+      <input autocomplete="off" type="password" name="user[password]" id="user_password" class="frm_input">
+    </div>
+  
+    <div class="actions">
+      <input class="btn_submit" type="submit" name="commit" value="로그인">
+    </div>
+    
+    <div class="field">
+        <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+        <label for="user_remember_me">자동로그인</label>
+      </div>
+      
+  </form>
+  <!--<a href="/users/sign_up" class="btn btn-primary">Sign up</a><br>-->
+  <!--<a href="/users/password/new">Forgot your password?</a><br>-->
+  
+  </fieldset>
+  <aside id="login_info">
+        <h2>회원로그인 안내</h2>
+        <p>
+            회원아이디 및 비밀번호가 기억 안나실 때는 아이디/비밀번호 찾기를 이용하십시오.<br>
+            아직 회원이 아니시라면 회원으로 가입 후 이용해 주십시오.
+        </p>
+        <div>
+            <a href="/users/password/new" target="_blank" id="login_password_lost" class="btn02">비밀번호 찾기</a>
+            <a href="/krc/pre_sign" class="btn01">회원 가입</a>
+        </div>
+    </aside>
+    <div class="btn_confirm">
+        <a href="/">메인으로 돌아가기</a>
+    </div>
+</div>

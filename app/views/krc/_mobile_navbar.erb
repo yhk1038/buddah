@@ -1,0 +1,85 @@
+<div id="mobile_hd_wrapper">
+        <div id="mobile_logo">
+            <a href="/"><img src="/theme/krc/img/mobile_logo2.png"></a>
+            <% 
+               if user_signed_in?
+                   flash[:error] = current_user.nickname + ' 님의 방문을 환영합니다.'
+               else
+                   flash[:error] = ''
+               end
+            %>
+            <span style="margin-left: 5%;; color:#fff;"><%= flash[:error] %></span>
+        </div>
+        <!--메뉴-->
+        <button type="button" id="mobile_gnb_open" class="mobile_hd_opener">메뉴<span class="sound_only"> 열기</span></button>
+        <div id="mobile_gnb" class="mobile_hd_div">
+            <div id="mobile_hd_sch"></div>
+            <ul id="mobile_gnb_1dul">
+                <li class="mobile_gnb_1dli" style="z-index:999;border-bottom:1px solid white;">
+                    <a href="/" target="_self" class="mobile_gnb_1da mobile_gnb_op">HOME</a>
+                </li>
+                <% n = 0 %>
+                <% $tab.order('turn asc').each do |tab| %>
+                    <li class="mobile_gnb_1dli" style="z-index:999;border-bottom:1px solid white;">
+                    <% if tab.intabs.count == 0 %>
+                        <a href="#" target="_self" class="mobile_gnb_1da mobile_gnb_bg"><%= tab.name %></a>
+                    <% elsif tab.intabs.first.templete == "open_board" %>
+                        <a href="/board/page/<%= tab.intabs.first.id %>" target="_self" class="mobile_gnb_1da mobile_gnb_bg"><%= tab.name %></a>
+                    <% else %>
+                        <a href="#" target="_self" class="mobile_gnb_1da mobile_gnb_bg mobile_gnb_op"><%= tab.name %></a>
+                        <ul class="mobile_gnb_2dul">
+                            <% tab.intabs.all.order('turn asc').each do |intab| %>
+                                <li class="mobile_gnb_2dli"><a href="/board/page/<%= intab.id %>" target="_self" class="mobile_gnb_2da"><%= intab.name %></a></li>
+                            <% end %>
+                        </ul>
+                    <% end %>
+                    </li>
+                <% end %>
+            </ul>
+            <ul id="mobile_hd_nb">
+                <% if user_signed_in? %>
+                <li><a href="/users/sign_out" id="mobile_snb_login">로그아웃</a></li>
+                <% else %>
+                <li><a href="/krc/pre_sign" id="mobile_snb_login">회원가입</a></li>
+                <li><a href="/users/sign_in" id="mobile_snb_login">로그인</a></li>
+                <% end %>
+            </ul>
+            <button type="button" id="mobile_gnb_close" class="mobile_hd_closer"><span class="sound_only">메뉴 </span>닫기</button>
+        </div>
+
+<script>
+$(function () {
+    $(".mobile_hd_opener").on("click", function() {
+        var $this = $(this);
+        var $hd_layer = $this.next(".mobile_hd_div");
+
+        if($hd_layer.is(":visible")) {
+            $hd_layer.hide();
+            $this.find("span").text("열기");
+        } else {
+            var $hd_layer2 = $(".mobile_hd_div:visible");
+            $hd_layer2.prev(".mobile_hd_opener").find("span").text("열기");
+            $hd_layer2.hide();
+
+            $hd_layer.show();
+            $this.find("span").text("닫기");
+        }
+        $("#mobile_wrapper").css("position","fixed").bind('touchmove', function(e){e.preventDefault()});
+    });
+
+    $(".mobile_hd_closer").on("click", function() {
+        var idx = $(".hd_closer").index($(this));
+        $(".mobile_hd_div:visible").hide();
+        $(".mobile_hd_opener:eq("+idx+")").find("span").text("열기");
+        $("#mobile_wrapper").css("position","relative").unbind('touchmove'); //스크롤 방지 해제
+
+    });
+});
+
+$(function(){
+    $(".mobile_gnb_op").click(function(){
+        $(this).next().slideToggle(300).siblings(".mobile_gnb_2dul").slideUp("slow");
+    });
+});
+</script>
+</div>

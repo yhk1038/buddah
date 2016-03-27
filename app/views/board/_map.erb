@@ -1,0 +1,136 @@
+<!--바디 스크립트 시작-->
+<body onload="InitializeM();">
+<!--바디 스크립트 끝-->
+
+<!--pc 버전 시작-->
+<!-- 상단 시작 { -->
+<div id="hd">
+    <h1 id="hd_h1">교단 자정 센터</h1>
+    <div id="skip_to_container">
+        <a href="#container">본문 바로가기</a>
+    </div>
+    <%= render :partial => '/krc/main_navbar' %>
+    <hr>
+</div>
+<!-- } 상단 끝 -->
+
+<hr>
+
+
+</div>
+<!-- } 상단 끝 -->
+
+<hr>
+
+<!-- 콘텐츠 시작 { -->
+<div id="wrapper">
+    <div id="sub_tit">
+        <h2 id="ctn_title"><%= @tab.name %></h2>
+    </div>
+    <div id="container">
+        <div id="container_title">.</div>
+
+        <article id="ctt" class="ctt_contact">
+            <div id="ctt_con">
+                <!--<div class="" style="position:fixed; width: 12%;">-->
+                    
+                <!--</div>-->
+                <div class="col-md-3 col-sm-3">
+                    <% @tab.intabs.all.order('turn asc').each do |side_intab| %>
+                        <% if side_intab.id == @intab.id %>
+                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menuselect"><%= side_intab.name %></p></span></a>
+                        <% else %>
+                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menu"><%= side_intab.name %></p></span></a>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <div class="intro">
+                        <p class="intro_title"><%= @intab.name %></p>
+                        <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
+                    </div>
+                    <div style="text-align: center; " align="center">
+                        <p style="text-align: center; " align="center">&nbsp;</p>
+                        <img src="/theme/krc/img/map.png" style="width:100%"/>
+                        <p style="text-align: center; " align="center">&nbsp;</p>
+                    </div>
+                    <dl class="map_info">
+                        <dt>지하철</dt>
+                        <dd>본사: 지하철 3호선 동대입구역 2번 출구 → 100m 앞 직진 → 원조장충동할매족발보쌈에서 왼쪽으로 꺾어서 직진하면<br>  우리함께빌딩 3층 교단자정센터</dd>
+                        <dt>버스</dt>
+                        <dd>이마트 하차시 : [마을버스 : 01번(영등포)] / [지선버스 : 5536번]</dd>
+                        <dt>자가용</dt>
+                        <dd><strong>남부순환도로 진입시 :</strong><br>  시흥 I.C → 수출공단입구 좌회전 → 이마트앞 우회전 200M 앞<br><br>  <strong>대릉 포스트타워 3차대방로 진입시:</strong><br>  수출관리공단 입구 좌, 우 회전 → 이마트앞 우회전 200M 앞 → 대룡 포스트 타워</dd>
+                        <dt>주소</dt>
+                        <dd class="noline">(100-855) 서울특별시시 중구 동호로 24길 27-17 우리함께빌딩 3층<br>
+                            Tel 02-2278-3417 | Fax 02-2278-3532 | e-mail cleansangha@buddha21.org</dd>
+                    </dl>
+                           
+                    <p style="text-align: center; " align="center">&nbsp;</p>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <%= render :partial => '/board/banner' %>
+                </div>
+            </div>
+    </div>
+        
+        </article>
+        <a href="#hd" id="top_btn">상단으로</a>
+    </div>
+</div>
+
+<!-- } 콘텐츠 끝 -->
+<!--pc 버전 끝-->
+
+<hr>
+
+<!--모바일 버전 시작-->
+<%= render :partial => '/krc/mobile_navbar' %>
+<div id="mobile_container">
+    <div id="mobile_container_title">찾아오시는 길</div>
+        <article id="mobile_ctt" class="mobile_ctt_contact">
+            <header>
+                <h1>찾아오시는 길</h1>
+            </header>
+        
+            <div id="mobile_ctt_con">
+                <p style="text-align: center; " align="center"><img src="/theme/krc/img/map.png"/ style="width:100%"></p>
+                
+                <dl class="map_info">
+                    <dt>지하철</dt>
+                    <dd>본사: 지하철 3호선 동대입구역 2번 출구 → 100m 앞 직진 → 원조장충동할매족발보쌈에서 왼쪽으로 꺾어서 직진하면<br>  우리함께빌딩 3층 교단자정센터</dd>
+                    <dt>버스</dt>
+                    <dd>이마트 하차시 : [마을버스 : 01번(영등포)] / [지선버스 : 5536번]</dd>
+                    <dt>자가용</dt>
+                    <dd><strong>남부순환도로 진입시 :</strong><br>  시흥 I.C → 수출공단입구 좌회전 → 이마트앞 우회전 200M 앞<br><br>  <strong>대릉 포스트타워 3차대방로 진입시:</strong><br>  수출관리공단 입구 좌, 우 회전 → 이마트앞 우회전 200M 앞 → 대룡 포스트 타워</dd>
+                    <dt>주소</dt>
+                    <dd class="noline">(100-855) 서울특별시시 중구 동호로 24길 27-17 우리함께빌딩 3층<br>
+                        Tel 02-2278-3417 | Fax 02-2278-3532 | e-mail cleansangha@buddha21.org</dd>
+                </dl>
+            </div>
+        
+        </article>
+</div>
+<!--모바일 버전 끝-->
+
+<!-- 하단 시작 { -->
+<%= render :partial => '/krc/footer' %>
+<!-- } 하단 끝 -->
+
+
+
+<!-- ie6,7에서 사이드뷰가 게시판 목록에서 아래 사이드뷰에 가려지는 현상 수정 -->
+<!--[if lte IE 7]>
+<script>
+$(function() {
+    var $sv_use = $(".sv_use");
+    var count = $sv_use.length;
+
+    $sv_use.each(function() {
+        $(this).css("z-index", count);
+        $(this).css("position", "relative");
+        count = count - 1;
+    });
+});
+</script>
+<![endif]-->

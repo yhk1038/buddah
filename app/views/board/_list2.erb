@@ -1,0 +1,195 @@
+<% 
+    if params[:id] == nil
+        @intab = Intab.where(name: '공지사항').take
+        @tab = Tab.find(@intab.tab_id)
+    end
+%>
+<!-- pc 버전 시작  -->
+<!-- 상단 시작 { -->
+<div id="hd">
+    <h1 id="hd_h1">교단 자정 센터</h1>
+    <div id="skip_to_container">
+        <a href="#container">본문 바로가기</a>
+    </div>
+    <%= render :partial => '/krc/main_navbar' %>
+    <hr>
+</div>
+<!-- } 상단 끝 -->
+
+<hr>
+
+<!-- 콘텐츠 시작 { -->
+<div id="wrapper">
+    <div id="sub_tit">
+        <h2 id="ctn_title"><%= @tab.name %></h2>
+    </div>
+    <div id="container">
+        <div id="container_title">.</div>
+        <article id="ctt" class="ctt_contact">
+            <div id="ctt_con">
+                <!--<div class="" style="position:fixed; width: 12%;">-->
+                <!--</div>-->
+                <div class="col-md-3 col-sm-3">
+                    <% @tab.intabs.all.order('turn asc').each do |side_intab| %>
+                        <% unless side_intab.templete == 'open_board' %>
+                            <% if side_intab.id == @intab.id %>
+                            <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menuselect"><%= side_intab.name %></p></span></a>
+                            <% else %>
+                            <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menu"><%= side_intab.name %></p></span></a>
+                            <% end %>
+                        <% else %>
+                            <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menu_home"><%= side_intab.name %></p></span></a>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <div class="intro">
+                        <p class="intro_title"><%= @intab.name %></p>
+                        <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
+                    </div>
+                    <!-- 게시판 카테고리 시작 { -->
+                    <!-- } 게시판 카테고리 끝 -->
+                    
+                    <!-- 게시판 목록 시작 { -->
+                    <%= render :partial => '/board/list_table' %>
+                    <!-- } 게시판 목록 끝 -->
+                    
+                    <a href="#hd" id="top_btn">상단으로</a>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <%= render :partial => '/board/banner' %>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
+<!--  콘텐츠 끝 -->
+<!-- pc 버전 끝  -->
+<hr>
+
+
+<!-- 모바일 버전 시작  -->
+<%= render :partial => '/krc/mobile_navbar' %>
+<div id="mobile_container">
+    <h2 id="mobile_container_title"><span style="font-size:15px;"><%= @tab.name %> ></span> <%= @intab.name %><span class="sound_only"> 목록</span></h2>
+    
+    <!-- 게시판 목록 시작 -->
+    <div id="mobile_bo_list">
+        <div class="mobile_bo_fx">
+            <div id="mobile_bo_list_total">
+                <span>Total <%= @intab.posts.all.count %>건</span><%= @intab.posts.all.count/15 +1 %> 페이지
+            </div>
+    
+        </div>
+    
+        <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post">
+        <input type="hidden" name="bo_table" value="notice">
+        <input type="hidden" name="sfl" value="">
+        <input type="hidden" name="stx" value="">
+        <input type="hidden" name="spt" value="">
+        <input type="hidden" name="sst" value="wr_num, wr_reply">
+        <input type="hidden" name="sod" value="">
+        <input type="hidden" name="page" value="1">
+        <input type="hidden" name="sw" value="">
+    
+        <div class="mobile_tbl_head01 mobile_tbl_wrap">
+            <table>
+            <thead>
+            <tr>
+                <th scope="col">제목</th>
+                <th scope="col"><a href="/gnuboard5/bbs/board.php?bo_table=notice&amp;sop=and&amp;sst=wr_datetime&amp;sod=desc&amp;sfl=&amp;stx=&amp;page=1">글쓴이</a></th>
+            </tr>
+            </thead>
+            <tbody>
+                    <% if @intab.posts.count == 0 %>
+                    <tr class="">
+                        <td class="td_subject">
+                        <a href="/board/post_create?intab=<%= @intab.id %>">
+                            첫 [<%= @intab.name %>] 게시글 작성의 주인공이 되어보세요!
+                        <span class="sound_only">댓글</span><span class="mobile_cnt_cmt">0</span><span class="sound_only">개</span></a></td>
+                        <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
+                    </tr>
+                    <% else %>
+                        <% pst_n = 0 %>
+                        <% @intab.posts.all.reverse.each do |pst| %>
+                        <tr class="">
+                            <td class="td_subject">
+                                <a href="/board/post_read/<%= pst.id %>">
+                                    <% if pst.title.length > 35 %>
+                                        <%= pst.title.first(35) + "..." %>
+                                    <% else %>
+                                        <%= pst.title %>
+                                    <% end %>
+                                <span class="sound_only">댓글</span><span class="cnt_cmt"><%= pst.replies.count %></span><span class="sound_only">개</span>
+                                </a>
+                            </td>
+                            <% if pst.anonymous == true %>
+                            <td class="td_name td_date sv_use">
+                                <span class="sv_member"><%= "익명" %></span>
+                            </td>
+                            <% else %>
+                            <td class="td_name td_date sv_use">
+                                <span class="sv_member"><%= pst.author_name %></span>
+                            </td>
+                            <% end %>
+                        </tr>
+                        <% pst_n += 1 %>
+                        <% end %>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+        </form>
+    </div>
+    
+    
+    <!-- 페이지 -->
+    
+    <fieldset id="mobile_bo_sch">
+        <legend>게시물 검색</legend>
+    
+        <form name="fsearch" method="get">
+        <input type="hidden" name="bo_table" value="notice">
+        <input type="hidden" name="sca" value="">
+        <input type="hidden" name="sop" value="and">
+        <label for="sfl" class="sound_only">검색대상</label>
+        <select name="sfl">
+            <option value="wr_subject">제목</option>
+            <option value="wr_content">내용</option>
+            <option value="wr_subject||wr_content">제목+내용</option>
+            <option value="mb_id,1">회원아이디</option>
+            <option value="mb_id,0">회원아이디(코)</option>
+            <option value="wr_name,1">글쓴이</option>
+            <option value="wr_name,0">글쓴이(코)</option>
+        </select>
+        <input name="stx" value="" placeholder="검색어(필수)" required="" id="stx" class="required frm_input" size="15" maxlength="20"><input type="submit" value="검색" class="mobile_btn_submit">
+        </form>
+    </fieldset>
+    
+    <!-- 게시판 목록 끝 -->
+        </div>
+
+<!-- 모바일 버전 끝  -->
+
+<!-- 하단 시작  -->
+    <%= render :partial => '/krc/footer' %>
+<!--  하단 끝 -->
+
+
+
+<!-- ie6,7에서 사이드뷰가 게시판 목록에서 아래 사이드뷰에 가려지는 현상 수정 -->
+<!--[if lte IE 7]>
+<script>
+$(function() {
+    var $sv_use = $(".sv_use");
+    var count = $sv_use.length;
+
+    $sv_use.each(function() {
+        $(this).css("z-index", count);
+        $(this).css("position", "relative");
+        count = count - 1;
+    });
+});
+</script>
+<![endif]-->

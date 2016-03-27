@@ -2,12 +2,25 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes" />-->
   <!--inserted meta tags-->
-    <meta http-equiv="imagetoolbar" content="no">
-    <meta http-equiv="X-UA-Compatible" content="IE=10,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta http-equiv="X-UA-Compatible" content="IE=10,chrome=1">
   <!--//end-->
   
   <title>교단자정센터</title>
+  
+  <!-- DataTables CSS -->
+  <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+  <!-- DataTables Responsive CSS -->
+  <link href="/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
   
   <!--  ========================================================  -->
   <!-- |            made by the team, '4d' at c9 workspace      | -->
@@ -15,29 +28,67 @@
   <!--  ========================================================  -->
   
   <!--original c9 meta tags-->
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    
+    <!--swiper 시작-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>  
+    <!--swiper 끝-->
+    
+    <link rel="stylesheet" media="all" href="/assets/board.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+    <link rel="stylesheet" media="all" href="/assets/krc.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+    <link rel="stylesheet" media="all" href="/assets/application.self-864ac4e0a5dbe39ec2d51890ad831d62692094ea0009fbd4815f0c0e345476a4.css?body=1" data-turbolinks-track="true">
+    
+    <script src="/assets/jquery.self-c64a74367bda6ef8b860f19e74df08927ca99d2be2ac934e9e92d5fd361e0da4.js?body=1" data-turbolinks-track="true"></script>
+    <script src="/assets/jquery_ujs.self-d602bdfe68ffc63b9f9cc512872aa3cfff046228a0a36e90dd476e8ef54c1b09.js?body=1" data-turbolinks-track="true"></script>
+    <script src="/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" data-turbolinks-track="true"></script>
+    <script src="/assets/board.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="true"></script>
+    <script src="/assets/krc.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="true"></script>
+    <script src="/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" data-turbolinks-track="true"></script>
+
+    
+    
+    <!--여기까지야-->
     <%= csrf_meta_tags %>
   <!--//end-->
+  
+  <!--모바일 버전 시작-->
+  <link rel="stylesheet" href="/theme/krc/css/custom.css" media="all and (min-width:768px)">
+  <link rel="stylesheet" href="/theme/krc/css/default.css" media="all and (min-width:768px)">
+  <link rel="stylesheet" href="/theme/krc/css/style.css" media="all and (min-width:768px)">
+  <link rel="stylesheet" href="/theme/krc/skin/latest/basic/style.css" media="all and (min-width:768px)">
+  <link rel="stylesheet" href="/theme/krc/skin/latest/gallery/style.css" media="all and (min-width:768px)">
+  <link rel="stylesheet" href="/theme/krc/css/-768.css" media="all and (max-width:767px)">
+  <link rel="stylesheet" href="/theme/krc/css/swiper.min.css" media="all and (max-width:767px)">
+  <!--모바일 버전 끝-->
   <!--inserted property tags-->
-    <link rel="stylesheet" href="/theme/krc/css/default.css">
-    <link rel="stylesheet" href="/theme/krc/css/style.css">
-    <link rel="stylesheet" href="/theme/krc/skin/latest/basic/style.css">
-    <link rel="stylesheet" href="/theme/krc/skin/latest/gallery/style.css">
+    <!--<link rel="stylesheet" href="/theme/krc/css/default.css">-->
+    <!--<link rel="stylesheet" href="/theme/krc/css/style.css">-->
+    <!--<link rel="stylesheet" href="/theme/krc/skin/latest/basic/style.css">-->
+    <!--<link rel="stylesheet" href="/theme/krc/skin/latest/gallery/style.css">-->
+    <!--부트스트랩 CDN - min.css 넣었던 자리-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!--/-->
     <link rel="stylesheet" type="text/css" href="/theme/krc/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/theme/krc/css/swiper.min.css">
   
     <script>
       // 자바스크립트에서 사용하는 전역변수 선언
       var g5_url       = "http://theme.sir.co.kr/gnuboard5";
       var g5_bbs_url   = "http://theme.sir.co.kr/gnuboard5/bbs";
-      var g5_is_member = "김용현";
-      var g5_is_admin  = "어드민";
-      var g5_is_mobile = "모바일";
-      var g5_bo_table  = "보 테이블?";
+      var g5_is_member = "";
+      var g5_is_admin  = "";
+      var g5_is_mobile = "";
+      var g5_bo_table  = "";
       var g5_sca       = "";
-      var g5_editor    = "에디터";
-      var g5_cookie_domain = "쿠키도메인";
+      var g5_editor    = "";
+      var g5_cookie_domain = "";
     </script>
     <!-- Latest compiled and minified CSS -->
 
@@ -49,16 +100,34 @@
     <script src="/js/common.js"></script>
     <script src="/js/wrest.js"></script>
     <script src="/theme/krc/js/unslider.min.js"></script>
-    
+    <script src="/js/swiper.min.js"></script>
     <!--[if lte IE 8]>
     <script src="js/html5.js"></script>
     <![endif]-->
   
   <!--//end-->
+  
 </head>
 <body>
 
 <%= yield %>
+
+    <!-- jQuery -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/bower_components/raphael/raphael-min.js"></script>
+    <script src="/bower_components/morrisjs/morris.min.js"></script>
+    <script src="/js/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/dist/js/sb-admin-2.js"></script>
 
 </body>
 </html>

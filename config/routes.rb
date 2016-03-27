@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+  
   root 'krc#main'
   
   match ":controller(/:action(/:id))", :via => [:post,:get]
+  #match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
+  post "users/registrations/destroy/:id" => 'users/registrations#destroy', as: 'delete_user'
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

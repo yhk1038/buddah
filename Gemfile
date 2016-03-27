@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
+# gem 'smart_editor', github: "goodoc/smart_editor_rails", branch: "rails4"
+# gem 'carrierwave'
+gem 'seed_dump'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '~> 4.2.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -23,6 +26,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+#gem 'rake', '~> 10.4', '>= 10.4.2'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

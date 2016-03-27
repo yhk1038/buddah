@@ -1,0 +1,243 @@
+<div class="panel panel-default col-md-12">
+  <!-- Default panel contents -->
+  <div class="panel-heading" style="font-size:25px;">회원가입자 <b>총 <%= User.count %></b></div>
+  <div class="panel-body">
+    <p>총 DGUlion 페이지 회원가입자 현황 thead는 User.attribute_names</p>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+        <tr style="font-weight:bold;">
+            <td>id</td>
+            <td>닉네임(nickname)</td>
+            <td>이름(username)</td>
+            <td>전화번호(phonenumber)</td>
+            <td>이메일(email)</td>
+            <td>가입일(created_at)</td>
+            <td>로그인횟수(sign_in_count)</td>
+            <td>현재접속여부(current_sign_in_ip)</td>
+            <td>최종방문일(updated_at)</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% User.all.each do |user| %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.nickname %></td>
+                <td><%= user.username %></td>
+                <td><%= user.phonenumber %></td>
+                <td><%= user.email %></td>
+                <td><%= user.created_at %></td>
+                <td><%= user.sign_in_count %></td>
+                <td><%= user.current_sign_in_ip %></td>
+                <td><%= user.updated_at %></td>
+            </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default col-md-12">
+  <!-- Default panel contents -->
+  <div class="panel-heading" style="font-size:25px;">네비게이션바 Tab <b>총 <%= Tab.count %></b></div>
+  <div class="panel-body">
+    <% if params[:mod_tab] == nil %>
+    <form action="/board/save_tabs" method="POST">
+        탭 이름 : <input type="text" name="name">
+        <input type="submit" class="btn btn-blue" value="추가">
+    </form>
+    <% else %>
+    <form action="/board/save_tabs?mod_tab=true" method="POST">
+        탭 이름 : 
+        <input type="text" name="name" value="<%= @tab.name %>">
+        하위 인탭 : 
+        <select>
+            <% Intab.all.each do |x| %>
+                <option><%= x.name %></option>
+            <% end %>
+        </select>
+        <input type="hidden" name="id" value="<%= @tab.id %>">
+        <input type="submit" class="btn btn-blue" value="수정">
+    </form>
+    <% end %>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+        <tr style="font-weight:bold;">
+            <td>id</td>
+            <td>탭 이름(name)</td>
+            <td>하위 인탭</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>부가기능</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% Tab.all.each do |tab| %>
+            <tr>
+                <td><%= tab.id %></td>
+                <td><%= tab.name %></td>
+                <td>
+                    <% tab.intabs.each do |it| %>
+                        <%= it.name %> | .
+                    <% end %>
+                </td>
+                <td><%#= q.user_phone %></td>
+                <td><%#= q.user_email %></td>
+                <td><%#= q.user_message %></td>
+                <td><a href="/board/tmp?mod_tab=<%= tab.id %>" class="btn btn-blue">수정</a> <a href="/board/delete_tabs/<%= tab.id %>" class="btn btn-blue">삭제</a></td>
+            </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default col-md-12">
+  <!-- Default panel contents -->
+  <div class="panel-heading" style="font-size:25px;">Tab에 포함된 Intab <b>총 <%= Intab.count %></b></div>
+  <div class="panel-body">
+    <% if params[:mod_intab] == nil %>
+    <form action="/board/save_intabs" method="POST">
+        <select name="tab_id">
+            <% Tab.all.each do |x| %>
+            <option value="<%= x.id %>"><%= x.name %></option>
+            <% end %>
+        </select>
+        인탭 이름 : <input type="text" name="name">
+        <select type="text" name="templete">
+            <option value="introduce">소개페이지형</option>
+            <option value="map">지도형</option>
+            <option value="org">분할카드형</option>
+            <option value="org2">조직 구성도</option>
+            <option value="list">목록형</option>
+            <option value="open_board">오픈보드형</option>
+        </select>
+        <input type="text" name="subscribe" value="" placeholder="짤막한 소개문구를 입력해주세요">
+        <input type="text" name="img" value="" placeholder="메인 이미지의 주소를 넣어주세요">
+        <select type="text" name="who_can_create">
+            <option value="" selected>-쓰기권한-</option>
+            <option value="10">최고관리자</option>
+            <option value="9">부분 관리자</option>
+            <option value="8">고위 임직원</option>
+            <option value="7">일반 임직원</option>
+            <option value="6">?</option>
+            <option value="5">?</option>
+            <option value="4">정회원</option>
+            <option value="3">후원회원</option>
+            <option value="2">인터넷회원</option>
+            <option value="1">비회원</option>
+            <option value="0">방문자</option>
+        </select>
+        <select type="text" name="who_can_read">
+            <option value="" selected>-읽기권한-</option>
+            <option value="10">최고관리자</option>
+            <option value="9">부분 관리자</option>
+            <option value="8">고위 임직원</option>
+            <option value="7">일반 임직원</option>
+            <option value="6">?</option>
+            <option value="5">?</option>
+            <option value="4">정회원</option>
+            <option value="3">후원회원</option>
+            <option value="2">인터넷회원</option>
+            <option value="1">비회원</option>
+            <option value="0">방문자</option>
+        </select>
+        <input type="submit" class="btn btn-blue" value="추가">
+    </form>
+    <% else %>
+    <form action="/board/save_intabs?mod_intab=true" method="POST">
+        <select name="tab_id">
+            <% Tab.all.each do |x| %>
+                <% if x.id == @intab.tab_id %>
+                <option value="<%= x.id %>" selected><%= x.name %></option>
+                <% else %>
+                <option value="<%= x.id %>"><%= x.name %></option>
+                <% end %>
+            <% end %>
+        </select>
+        <input type="text" name="name" value="<%= @intab.name %>">
+        <select type="text" name="templete">
+            <option value="introduce" <%= "selected" if @intab.templete == "introduce" %>>소개페이지형</option>
+            <option value="map" <%= "selected" if @intab.templete == "map" %>>지도형</option>
+            <option value="org" <%= "selected" if @intab.templete == "org" %>>분할카드형</option>
+            <option value="list" <%= "selected" if @intab.templete == "list" %>>목록형</option>
+            <option value="donate" <%= "selected" if @intab.templete == "donate" %>>후원형</option>
+            <option value="open_board" <%= "selected" if @intab.templete == "open_board" %>>오픈보드형</option>
+        </select>
+        <input type="text" name="subscribe" value="<%= @intab.subscribe %>">
+        <input type="text" name="img" value="<%= @intab.img %>">
+        <select type="text" name="who_can_create">
+            
+            <option value="10" <%= "selected" if @intab.who_can_create == 10 %>>최고관리자</option>
+            <option value="9" <%= "selected" if @intab.who_can_create == 9 %>>부분 관리자</option>
+            <option value="8" <%= "selected" if @intab.who_can_create == 8 %>>고위 임직원</option>
+            <option value="7" <%= "selected" if @intab.who_can_create == 7 %>>일반 임직원</option>
+            <option value="6" <%= "selected" if @intab.who_can_create == 6 %>>?</option>
+            <option value="5" <%= "selected" if @intab.who_can_create == 5 %>>?</option>
+            <option value="4" <%= "selected" if @intab.who_can_create == 4 %>>정회원</option>
+            <option value="3" <%= "selected" if @intab.who_can_create == 3 %>>후원회원</option>
+            <option value="2" <%= "selected" if @intab.who_can_create == 2 %>>인터넷회원</option>
+            <option value="1" <%= "selected" if @intab.who_can_create == 1 %>>비회원</option>
+            <option value="0" <%= "selected" if @intab.who_can_create == 0 %>>방문자</option>
+        </select>
+        <select type="text" name="who_can_read">
+            
+            <option value="10" <%= "selected" if @intab.who_can_read == 10 %>>최고관리자</option>
+            <option value="9" <%= "selected" if @intab.who_can_read == 9 %>>부분 관리자</option>
+            <option value="8" <%= "selected" if @intab.who_can_read == 8 %>>고위 임직원</option>
+            <option value="7" <%= "selected" if @intab.who_can_read == 7 %>>일반 임직원</option>
+            <option value="6" <%= "selected" if @intab.who_can_read == 6 %>>?</option>
+            <option value="5" <%= "selected" if @intab.who_can_read == 5 %>>?</option>
+            <option value="4" <%= "selected" if @intab.who_can_read == 4 %>>정회원</option>
+            <option value="3" <%= "selected" if @intab.who_can_read == 3 %>>후원회원</option>
+            <option value="2" <%= "selected" if @intab.who_can_read == 2 %>>인터넷회원</option>
+            <option value="1" <%= "selected" if @intab.who_can_read == 1 %>>비회원</option>
+            <option value="0" <%= "selected" if @intab.who_can_read == 0 %>>방문자</option>
+        </select>
+        <input type="hidden" name="id" value="<%= @intab.id %>">
+        <input type="submit" class="btn btn-blue" value="수정">
+    </form>
+    <% end %>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+        <tr style="font-weight:bold;">
+            <td>id</td>
+            <td>소속 탭</td>
+            <td>인탭 이름</td>
+            <td>페이지 형태</td>
+            <td>소개문구</td>
+            <td>메인이미지 주소</td>
+            <td>작성권한</td>
+            <td>읽기권한</td>
+            <td>부가기능</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% Intab.all.each do |intab| %>
+            <tr>
+                <td><%= intab.id %></td>
+                <td>
+                    <% belong_tab = Tab.where(:id => intab.tab_id).take %>
+                    <%= belong_tab.name %>
+                </td>
+                <td><%= intab.name %></td>
+                <td><%= intab.templete %></td>
+                <td><%= intab.subscribe %></td>
+                <td><%= intab.img %></td>
+                <td><%= intab.who_can_create %></td>
+                <td><%= intab.who_can_read %></td>
+                <td>
+                    <a href="/board/tmp?mod_intab=<%= intab.id %>" class="btn btn-blue">수정</a> <a href="/board/delete_intabs/<%= intab.id %>" class="btn btn-blue">삭제</a>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>

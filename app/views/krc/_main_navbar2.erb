@@ -1,0 +1,168 @@
+
+
+<!-- 팝업레이어 시작 { -->
+<div id="hd_pop">
+    <h2>팝업레이어 알림</h2>
+    <span class="sound_only">팝업레이어 알림이 없습니다.</span>
+</div>
+
+<script>
+$(function() {
+    $(".hd_pops_reject").click(function() {
+        var id = $(this).attr('class').split(' ');
+        var ck_name = id[1];
+        var exp_time = parseInt(id[2]);
+        $("#"+id[1]).css("display", "none");
+        set_cookie(ck_name, 1, exp_time, g5_cookie_domain);
+    });
+    $('.hd_pops_close').click(function() {
+        var idb = $(this).attr('class').split(' ');
+        $('#'+idb[1]).css('display','none');
+    });
+    $("#hd").css("z-index", 1000);
+});
+</script>
+<!-- } 팝업레이어 끝 -->
+
+    <div id="hd_wrapper">
+
+        <div id="logo">
+            <a href="#"><img src="/theme/krc/img/logo.jpg" alt="교단자정센터" class="logo_banner"/></a>
+        </div>
+
+        
+        <nav id="gnb">
+            <h2>메인메뉴</h2>
+            <ul id="gnb_1dul">
+                <li class="gnb_1dli" style="z-index:999">
+                    <a href="/" target="_self" class="gnb_1da">HOME</a>
+                </li>
+                
+                
+                
+                <div class="dropdown">
+                <li class="gnb_1dli" style="z-index:998">
+                    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" target="_self" class="drop_btn">교단자정센터
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu gnb_2dul" aria-labelledby="dLabel">
+                     <li class="gnb_2dli"><a href="/board/introduce" target="_self" class="gnb_2da">센터소개</a></li>
+                        <li class="gnb_2dli"><a href="/board/map" target="_self" class="gnb_2da">오시는 길</a></li>
+                        <li class="gnb_2dli"><a href="/board/org" target="_self" class="gnb_2da">참여불교재가연대</a></li>
+                        <li class="gnb_2dli"><a href="/board/data" target="_self" class="gnb_2da">공개 자료</a></li>
+                  </ul>
+                    
+                </li>
+                
+                </div>
+                
+                
+                <!--<li class="gnb_1dli" style="z-index:998">-->
+                <!--    <a href="#" target="_self" class="gnb_1da gnb_bg">교단자정센터</a>-->
+                <!--    <ul class="gnb_2dul">-->
+                <!--        <li class="gnb_2dli"><a href="/board/introduce" target="_self" class="gnb_2da">센터소개</a></li>-->
+                <!--        <li class="gnb_2dli"><a href="/board/map" target="_self" class="gnb_2da">오시는 길</a></li>-->
+                <!--        <li class="gnb_2dli"><a href="/board/org" target="_self" class="gnb_2da">참여불교재가연대</a></li>-->
+                <!--        <li class="gnb_2dli"><a href="/board/data" target="_self" class="gnb_2da">공개 자료</a></li>-->
+                <!--    </ul>-->
+                <!--</li>-->
+                <li class="gnb_1dli" style="z-index:997">
+                    <a href="#" target="_self" class="gnb_1da gnb_bg">활동소식</a>
+                    <ul class="gnb_2dul">
+                        <li class="gnb_2dli"><a href="/board/notice" target="_self" class="gnb_2da">공지사항</a></li>
+                        <li class="gnb_2dli"><a href="/board/activity" target="_self" class="gnb_2da">활동 보고</a></li>
+                        <li class="gnb_2dli"><a href="/board/press" target="_self" class="gnb_2da">언론 보도</a></li>
+                    </ul>
+                </li>
+                <li class="gnb_1dli" style="z-index:996">
+                    <a href="#" target="_self" class="gnb_1da gnb_bg">자정활동참여</a>
+                    <ul class="gnb_2dul">
+                        <li class="gnb_2dli"><a href="/board/report" target="_self" class="gnb_2da">제보하기</a></li>
+                        <li class="gnb_2dli"><a href="/board/councel" target="_self" class="gnb_2da">상담하기</a></li>
+                        <li class="gnb_2dli"><a href="/board/donate" target="_self" class="gnb_2da">후원하기</a></li>
+                    </ul>
+                </li>
+                <li class="gnb_1dli" style="z-index:995">
+                    <a href="#" target="_self" class="gnb_1da gnb_bg">자료실</a>
+                    <ul class="gnb_2dul">
+                        <li class="gnb_2dli"><a href="#" target="_self" class="gnb_2da">컨텐츠1</a></li>
+                        <li class="gnb_2dli"><a href="#" target="_self" class="gnb_2da">컨텐츠2</a></li>
+                        <li class="gnb_2dli"><a href="#" target="_self" class="gnb_2da">컨텐츠3</a></li>
+                    </ul>
+                </li>
+                <li class="gnb_1dli" style="z-index:994">
+                    <a href="/board/open_board" target="_self" class="gnb_1da gnb_bg">열린광장</a>
+                    <ul class="gnb_2dul">
+                        <li class="gnb_2dli"><a href="#" target="_self" class="gnb_2da">자유갤러리</a></li>
+                        <li class="gnb_2dli"><a href="#" target="_self" class="gnb_2da">갤러리1</a></li>
+                        <li class="gnb_2dli"><a href="#" target="_self" class="gnb_2da">갤러리2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        
+        <fieldset id="hd_sch">
+            <legend>사이트 내 전체검색</legend>
+            <form name="fsearchbox" method="get" onsubmit="return fsearchbox_submit(this);"> <!--action="사이트 내 전체검색.php"-->
+                <input type="hidden" name="sfl" value="wr_subject||wr_content">
+                <input type="hidden" name="sop" value="and">
+                
+                <label for="sch_stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
+                <input type="text" name="stx" id="sch_stx" maxlength="20">
+                <input type="submit" id="sch_submit" value="검색">
+            </form>
+
+            <script>
+            function fsearchbox_submit(f)
+            {
+                if (f.stx.value.length < 2) {
+                    alert("검색어는 두글자 이상 입력하십시오.");
+                    f.stx.select();
+                    f.stx.focus();
+                    return false;
+                }
+
+                // 검색에 많은 부하가 걸리는 경우 이 주석을 제거하세요.
+                var cnt = 0;
+                for (var i=0; i<f.stx.value.length; i++) {
+                    if (f.stx.value.charAt(i) == ' ')
+                        cnt++;
+                }
+
+                if (cnt > 1) {
+                    alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");
+                    f.stx.select();
+                    f.stx.focus();
+                    return false;
+                }
+
+                return true;
+            }
+            </script>
+        </fieldset>
+
+        <% if user_signed_in? %>
+        <ul id="tnb">
+            <li style="color:white;">
+                <!--<a href="">-->
+                    <b><%= current_user.nickname %>님의 교단자정센터 방문을 환영합니다!</b>
+                <!--</a>-->
+            </li>
+            <li><a href="/users/edit"><b>정보수정</b></a></li>
+            <li><a href="/users/sign_out"><b>로그아웃</b></a></li>
+        </ul>
+        <% else %>
+        <ul id="tnb">
+            <li><a href="/users/sign_up"><b>회원가입</b></a></li>
+            <li><a href="/users/sign_in"><b>로그인</b></a></li>
+        </ul>
+        <% end %>
+    </div>
+    
+    
+    
+    <style>
+    .drop_btn {width: 100%; outline: 0;height: 55px;border: none;background-color: #3E3C52;color: white;}
+    .dropdown-menu {background-color: #3E3C52; margin:-1px 0 0;border: none;border-radius: 0px; padding :0px;}
+    .dropdown-menu>li>a {color:white;padding: 10px 20px;}
+    .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {color: white;text-decoration: none;background-color: #3E3C52;}
+    </style>

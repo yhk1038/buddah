@@ -1,0 +1,195 @@
+<!--바디 스크립트 시작-->
+<body onload="InitializeM();">
+<!--바디 스크립트 끝-->
+
+<!--pc 버전 시작-->
+<!-- 상단 시작 { -->
+<div id="hd">
+    <h1 id="hd_h1">교단 자정 센터</h1>
+    <div id="skip_to_container">
+        <a href="#container">본문 바로가기</a>
+    </div>
+    <%= render :partial => '/krc/main_navbar' %>
+    <hr>
+</div>
+<!-- 상단 끝 -->
+
+<hr>
+
+<!-- 콘텐츠 시작 { -->
+<!--<div id="wrapper">-->
+<!--    <div id="sub_tit">-->
+<!--        <h2 id="ctn_title"><%#= @tab.name %></h2>-->
+<!--    </div>-->
+<!--    <div id="container">-->
+<!--        <div id="container_title">유관 단체</div>-->
+
+<!--        <article id="ctt" class="ctt_contact">-->
+<!--            <div id="ctt_con">-->
+                <!--<div class="" style="position:fixed; width: 12%;">-->
+                <!--    <%# @tab.intabs.each do |side_intab| %>-->
+                <!--        <%# if side_intab.id == @intab.id %>-->
+                <!--        <a href="/board/page/<%#= side_intab.id %>"><span><p class="ctt_con_menuselect"><%#= side_intab.name %></p></span></a>-->
+                <!--        <%# else %>-->
+                <!--        <a href="/board/page/<%#= side_intab.id %>"><span><p class="ctt_con_menu"><%#= side_intab.name %></p></span></a>-->
+                <!--        <%# end %>-->
+                <!--    <%# end %>-->
+                <!--</div>-->
+<!--                <div class="col-md-3 col-sm-3">-->
+<!--                    <%# @tab.intabs.each do |side_intab| %>-->
+<!--                        <%# if side_intab.id == @intab.id %>-->
+<!--                        <a href="/board/page/<%#= side_intab.id %>"><span><p class="ctt_con_menuselect"><%#= side_intab.name %></p></span></a>-->
+<!--                        <%# else %>-->
+<!--                        <a href="/board/page/<%#= side_intab.id %>"><span><p class="ctt_con_menu"><%#= side_intab.name %></p></span></a>-->
+<!--                        <%# end %>-->
+<!--                    <%# end %>-->
+<!--                </div>-->
+<!--                <div class="col-md-8 col-sm-8">-->
+<!--                    <div class="intro">-->
+<!--                        <p class="intro_title"><%#= @intab.name %></p>-->
+<!--                        <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%#= @tab.name %> &gt; <strong><%#= @intab.name %></strong></span>-->
+<!--                    </div>-->
+<!--                    <p align="center">&nbsp;</p>-->
+<!--                    <div style="padding:0; margin-bottom:6%; background-image:url(http://www.jungamsa.com/data/file/03_4/2072982194_6i8BdMvn_B5BFC0DABDC2_B1E2B5B5.jpg); background-size:cover;">-->
+<!--                        <div style="background: rgba(0, 0, 0, 0.56); padding: 9% 4%; height: 200px; border-bottom: 1px solid #000;">-->
+<!--                            <p style="color: #fafafa; font-size: 37px; font-weight: bold; line-height: 1.8;text-align: center;">-->
+<!--                                참여불교 재가연대-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                        <div style="background: rgba(0, 0, 0, 0.56); padding: 9% 4%; height: 200px; border-bottom: 1px solid #000;">-->
+<!--                            <p style="color: #fafafa; font-size: 37px; font-weight: bold; line-height: 1.8;text-align: center;">-->
+<!--                                (사) 불교 아카데미-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                        <div style="background: rgba(0, 0, 0, 0.56); padding: 9% 4%; height: 200px; border-bottom: 1px solid #000;">-->
+<!--                            <p style="color: #fafafa; font-size: 37px; font-weight: bold; line-height: 1.8;text-align: center;">-->
+<!--                                교단자정 CENTER-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-1 col-sm-1">-->
+<!--                    <%#= render :partial => '/board/banner' %>-->
+<!--                </div>-->
+<!--                <p style="text-align: center; " align="center">&nbsp;</p>-->
+<!--                <p style="text-align: center; " align="center">&nbsp;</p><p>&nbsp;</p>-->
+<!--                <div style="text-align: center;" align="center"><br></div>-->
+<!--                <div style="text-align: center;" align="center"><br></div>-->
+<!--                <div style="text-align: center;" align="center"><br></div>-->
+<!--                <div style="text-align: center;" align="center"><br></div>-->
+<!--                <div style="text-align: center;" align="center"><span style="line-height: 1.5;">&nbsp;</span>-->
+<!--            </div>-->
+<!--            <p>&nbsp;</p>-->
+<!--            <p>&nbsp;</p>-->
+<!--            <p>&nbsp;</p>-->
+<!--            <p>&nbsp;</p>-->
+<!--            <p>&nbsp;</p>-->
+<!--            </div>-->
+        
+<!--        </article>-->
+<!--        <a href="#hd" id="top_btn">상단으로</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--  콘텐츠 끝 -->
+<!-- 콘텐츠 시작 { -->
+<div id="wrapper">
+    <div id="sub_tit">
+        <h2 id="ctn_title"><%= @tab.name %></h2>
+    </div>
+    <div id="container">
+        <div id="container_title">.</div>
+        <article id="ctt" class="ctt_contact">
+            <div id="ctt_con">
+                <div class="col-md-3 col-sm-3">
+                    <% @tab.intabs.all.order('turn asc').each do |side_intab| %>
+                        <% if side_intab.id == @intab.id %>
+                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menuselect"><%= side_intab.name %></p></span></a>
+                        <% else %>
+                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menu"><%= side_intab.name %></p></span></a>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <div class="intro">
+                        <p class="intro_title"><%= @intab.name %></p>
+                        <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
+                    </div>
+                    <div style="text-align: center; " align="center">
+                        <p style="text-align: center; " align="center">&nbsp;</p>
+                        <img src="/theme/krc/img/tree.png" style="width:100%"/>
+                        <p style="text-align: center; " align="center">&nbsp;</p>
+                    </div>
+                    <dl class="map_info">
+                        <dt>대표이사</dt>
+                        <dd><br>홍길동 : https://buddah-yhk1038.c9users.io</dd>
+                        <dt>후원회원</dt>
+                        <dd><br>홍길동 &nbsp&nbsp&nbsp 홍길동 &nbsp&nbsp&nbsp 홍길동 &nbsp&nbsp&nbsp</dd>
+                    </dl>
+                           
+                    <p style="text-align: center; " align="center">&nbsp;</p>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                    <%= render :partial => '/board/banner' %>
+                </div>
+            </div>
+    </div>
+        
+        </article>
+        <a href="#hd" id="top_btn">상단으로</a>
+    </div>
+</div>
+
+<!-- } 콘텐츠 끝 -->
+<!--pc 버전 끝-->
+
+
+<!--모바일 버전 시작-->
+<%= render :partial => '/krc/mobile_navbar' %>
+<div id="mobile_container">
+    <div id="mobile_container_title">참여불교재가연대</div>
+        <article id="mobile_ctt" class="mobile_ctt_contact">
+            <header>
+                <h1>참여불교재가연대</h1>
+            </header>
+        
+            <div class="col-md-12 col-sm-12">
+                    <p align="center">&nbsp;</p>
+                    <div class="col-md-12" style="padding:0;">
+                        <div class="col-sm-10">
+                            <div style="padding:0; background-image:url(http://www.jungamsa.com/data/file/03_4/2072982194_6i8BdMvn_B5BFC0DABDC2_B1E2B5B5.jpg); background-size:cover;">
+                                <div style="background: rgba(0, 0, 0, 0.56); padding: 9% 4%; height: 10%; border-bottom: 1px solid #000;">
+                                    <p style="color: #fafafa; font-size: 28px; font-weight: bold; line-height: 1.8;text-align: center;">
+                                        참여불교 재가연대
+                                    </p>
+                                </div>
+                                <div style="background: rgba(0, 0, 0, 0.56); padding: 9% 4%; height: 10%; border-bottom: 1px solid #000;">
+                                    <p style="color: #fafafa; font-size: 28px; font-weight: bold; line-height: 1.8;text-align: center;">
+                                        (사) 불교 아카데미
+                                    </p>
+                                </div>
+                                <div style="background: rgba(0, 0, 0, 0.56); padding: 9% 4%; height: 10%; border-bottom: 1px solid #000;">
+                                    <p style="color: #fafafa; font-size: 28px; font-weight: bold; line-height: 1.8;text-align: center;">
+                                        교단자정 CENTER
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;" align="center"><br></div>
+                    <div style="text-align: center;" align="center"><span style="line-height: 1.5;">&nbsp;</span>
+                </div>
+                
+            </div>
+        
+        </article>
+</div>
+<!--모바일 버전 끝-->
+
+
+<!-- 하단 시작 { -->
+    <%= render :partial => '/krc/footer' %>
+<!-- } 하단 끝 -->
+
+</body>

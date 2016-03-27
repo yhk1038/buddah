@@ -1,0 +1,366 @@
+<!--메뉴 조회/추가/수정 GUI기반-->
+    <!--상위메뉴 정보 조회/수정-->
+    
+    <div class="col-md-12" style="background-color:#8cc152; padding:0px">
+        
+        <div id="all_tabs" class="col-md-3 list-group" style="background:#a0d468; padding:0px 10px;">
+            <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">상위메뉴</a>
+            <% Tab.all.order('turn asc').each do |ytab| %>
+                <a id="ctrl_<%= ytab.id %>" class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px; cursor:pointer;"><%= ytab.name %></a>
+
+                        <script>
+                            $( "#ctrl_<%= ytab.id %>" ).click(function() {
+                              if ( $( "#intabs_<%= ytab.id %>").is( ":hidden" )){
+                                $( "#intabs_0").fadeOut( "fast", function() { 
+                                });
+                                $( "#intabs_1").fadeOut( "fast", function() { 
+                                });
+                                $( "#intabs_2").fadeOut( "fast", function() { 
+                                });
+                                $( "#intabs_3").fadeOut( "fast", function() { 
+                                });
+                                $( "#intabs_4").fadeOut( "fast", function() { 
+                                });
+                                $( "#intabs_5").fadeOut( "fast", function() { 
+                                });
+                                <% Intab.all.each do |w| %>
+                                $( "#dt_intab_<%= w.id %>" ).slideUp( "fast", function() {
+                                });
+                                <% end %>
+                                $( "#dt_intab_00" ).slideUp( "fast", function() {
+                                });
+                                $( "#intabs_<%= ytab.id %>" ).fadeIn( "fast", function() {
+                                });
+                              } else {
+                                $( "#intabs_<%= ytab.id %>" ).fadeOut( "fast", function() {
+                                });      
+                              }
+                            });
+                        </script>
+
+            <% end %>
+            <a id="ctrl_0" class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px; cursor:pointer;">+ 새로운 상위메뉴 추가</a>
+            <script>
+            $( "#ctrl_0" ).click(function() {
+               if ( $( "#intabs_0").is( ":hidden" )){
+                $( "#intabs_0").fadeOut( "fast", function() { 
+                });
+                $( "#intabs_1").fadeOut( "fast", function() { 
+                });
+                $( "#intabs_2").fadeOut( "fast", function() { 
+                });
+                $( "#intabs_3").fadeOut( "fast", function() { 
+                });
+                $( "#intabs_4").fadeOut( "fast", function() { 
+                });
+                $( "#intabs_5").fadeOut( "fast", function() { 
+                });
+                $( "#intabs_0" ).fadeIn( "fast", function() {
+                });  
+                <% Intab.all.each do |w| %>
+                $( "#dt_intab_<%= w.id %>" ).slideUp( "fast", function() {
+                });
+                <% end %>
+                $( "#dt_intab_00" ).slideUp( "fast", function() {
+                });
+              } else {
+                $( "#intabs_0" ).fadeOut( "fast", function() {
+                });      
+              } 
+            });
+            </script>
+        </div>
+        
+        <% Tab.all.order('turn asc').each do |y_tab| %>
+        <div id="intabs_<%= y_tab.id %>" class="col-md-6" style="padding:0; display:none;">
+            <div id="tab_mod_<%= y_tab.id %>" class="col-md-6 list-group form-group" style="">
+                <form action="/board/save_tabs?mod_tab=true" method="POST">
+                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">상위메뉴 수정하기</a>
+                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                    메뉴 이름 <input type="text" name="name" class="form-control" value="<%= y_tab.name %>">
+                </a><input type="hidden" name="id" value="<%= y_tab.id %>">
+                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                    상단메뉴 중 <input type="number" name="turn" class="form-control" value="<%= y_tab.turn %>">번째 메뉴
+                </a>
+                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                    <input type="submit" class="form-control btn-warning" value="수정하기" style="font-size:18px;">
+                    <a href="/board/delete_tabs/<%= y_tab.id %>" class="form-control btn-danger" style="font-size:18px; text-align:center;color:#fff;">삭제하기</a>
+                </a>
+                </form>
+            </div>
+            <div class="col-md-6 list-group" style="background:#a0d468; padding:0px 10px;">
+                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">[<%= y_tab.name %>]의 하위메뉴</a>
+                <% y_tab.intabs.all.order('turn asc').each do |yintab| %>
+                    <a id="ls_<%= yintab.id %>" class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;"><%= yintab.name %></a>
+                    <script>
+                        $( "#ls_<%= yintab.id %>").click( function(){
+                           $( "#tab_mod_<%= y_tab.id %>").fadeOut( "fast", function(){
+                           });
+                           
+                           if ( $( "#dt_intab_<%= yintab.id %>").is( ":hidden" )){
+                            $( "#dt_intab_00").fadeOut( "fast", function() { 
+                            });
+                            <% i = 1 %>
+                            <% loop do %>
+                                $( "#dt_intab_<%= i %>").slideUp( "fast", function() { 
+                                });
+                                <% break if i == Intab.count %>
+                                <% i += 1 %>
+                            <% end %>
+                            $( "#dt_intab_00").slideUp( "fast", function(){
+                            });
+                            $( "#dt_intab_<%= yintab.id %>" ).slideDown( "fast", function() {
+                            });  
+                          } else {
+                            $( "#dt_intab_<%= yintab.id %>" ).slideUp( "fast", function() {
+                            });
+                            $( "#dt_intab_00").slideUp( "fast", function(){
+                            });
+                            $( "#tab_mod_<%= y_tab.id %>").fadeIn( "fast", function(){
+                            });
+                          } 
+                        });
+                    </script>
+                <% end %>
+                <a id="ls_<%= y_tab.id %>_0" class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">+ 추가하기</a>
+                <script>
+                    $( "#ls_<%= y_tab.id %>_0").click( function(){
+                       $( "#tab_mod_<%= y_tab.id %>").fadeOut( "fast", function(){
+                       });
+                       
+                       if ( $( "#dt_intab_00").is( ":hidden" )){
+                        // $( "#dt_intab_0").fadeOut( "fast", function() { 
+                        // });
+                        <% i = 1 %>
+                        <% loop do %>
+                            $( "#dt_intab_<%= i %>").slideUp( "fast", function() { 
+                            });
+                            <% break if i == Intab.count %>
+                            <% i += 1 %>
+                        <% end %>
+                        $( "#dt_intab_00" ).slideDown( "fast", function() {
+                        });  
+                      } else {
+                        $( "#dt_intab_00").slideUp( "fast", function(){
+                        });
+                        $( "#tab_mod_<%= y_tab.id %>").fadeIn( "fast", function(){
+                        });
+                      } 
+                    });
+                </script>
+            </div>
+        </div>
+        
+        
+    <!--하위메뉴 '수정'하기    -->
+        <% y_tab.intabs.all.order('turn asc').each do |yl_intab| %>
+        <div id="dt_intab_<%= yl_intab.id %>" class="col-md-12 form-group" style="padding:0; display:none;">
+          <form action="/board/save_intabs?mod_intab=true" method="POST">
+            <input type="hidden" name="id" value="<%= yl_intab.id %>">
+            <a class="list-group-item" style="background:#48CFAD;; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;border: none;color:#fff;">[<%= yl_intab.name %>] 수정하기</a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:100px; float:left">메뉴이름</span>
+                <input type="text" name="name" class="form-control" value="<%= yl_intab.name %>" style="width:15%;">
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:100px; float:left">상위메뉴</span>
+                <select name="tab_id" class="form-control" style="width:15%;">
+                    <% Tab.all.order('turn asc').each do |x| %>
+                        <option value="<%= x.id %>" <%= "selected" if x.id == yl_intab.tab_id %>><%= x.name %></option>
+                    <% end %>
+                </select>
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:100px; float:left">메뉴순서</span>
+                <input type="number" name="turn" class="form-control" style="width:5%; float:left;" value="<%= yl_intab.turn %>">번째 하위메뉴
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;height: 65px;">
+                <span style="margin-right:22px; float:left">쓰기 및 읽기 권한</span>
+                <span style="float:left">쓰기 : </span>
+                <select type="text" name="who_can_create" class="form-control" style="width:15%; float:left;">
+                    <option value="" <%= "selected" if yl_intab.who_can_create == "" %>>-쓰기권한-</option>
+                    <option value="10" <%= "selected" if yl_intab.who_can_create == 10 %>>최고관리자</option>
+                    <option value="9" <%= "selected" if yl_intab.who_can_create == 9 %>>부분 관리자</option>
+                    <option value="8" <%= "selected" if yl_intab.who_can_create == 8 %>>고위 임직원</option>
+                    <option value="7" <%= "selected" if yl_intab.who_can_create == 7 %>>일반 임직원</option>
+                    <option value="6" <%= "selected" if yl_intab.who_can_create == 6 %>>?</option>
+                    <option value="5" <%= "selected" if yl_intab.who_can_create == 5 %>>?</option>
+                    <option value="4" <%= "selected" if yl_intab.who_can_create == 4 %>>정회원</option>
+                    <option value="3" <%= "selected" if yl_intab.who_can_create == 3 %>>후원회원</option>
+                    <option value="2" <%= "selected" if yl_intab.who_can_create == 2 %>>인터넷회원</option>
+                    <option value="1" <%= "selected" if yl_intab.who_can_create == 1 %>>비회원</option>
+                    <option value="0" <%= "selected" if yl_intab.who_can_create == 0 %>>방문자</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="float:left; margin-left:20px;">읽기 : </span>
+                <select type="text" name="who_can_read" class="form-control" style="width:15%; float:left;">
+                    <option value="" <%= "selected" if yl_intab.who_can_read == "" %>>-읽기권한-</option>
+                    <option value="10" <%= "selected" if yl_intab.who_can_read == 10 %>>최고관리자</option>
+                    <option value="9" <%= "selected" if yl_intab.who_can_read == 9 %>>부분 관리자</option>
+                    <option value="8" <%= "selected" if yl_intab.who_can_read == 8 %>>고위 임직원</option>
+                    <option value="7" <%= "selected" if yl_intab.who_can_read == 7 %>>일반 임직원</option>
+                    <option value="6" <%= "selected" if yl_intab.who_can_read == 6 %>>?</option>
+                    <option value="5" <%= "selected" if yl_intab.who_can_read == 5 %>>?</option>
+                    <option value="4" <%= "selected" if yl_intab.who_can_read == 4 %>>정회원</option>
+                    <option value="3" <%= "selected" if yl_intab.who_can_read == 3 %>>후원회원</option>
+                    <option value="2" <%= "selected" if yl_intab.who_can_read == 2 %>>인터넷회원</option>
+                    <option value="1" <%= "selected" if yl_intab.who_can_read == 1 %>>비회원</option>
+                    <option value="0" <%= "selected" if yl_intab.who_can_read == 0 %>>방문자</option>
+                </select>
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px; height:65px;">
+                <span style="margin-right:22px; float:left">소개문구</span>
+                <input type="text" name="subscribe" value="<%= yl_intab.subscribe %>" class="form-control" placeholder="짤막한 소개문구를 입력해주세요" style="width:40%;">
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:22px; float:left">메뉴이미지 사진주소</span>
+                <input id="img_input" type="text" name="img" class="form-control" value="<%= yl_intab.img %>" placeholder="메인 이미지의 주소를 넣어주세요" style="width:70%;">
+                <img id="cc" src="<%= yl_intab.img %>" style="width:376px; height:321px; margin: 2% 30%;">
+                <script>
+                    $( "#img_input" ).change(function () {
+                        var str = $( this ).val();
+                        $( "#cc" ).attr('src', str );
+                    }).change();
+                </script>
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:22px; float:left">페이지 형식</span>
+                <select id="templete_input" type="text" name="templete" class="form-control" style="width:20%;">
+                    <option value="introduce" <%= "selected" if yl_intab.templete == "introduce" %>>소개페이지형</option>
+                    <option value="map" <%= "selected" if yl_intab.templete == "map" %>>지도형</option>
+                    <option value="org" <%= "selected" if yl_intab.templete == "org" %>>분할카드형</option>
+                    <option value="org2" <%= "selected" if yl_intab.templete == "org2" %>>조직 구성도</option>
+                    <option value="list" <%= "selected" if yl_intab.templete == "list" %>>목록형</option>
+                    <option value="open_board" <%= "selected" if yl_intab.templete == "open_board" %>>오픈보드형</option>
+                </select>
+                <img id="dd" src="/<%= yl_intab.templete %>.png" style="width:950px; height:468px; margin: 2% 8%;">
+                <script>
+                    $( "#templete_input" ).change(function () {
+                        var str = "/" + $( this ).val() + ".png" ;
+                        $( "#dd" ).attr('src', str );
+                    }).change();
+                </script>
+            </a>
+            <input type="submit" class="btn-warning" value="수정 사항 저장하기" style="border: none;width: 100%;font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">
+          </form>
+        </div>
+        <% end %>
+        
+    <!--하위메뉴 '추가'하기    -->
+        <div id="dt_intab_00" class="col-md-12 form-group" style="padding:0; display:none;">
+          <form action="/board/save_intabs" method="POST">
+            <a class="list-group-item" style="background:#48CFAD;; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;border: none;color:#fff;">[새 하위메뉴] 추가하기</a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:100px; float:left">메뉴이름</span>
+                <input type="text" name="name" class="form-control" value="<%#= yl_intab.name %>" style="width:15%;">
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:100px; float:left">상위메뉴</span>
+                <select name="tab_id" class="form-control" style="width:15%;">
+                    <% Tab.all.order('turn asc').each do |x| %>
+                        <option value="<%= x.id %>"><%= x.name %></option>
+                    <% end %>
+                </select>
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:100px; float:left">메뉴순서</span>
+                <input type="number" name="turn" class="form-control" style="width:5%; float:left;" value="<%#= yl_intab.turn %>">번째 하위메뉴
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;height: 65px;">
+                <span style="margin-right:22px; float:left">쓰기 및 읽기 권한</span>
+                <span style="float:left">쓰기 : </span>
+                <select type="text" name="who_can_create" class="form-control" style="width:15%; float:left;">
+                    <option value="" selected>-쓰기권한-</option>
+                    <option value="10" <%#= "selected" if yl_intab.who_can_create == 10 %>>최고관리자</option>
+                    <option value="9" <%#= "selected" if yl_intab.who_can_create == 9 %>>부분 관리자</option>
+                    <option value="8" <%#= "selected" if yl_intab.who_can_create == 8 %>>고위 임직원</option>
+                    <option value="7" <%#= "selected" if yl_intab.who_can_create == 7 %>>일반 임직원</option>
+                    <option value="6" <%#= "selected" if yl_intab.who_can_create == 6 %>>?</option>
+                    <option value="5" <%#= "selected" if yl_intab.who_can_create == 5 %>>?</option>
+                    <option value="4" <%#= "selected" if yl_intab.who_can_create == 4 %>>정회원</option>
+                    <option value="3" <%#= "selected" if yl_intab.who_can_create == 3 %>>후원회원</option>
+                    <option value="2" <%#= "selected" if yl_intab.who_can_create == 2 %>>인터넷회원</option>
+                    <option value="1" <%#= "selected" if yl_intab.who_can_create == 1 %>>비회원</option>
+                    <option value="0" <%#= "selected" if yl_intab.who_can_create == 0 %>>방문자</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span style="float:left; margin-left:20px;">읽기 : </span>
+                <select type="text" name="who_can_read" class="form-control" style="width:15%; float:left;">
+                    <option value="" selected>-읽기권한-</option>
+                    <option value="10" <%#= "selected" if yl_intab.who_can_read == 10 %>>최고관리자</option>
+                    <option value="9" <%#= "selected" if yl_intab.who_can_read == 9 %>>부분 관리자</option>
+                    <option value="8" <%#= "selected" if yl_intab.who_can_read == 8 %>>고위 임직원</option>
+                    <option value="7" <%#= "selected" if yl_intab.who_can_read == 7 %>>일반 임직원</option>
+                    <option value="6" <%#= "selected" if yl_intab.who_can_read == 6 %>>?</option>
+                    <option value="5" <%#= "selected" if yl_intab.who_can_read == 5 %>>?</option>
+                    <option value="4" <%#= "selected" if yl_intab.who_can_read == 4 %>>정회원</option>
+                    <option value="3" <%#= "selected" if yl_intab.who_can_read == 3 %>>후원회원</option>
+                    <option value="2" <%#= "selected" if yl_intab.who_can_read == 2 %>>인터넷회원</option>
+                    <option value="1" <%#= "selected" if yl_intab.who_can_read == 1 %>>비회원</option>
+                    <option value="0" <%#= "selected" if yl_intab.who_can_read == 0 %>>방문자</option>
+                </select>
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px; height:65px;">
+                <span style="margin-right:22px; float:left">소개문구</span>
+                <input type="text" name="subscribe" value="<%#= yl_intab.subscribe %>" class="form-control" placeholder="짤막한 소개문구를 입력해주세요" style="width:40%;">
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:22px; float:left">메뉴이미지 사진주소</span>
+                <input id="img_input" type="text" name="img" class="form-control" value="<%#= yl_intab.img %>" placeholder="메인 이미지의 주소를 넣어주세요" style="width:70%;">
+                <img id="cc" src="<%#= yl_intab.img %>" style="width:376px; height:321px; margin: 2% 30%;">
+                <script>
+                    $( "#img_input" ).change(function () {
+                        var str = $( this ).val();
+                        $( "#cc" ).attr('src', str );
+                    }).change();
+                </script>
+            </a>
+            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <span style="margin-right:22px; float:left">페이지 형식</span>
+                <select id="templete_input" type="text" name="templete" class="form-control" style="width:20%;">
+                    <option value="introduce" <%#= "selected" if yl_intab.templete == "introduce" %>>소개페이지형</option>
+                    <option value="map" <%#= "selected" if yl_intab.templete == "map" %>>지도형</option>
+                    <option value="org" <%#= "selected" if yl_intab.templete == "org" %>>분할카드형</option>
+                    <option value="org2" <%#= "selected" if yl_intab.templete == "org2" %>>조직 구성도</option>
+                    <option value="list" <%#= "selected" if yl_intab.templete == "list" %>>목록형</option>
+                    <option value="open_board" <%#= "selected" if yl_intab.templete == "open_board" %>>오픈보드형</option>
+                </select>
+                <img id="dd" src="/<%#= yl_intab.templete %>.png" style="width:950px; height:468px; margin: 2% 8%;">
+                <script>
+                    $( "#templete_input" ).change(function () {
+                        var str = "/" + $( this ).val() + ".png" ;
+                        $( "#dd" ).attr('src', str );
+                    }).change();
+                </script>
+            </a>
+            <input type="submit" class="btn-warning" value="수정 사항 저장하기" style="border: none;width: 100%;font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">
+          </form>
+        </div>
+    <!--/-->
+        
+        
+            
+            
+            
+        <div id="intabs_0" class="col-md-6" style="padding:0; display:none;">
+            <form action="/board/save_tabs" method="POST">
+            <div class="col-md-6 list-group form-group" style="">
+                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">상위메뉴 추가하기</a>
+                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                    메뉴 이름 <input type="text" name="name" class="form-control" value="<%#= y_tab.name %>">
+                </a>
+                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                    상단메뉴 중 <input type="number" name="turn" class="form-control" value="<%#= y_tab.turn %>">번째 메뉴
+                </a>
+                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                    <input type="submit" class="form-control btn-warning" value="추가하기" style="font-size:18px;">
+                </a>
+            </div>
+            </form>
+        </div>
+        <% end %>
+        <div class="col-md-3">
+            
+        </div>
+        
+        
+    </div>
+<!--/-->

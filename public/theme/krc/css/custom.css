@@ -1,2 +1,3 @@
-h2 {margin-top: 0px;}
+
 a:hover, a:focus {color: #23527c; text-decoration: none;}
+ol, ul {margin-top: 0;margin-bottom: 0;}

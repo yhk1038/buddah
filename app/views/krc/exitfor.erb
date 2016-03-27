@@ -1,0 +1,43 @@
+<div class="border-form-div">
+  <h1><strong>회원 탈퇴 확인</strong></h1>
+  
+
+
+<fieldset id="login_fs">  
+  <form class="new_user" id="new_user" action="/krc/destroy_user/<%= current_user.id %>" accept-charset="UTF-8" method="post">
+    <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    
+    <div class="field">
+      <label for="user_id">아이디</label><br>
+      <input  autocomplete="off" autofocus="autofocus" type="mb_id" value="" name="mb_id" id="user_id" class="frm_input">
+    </div>
+  
+    <div class="field">
+      <label for="user_password">비밀번호</label><br>
+      <input autocomplete="off" type="password" name="password" id="user_password" class="frm_input">
+    </div>
+  
+    <div class="actions">
+      <input class="btn_submit" type="submit" name="commit" value="탈퇴하기">
+    </div>
+      
+  </form>
+  <!--<a href="/users/sign_up" class="btn btn-primary">Sign up</a><br>-->
+  <!--<a href="/users/password/new">Forgot your password?</a><br>-->
+  
+  </fieldset>
+  <aside id="login_info">
+        <h2>회원탈퇴 안내</h2>
+        <p>
+            계정 정보를 안전하게 삭제(탈퇴)하기 위해서 현재 보유하신 계정을 입력해주십시오.<br>
+            이 절차는 본인확인 절차로서 회원들의 정보 보호를 위해 실시하고 있으니 양해해주시기 바랍니다.
+        </p>
+        <div>
+            <a href="/users/password/new" target="_blank" id="login_password_lost" class="btn02">비밀번호 찾기</a>
+            <a href="/users/sign_out" class="btn01">로그 아웃</a>
+        </div>
+    </aside>
+    <div class="btn_confirm">
+        <a href="/">메인으로 돌아가기</a>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="border-form-div">
+  <h1><strong>비밀번호 찾기</strong></h1>
+  
+  <fieldset id="login_fs">
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= devise_error_messages! %>
+    
+      <div class="field">
+        <%= f.label :email %><br/>
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+    
+      <div class="actions">
+        <%= f.submit "Send me reset password instructions" %>
+      </div>
+    <% end %>
+    
+    <%#= render "devise/shared/links" %>
+
+  </fieldset>
+  <aside id="login_info">
+      <div>
+          <a href="/users/sign_in" target="_blank" id="login_password_lost" class="btn02">로그인</a>
+          <a href="/users/sign_up" class="btn01">회원가입</a>
+      </div>
+  </aside>
+  <div class="btn_confirm">
+      <br><a href="/">메인으로 돌아가기</a>
+  </div>
+
+</div>

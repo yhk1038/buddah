@@ -1,0 +1,43 @@
+<div class="panel panel-default col-md-12" style="padding:0;">
+    
+    
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="font-size:25px;">
+        회원가입자 <b>총 <%= User.count %></b>
+    </div>
+    <div class="panel-body">
+        <p>총 DGUlion 페이지 회원가입자 현황 thead는 User.attribute_names</p>
+    </div>
+    
+    <!-- Table -->
+    <table class="table">
+    <thead>
+        <tr style="font-weight:bold;">
+            <td>id</td>
+            <td>닉네임(nickname)</td>
+            <td>이름(username)</td>
+            <td>전화번호(phonenumber)</td>
+            <td>이메일(email)</td>
+            <td>가입일(created_at)</td>
+            <td>로그인횟수(sign_in_count)</td>
+            <td>현재접속여부(current_sign_in_ip)</td>
+            <td>최종방문일(updated_at)</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% User.all.each do |user| %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.nickname %></td>
+                <td><%= user.username %></td>
+                <td><%= user.phonenumber %></td>
+                <td><%= user.email %></td>
+                <td><%= user.created_at %></td>
+                <td><%= user.sign_in_count %></td>
+                <td><%= user.current_sign_in_ip %></td>
+                <td><%= user.updated_at %></td>
+            </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>

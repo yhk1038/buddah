@@ -1,12 +1,59 @@
+<!--pc 버전 시작-->
 <!-- 상단 시작 { -->
 <div id="hd">
-    <h1 id="hd_h1">그누보드5 테마데모</h1>
+    <h1 id="hd_h1"></h1>
     <div id="skip_to_container">
-        <a href="#container">본문 바로가기</a>
+        <a href="#container"></a>
     </div>
     <%= render :partial => 'main_navbar' %>
     <hr>
 </div>
+<% if current_user %>
+<div class="modal fade" id="myInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#3E3C52; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" style="font-weight:bold; color:#fff;"><%= current_user.nickname %> 님의 회원정보</h4>
+      </div>
+      <div class="modal-body" style="padding:0;">
+        <div class="panel panel-default" style="margin:0;border:0px;">
+          <!-- Default panel contents -->
+          <div class="panel-heading" style="text-align: center; font-size: 20px; font-weight: bold; background-color: #f2dede;">
+              회원님은 <span style="font-size:22px; color:#D23232;">정회원</span> 입니다.
+          </div>
+          <div class="panel-body">
+            <p>정회원이란 ...</p>
+          </div>
+        
+          <!-- List group -->
+          <div class="list-group">
+              <% x = current_user %>
+              <% i = 0 %>
+              <% @myinfo_arr.each do |m_i| %>
+              <%# 
+                  if eval("@#{m_i}") == nil 
+                      eval("@#{m_i}") = '입력된 정보 없음'
+                  end
+              %>
+                  <a class="list-group-item" style="height:42px;padding: 0px 15px 0px 0px;">
+                      <div style="float:left; font-weight:bold; height: 100%; background-color: #fcf8e3; width: 30%; text-align:center; padding: 11px;"><%= @myinfo_arr2[i] %></div>
+                      <span style="float:right; font-weight:bold; margin-top: 11px;"><%= eval("@#{m_i}") %></span>
+                  </a>
+              <% i += 1 %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="background-color:#3E3C52; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+        <a href="/krc/exitfor" class="btn btn-danger btn-sm" style="float: left; font-weight: bold; color:#fff;">탈퇴하기</a>
+        <a href="/users/edit" class="btn btn-warning btn-sm" style="float: left; font-weight: bold; color:#fff;">정보변경</a>
+        <button type="button" class="btn btn-info" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
 <!-- } 상단 끝 -->
 
 <hr>
@@ -73,118 +120,114 @@
         });
     });
     </script>
-
     <div id="idx_container">
         <ul id="comp_bn">
+            <% tab_n = 0 %>
+            <% Tab.where(:name => '열린광장').take.intabs.first(4).last(3).each do |gallery| %>
             <li>
                 <button type="button" class="accordion-toggle bubn_btn">
-                    수행나눔 갤러리<span>사업보기</span>
+                    <%= gallery.name %><span>사업보기</span>
                 </button>
-                <div class="accordion-content default bubn_img">
-                    <img src="/theme/krc/img/bu01.jpg" alt="회사설명"/>
+                <div class="accordion-content bubn_img <%= "default" if tab_n == 0 %>">
+                    <img src="<%= gallery.img %>" alt="겔러리 이미지" style="width: 100%;"/>
                     <div class="bubn_img_ov">
-                        <h3>수행나눔 갤러리</h3>
-                        <p>수행에 관한 정보를 나눕니다<br>
+                        <h3><%= gallery.name %></h3>
+                        <p><%= gallery.subscribe %><br>
                             <span>
-                                <span>새글 12</span> | <span>조회수 8</span>
+                                <% 
+                                    today = Date.parse(Time.zone.now.to_s).to_s 
+                                    dd_date = []
+                                    
+                                    gallery.posts.all.each do |gp|
+                                        gp_date = Date.parse(gp.created_at.to_s).to_s
+                                        if today.to_i - gp_date.to_i <= 2
+                                            dd_date << gp
+                                        end
+                                    end
+                                %>
+                                <span>새글 <%= dd_date.count %></span> | <span>조회수 8</span>
                             </span>
                         </p>
-                        <a href="#">상세보기</a>
+                        <a href="/board/page/<%= gallery.id %>">상세보기</a>
                     </div>
                 </div>
             </li>
-            <li>
-                <button type="button" class="accordion-toggle bubn_btn">갤러리 02<span>사업보기</span></button>
-                <div class="accordion-content  bubn_img">
-                    <img src="/theme/krc/img/bu01.jpg" alt="회사설명">
-                    <div class="bubn_img_ov">
-                        <h3>갤러리 02</h3>
-                        <p>갤러리 02 에 관한 안내문구<br>
-                            <span>
-                                <span>새글 12</span> | <span>조회수 8</span>
-                            </span>
-                        </p>
-                        <a href="#">상세보기</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <button type="button" class="accordion-toggle bubn_btn">갤러리 03<span>사업보기</span></button>
-                <div class="accordion-content  bubn_img">
-                    <img src="/theme/krc/img/bu01.jpg" alt="회사설명">
-                    <div class="bubn_img_ov">
-                        <h3>갤러리 03</h3>
-                        <p>갤러리 03 에 관한 안내문구<br>
-                            <span>
-                                <span>새글 12</span> | <span>조회수 8</span>
-                            </span>
-                        </p>
-                        <a href="#">상세보기</a>
-                    </div>
-                </div>
-            </li>
+            <% tab_n += 1 %>
+            <% end %>
         </ul>
+       
         <script type="text/javascript">
-          $(document).ready(function($) {
+          $(document).ready(function() {
             $("#comp_bn").find(".accordion-toggle").click(function(){
                 $(this).next().slideToggle('fast');
                 $(".accordion-content").not($(this).next()).slideUp('fast');
             });
           });
         </script>
+        
+        <!--pc 버전 시작-->
         <ul id="comp_if">
+            <% 
+                @md_1 = Intab.where(:name => "센터소개").take
+                @md_2 = Intab.where(:name => "후원하기").take
+                @md_3 = Intab.where(:name => "언론보도").take
+            %>
             <li  class="com_bg1">
-                <h2>교단자정센터 소개</h2>
-                <p>대한불교조계종의 양심 <br>
-                올바름을 이끄는 원동력</p>
-                <a href="#">바로가기</a>
+                <h2 style="font-weight: bold;"><%= @md_1.name %></h2>
+                <p style="width: 65%;"><%= @md_1.subscribe %></p>
+                <a href="/board/page/<%= @md_1.id %>" style="background: url(<%= @md_1.img %>) no-repeat bottom right #e7f0f6;">바로가기</a>
             </li>
             <li  class="com_bg2">
-                <h2>후원하기</h2>
-                <p>여러분의 참여로 만드는 <br>
-                교단자정과 교단개혁</p>
-                <a href="#">바로가기</a>
+                <h2 style="font-weight: bold;"><%= @md_2.name %></h2>
+                <p style="width: 65%;"><%= @md_2.subscribe %></p>
+                <a href="/board/page/<%= @md_2.id %>" style="background: url(<%= @md_2.img %>) no-repeat bottom right #2676c5">바로가기</a>
             </li>
-            <li class="com_bg3">
-                <h2>보도자료</h2>
-                <p>언론의 소식과 <br>
-                교단자정의 보도자료</p>
-                <a href="#">바로가기</a>
+            <li  class="com_bg3">
+                <h2 style="font-weight: bold;"><%= @md_3.name %></h2>
+                <p style="width: 65%;"><%= @md_3.subscribe %></p>
+                <a href="/board/page/<%= @md_3.id %>" style="background: url(<%= @md_3.img %>) no-repeat bottom right #e7f0f6;">바로가기</a>
             </li>
         </ul>
+        <!--pc 버전 끝-->
         <div id="comp_lt">
             <div class="li_notice">
                 <!-- 공지사항 최신글 시작 { -->
-                <div class="lt">
+                <% rgt_up = Intab.where(:name => '공지사항').take %>
+                <div class="lt_main">
                     <strong class="lt_title">
-                        <a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice">공지사항</a>
+                        <a href="/board/page/<%= rgt_up.id %>"><%= rgt_up.name %></a>
+                        <!--http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice-->
                     </strong>
                     <ul>
+                        <% rgt_up.posts.last(4).reverse.each do |x| %>
                         <li>
-                            <a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice&amp;wr_id=7">공지사항1<span class="cnt_cmt">1</span></a><span class="lt_date">10-08</span>
+                            <a href="/board/post_read/<%= x.id %>">
+                                <% if x.title.length > 25 %>
+                                    <%= x.title.first(25) + '...' %>
+                                <% else %>
+                                    <%= x.title %>
+                                <% end %>
+                                <span class="cnt_cmt"><%= x.replies.count %></span></a><span class="lt_date"><%= Date.parse(x.created_at.to_s).to_s.last(5) %></span>
+                            <!--http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice&amp;wr_id=7-->
                         </li>
-                            <li>
-                            <a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice&amp;wr_id=6">공지사항2<span class="cnt_cmt">4</span></a><span class="lt_date">09-25</span>
-                        </li>
-                            <li>
-                            <a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice&amp;wr_id=1">공지사항3<span class="cnt_cmt">6</span></a><span class="lt_date">07-28</span>
-                        </li>
-                    
-                        </ul>
+                        <% end %>
+                    </ul>
                 
-                    <div class="lt_more"><a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice"><span class="sound_only">공지사항</span>더보기</a></div>
+                    <div class="lt_more"><a href="/board/page/<%= rgt_up.id %>"><span class="sound_only">공지사항</span>더보기</a></div>
+                    <!--http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice-->
                 </div>
                 <!-- } 공지사항 최신글 끝 -->    
             </div>
             <div class="li_gall">
                 
         <!-- 베스트 메뉴 최신글 시작 { -->
+        <% rgt_dwn = Intab.where(:name => '활동보고').take %>
         <div class="lt_gal">
-            <strong class="lt_title"><a href="#">교단자정 소식지</a></strong>
+            <strong class="lt_title"><a href="/board/page/<%= rgt_dwn.id %>">교단자정 소식지</a></strong>
             <ul>
                 <li>
                     <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>
-                    <a href="#" class="It_tit">7월 웹진</a>
+                    <a href="#" class="lt_tit">7월 웹진</a>
                     <p class="lt_detail">메뉴입니다.&nbsp;&nbsp;메뉴입니다.&nbsp;</p>
                 </li>
                 <li>
@@ -200,21 +243,158 @@
             
                 </ul>
         
-            <div class="lt_more"><a href="http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=gallery"><span class="sound_only">베스트 메뉴</span>더보기</a></div>
+            <div class="lt_more"><a href="#"><span class="sound_only">교단자정 소식지</span>더보기</a></div>
+            <!--http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=gallery-->
         </div>
-        <!-- } 베스트 메뉴 최신글 끝 -->    </div>
+        <!-- } 교단자정 소식지 최신글 끝 -->    </div>
         </div>
         <a href="#hd" id="top_btn">상단으로</a>
     </div>
 </div>
 
-<!-- } 콘텐츠 끝 -->
-
+<!--  콘텐츠 끝 -->
+<!--pc 버전 끝-->
 <hr>
+
+
+
+<!--모바일 버전 시작-->
+
+<%= render :partial => 'krc/mobile_navbar' %>
+    
+<div id="mobile_wrapper">
+    <div id="mobile_container">
+        
+    <!--메인이미지-->
+    <div class="swiper-container swiper-container-horizontal">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="mobile_bn_txt">
+                    <h2>교단자정센터<br>교단자정소식</h2>
+                    <p>우리의 원대한 도전,<br>새로운 100년이 깨어납니다</p>
+                </div>
+            </div>
+            <div class="swiper-slide swiper-slide-next" style="width: 325px;">
+                <div class="mobile_bn_txt">
+                    <h2>노출하고 싶은<br>컨텐츠2</h2>
+                    <p>우리의 원대한 도전,<br>새로운 100년이 깨어납니다</p>
+                </div>
+            </div>
+            <div class="swiper-slide" style="width: 325px;">
+                <div class="mobile_bn_txt">
+                    <h2>노출하고 싶은  <br>컨텐츠3</h2>
+                    <p>우리의 원대한 도전,<br>새로운 100년이 깨어납니다</p>
+                </div>
+            </div>
+            <div class="swiper-slide" style="width: 325px;">
+                <div class="mobile_bn_txt">
+                    <h2>노출하고 싶은  <br>컨텐츠4</h2>
+                    <p>우리의 원대한 도전,<br>새로운 100년이 깨어납니다</p>
+                </div>
+            </div>
+        </div>
+         <!--Add Pagination--> 
+        <!--<div class="swiper-pagination swiper-pagination-clickable">-->
+        <!--    <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>-->
+        <!--    <span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span>-->
+        <!--    <span class="swiper-pagination-bullet"></span>-->
+        <!--</div>-->
+    </div>
+    
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true
+        });
+    </script>
+    <!--메인이미지-->
+    
+    <ul id="mobile_comp_if">
+        <li class="mobile_com_bg1">
+            <a href="/board/page/1"><img src="/theme/krc/img/main_img1.jpg" alt="회사소개 바로가기" title="" data-pin-nopin="true"></a>
+            <h2>교단자정센터</h2>
+            <p>대한불교 조계종의 양심<br>
+            올바름을 이끄는 원동력</p>
+        </li>
+        <li class="mobile_com_bg2">
+            <a href="/board/page/10"><img src="/theme/krc/img/main_img2.jpg" alt="사회공헌 바로가기" title="" data-pin-nopin="true"></a>
+            <h2>후원하기</h2>
+            <p>여러분의 참여로 만드는 <br>
+            교단자정과 교단개혁</p>
+        </li>
+        <li class="mobile_com_bg3">
+            <a href="/board/page/7"><img src="/theme/krc/img/main_img3.jpg" alt="인재채용 바로가기"></a>
+            <h2>보도자료</h2>
+            <p>언론의 소식과<br>
+            교단자정의 보도자료</p>
+        </li>
+    </ul>
+
+
+<!-- 메인화면 최신글 시작 -->
+<div class="mobile_lt">
+    <h2><a href="#" class="mobile_lt_title"><span></span>공지사항</a></h2>
+    <ul>
+        <li>
+            <a href="#">테마 공지사항 테스트글입니다 <span class="mobile_cnt_cmt"><span class="cnt_cmt">1</span></span> </a>            <span class="mobile_lt_date">10-08</span>
+        </li>
+        <li>
+            <a href="#">SIR 테마 미리보기 사이트입니다. <span class="mobile_cnt_cmt"><span class="cnt_cmt">4</span></span> </a>            <span class="mobile_lt_date">09-25</span>
+        </li>
+        <li>
+            <a href="#">SIR 테마 미리보기 사이트입니다. <span class="mobile_cnt_cmt"><span class="cnt_cmt">6</span></span> </a>            <span class="mobile_lt_date">07-28</span>
+        </li>
+    </ul>
+</div>
+<div class="mobile_li_gall">
+    <div class="mobile_lt_gal">
+        <h2><a href="#" class="mobile_lt_title"><span></span>교단자정 소식</a></h2>
+        <ul>
+            <li>
+                <a href="#" class="mobile_lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="400" height="250"></a>
+                <a href="#" class="mobile_lt_tit">3월 웹진</a>
+            </li>
+            <li>
+                <a href="#" class="mobile_lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="400" height="250"></a>
+                <a href="#" class="mobile_lt_tit">4월 웹원</a>
+            </li>
+            <li>
+                <a href="#" class="mobile_lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="400" height="250"></a>
+                <a href="#" class="mobile_lt_tit">5월 웹진</a>
+            </li>
+            <li>
+                <a href="#" class="mobile_lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="400" height="250"></a>
+                <a href="#" class="mobile_lt_tit">6월 웹진</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- 메인화면 최신글 끝 -->
+    </div>
+</div>
+<!--모바일 버전 끝-->
+
 
 <%= render :partial => 'footer' %>
 
-
+<script>        
+    // var mySwiper = new Swiper ('.swiper-container', {
+    // // Optional parameters
+    // direction: 'vertical',
+    // loop: true,
+    
+    // // If we need pagination
+    // pagination: '.swiper-pagination',
+    
+    // // Navigation arrows
+    // nextButton: '.swiper-button-next',
+    // prevButton: '.swiper-button-prev',
+    
+    // // And if we need scrollbar
+    // scrollbar: '.swiper-scrollbar',
+    // })        
+</script>
 
 <!-- ie6,7에서 사이드뷰가 게시판 목록에서 아래 사이드뷰에 가려지는 현상 수정 -->
 <!--[if lte IE 7]>

@@ -1,0 +1,56 @@
+<h2>회원정보 수정하기 <%= resource_name.to_s.humanize %></h2>
+
+<form class="edit_user" id="edit_user" action="/users" accept-charset="UTF-8" method="post">
+  <input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="put">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <%= devise_error_messages! %>
+  
+  <div class="field">
+    <label for="user_username"><span style="font-weight:bold; font-size:20px;">이름</span></label><br>
+    <input autofocus="autofocus" type="username" value="<%= current_user.username %>" name="user[username]" id="user_username">
+  </div>
+  
+  <div class="field">
+    <label for="user_nickname"><span style="font-weight:bold; font-size:20px;">닉네임</span></label><br>
+    <input autofocus="autofocus" type="nickname" value="<%= current_user.nickname %>" name="user[nickname]" id="user_nickname">
+  </div>
+  
+  <div class="field">
+    <label for="user_phonenumber"><span style="font-weight:bold; font-size:20px;">전화번호</span></label><br>
+    <input autofocus="autofocus" type="text" value="<%= current_user.phonenumber %>" name="user[phonenumber]" id="user_phonenumber">
+  </div>
+  
+  <div class="field">
+    <label for="user_email"><span style="font-weight:bold; font-size:20px;">이메일</span></label><br>
+    <input autofocus="autofocus" type="email" value="<%= current_user.email %>" name="user[email]" id="user_email">
+  </div>
+#######################################################
+  <div class="field">
+    <label for="user_password"><span style="font-weight:bold; font-size:20px;">비밀번호 변경하기</span></label> <i>(변경을 원치 않을 경우 빈칸으로 두시면 됩니다)</i><br>
+  </div>
+  
+  <div class="field">
+    <label for="user_password"><span style="font-weight:bold; font-size:20px;">변경할 비밀번호</span></label><br>
+    <input autocomplete="off" type="password" name="user[password]" id="user_password">
+  </div>
+
+  <div class="field">
+    <label for="user_password_confirmation"><span style="font-weight:bold; font-size:20px;">비밀번호 확인</span></label><br>
+    <input autocomplete="off" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+  </div>
+#######################################################
+  <div class="field">
+    <label for="user_current_password">(변경하실 사항의 입력이 완료되면 <span style="font-weight:bold; font-size:20px;">현재의 비밀번호</span>를 입력해주세요)</label><br>
+    <input autocomplete="off" type="password" name="user[current_password]" id="user_current_password">
+  </div>
+
+  <div class="actions">
+    <input type="submit" name="commit" value="Update">
+  </div>
+</form>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= link_to "Back", :back %>

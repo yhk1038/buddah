@@ -1,0 +1,407 @@
+<!-- pc 버전 시작  -->
+<!-- 상단 시작 { -->
+<div id="hd">
+    <h1 id="hd_h1">교단 자정 센터</h1>
+    <div id="skip_to_container">
+        <a href="#container">본문 바로가기</a>
+    </div>
+    <%= render :partial => '/krc/main_navbar' %>
+    <hr>
+</div>
+<!-- } 상단 끝 -->
+
+<hr>
+
+<!-- 콘텐츠 시작 { -->
+<div id="wrapper">
+    <div id="sub_tit">
+        <h2 id="ctn_title"><%= @tab.name %></h2>
+    </div>
+    <div id="container">
+        <div id="container_title">.</div>
+        <article id="ctt" class="ctt_contact">
+            <div id="ctt_con">
+                <div class="" style="position:fixed; width: 12%;">
+                    <% @tab.intabs.all.order('turn asc').each do |side_intab| %>
+                        <% if side_intab.id == @intab.id %>
+                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menuselect"><%= side_intab.name %></p></span></a>
+                        <% else %>
+                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menu"><%= side_intab.name %></p></span></a>
+                        <% end %>
+                    <% end %>
+                    <!--<a href="/board/councel"><span><p class="ctt_con_menuselect">상담하기</p></span></a>-->
+                    <!--<a href="/board/donate"><span><p class="ctt_con_menu">후원하기</p></span></a>-->
+                </div>
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-9">
+                    <div class="intro">
+                        <p class="intro_title"><%= @intab.name %></p>
+                        <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
+                    </div>
+                    <!-- 게시물 작성/수정 시작 { -->
+                    <script type="text/javascript" src="./se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+                    <script type="text/javascript">
+                    
+                        var oEditors = [];
+                        
+                        nhn.husky.EZCreator.createInIFrame({
+                        
+                            oAppRef: oEditors,
+                        
+                            elPlaceHolder: "ir1",
+                        
+                            sSkinURI: "./se2/SmartEditor2Skin.html",
+                        
+                            fCreator: "createSEditor2"
+                        
+                        });
+                    
+                    </script>
+                    <form name="fwrite" id="fwrite" action="/board/post_save<%= "/" + params[:id] if params[:id] != nil %>" method="post" enctype="multipart/form-data" style="width:100%">
+                    <input type="hidden" name="intab_id" value="<%= @intab.id %>">
+                    <% if current_user.nil? %>
+                        
+                    <% else %>
+                        <input type="hidden" name="author_name" value="<%= current_user.username %>">
+                        <input type="hidden" name="author_id" value="<%= current_user.id %>">
+                    <% end %>
+                    
+                    <!--<input type="hidden" name="wr_id" value="0">-->
+                    <!--<input type="hidden" name="sca" value="">-->
+                    <!--<input type="hidden" name="sfl" value="">-->
+                    <!--<input type="hidden" name="stx" value="">-->
+                    <!--<input type="hidden" name="spt" value="">-->
+                    <!--<input type="hidden" name="sst" value="">-->
+                    <!--<input type="hidden" name="sod" value="">-->
+                    <!--<input type="hidden" name="page" value="">-->
+                    <!--<input type="hidden" value="html1" name="html">-->
+                    <div class="tbl_frm01 tbl_wrap">
+                        <table>
+                        <tbody>
+                            <% if current_user.nil? %>
+                            <tr>
+                                <th scope="row"><label for="author_name">비회원</label></th>
+                                <td style="padding:0;">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row" style="border-left: none;"><label for="author_name">이름</label></th>
+                                                <td>
+                                                    <input type="hidden" name="author_id" value="00">
+                                                    <input type="input" name="author_name" value="" id="author_name" required class="frm_input required" style="width:100%;">
+                                                </td>
+                                                <th scope="row"><label for="">비밀번호</label></th>
+                                                <td>
+                                                    <input type="password" name="author_passwd" id="author_passwd" required class="frm_input required" style="width:100%;">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <% end %>
+                            <tr>
+                                <th scope="row"><label for="visible">설정</label></th>
+                                <td style="padding:0;">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row" style="border-left: none;"><label for="visible">공개여부</label></th>
+                                                <td>
+                                                    <input type="radio" name="visible" value="false" id="wr_email" class="frm_input email" checked>공개
+                                                    <input type="radio" name="visible" value="true" id="wr_email" class="frm_input email">비공개
+                                                </td>
+                                                <th scope="row"><label for="anonymous">작성자</label></th>
+                                                <td>
+                                                    <input type="checkbox" name="anonymous" value="true" id="anonymous" class="frm_input email"> 익명
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="title">제목</label></th>
+                                <td><div id="autosave_wrapper"><input type="text" name="title" value="" id="title" required class="frm_input required" size="50" maxlength="255"></div></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="ir1">내용</label></th>
+                                <td class="wr_content">
+                                    <!--<span class="sound_only">웹에디터 시작</span>-->
+                                    <!--    <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="65536" style="width:100%;height:300px"></textarea>-->
+                                        
+                                    <textarea name="ir1" id="ir1" rows="100" cols="100" style="height: 400px;"></textarea>
+    
+                                        
+                                    <!--<span class="sound_only">웹 에디터 끝</span>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="file1">첨부파일1</label></th>
+                                <td><input type="file" name="file1" value="" id="file1" class="frm_input" size="50"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="file2">첨부파일2</label></th>
+                                <td><input type="file" name="file2" value="" id="file2" class="frm_input" size="50"></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                
+                    <div class="btn_confirm">
+                        <input type="submit" value="작성완료" id="" class="btn_submit">
+                        <a href="/board/page/<%= @intab.id %>" class="btn_cancel">취소</a>
+                    </div>
+                    </form>
+                    
+                
+                    <script>
+                //         function html_auto_br(obj)
+                //     {
+                //         if (obj.checked) {
+                //             result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
+                //             if (result)
+                //                 obj.value = "html2";
+                //             else
+                //                 obj.value = "html1";
+                //         }
+                //         else
+                //             obj.value = "";
+                //     }
+                
+                //     function fwrite_submit(f)
+                //     {
+                //         var wr_content_editor_data = oEditors.getById['wr_content'].getIR();
+                // oEditors.getById['wr_content'].exec('UPDATE_CONTENTS_FIELD', []);
+                // if(jQuery.inArray(document.getElementById('wr_content').value.toLowerCase().replace(/^\s*|\s*$/g, ''), ['&nbsp;','<p>&nbsp;</p>','<p><br></p>','<div><br></div>','<p></p>','<br>','']) != -1){document.getElementById('wr_content').value='';}
+                // if (!wr_content_editor_data || jQuery.inArray(wr_content_editor_data.toLowerCase(), ['&nbsp;','<p>&nbsp;</p>','<p><br></p>','<p></p>','<br>']) != -1) { alert("내용을 입력해 주십시오."); oEditors.getById['wr_content'].exec('FOCUS'); return false; }
+                
+                //         var subject = "";
+                //         var content = "";
+                //         $.ajax({
+                //             url: g5_bbs_url+"/ajax.filter.php",
+                //             type: "POST",
+                //             data: {
+                //                 "subject": f.wr_subject.value,
+                //                 "content": f.wr_content.value
+                //             },
+                //             dataType: "json",
+                //             async: false,
+                //             cache: false,
+                //             success: function(data, textStatus) {
+                //                 subject = data.subject;
+                //                 content = data.content;
+                //             }
+                //         });
+                
+                //         if (subject) {
+                //             alert("제목에 금지단어('"+subject+"')가 포함되어있습니다");
+                //             f.wr_subject.focus();
+                //             return false;
+                //         }
+                
+                //         if (content) {
+                //             alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
+                //             if (typeof(ed_wr_content) != "undefined")
+                //                 ed_wr_content.returnFalse();
+                //             else
+                //                 f.wr_content.focus();
+                //             return false;
+                //         }
+                
+                //         if (document.getElementById("char_count")) {
+                //             if (char_min > 0 || char_max > 0) {
+                //                 var cnt = parseInt(check_byte("wr_content", "char_count"));
+                //                 if (char_min > 0 && char_min > cnt) {
+                //                     alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");
+                //                     return false;
+                //                 }
+                //                 else if (char_max > 0 && char_max < cnt) {
+                //                     alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
+                //                     return false;
+                //                 }
+                //             }
+                //         }
+                
+                //         if (!chk_captcha()) return false;
+                
+                //         document.getElementById("btn_submit").disabled = "disabled";
+                
+                //         return true;
+                //     }
+                    </script>
+                </section>
+                <!-- } 게시물 작성/수정 끝 -->
+                    <a href="#hd" id="top_btn">상단으로</a>
+                
+                <%= render :partial => '/board/list_table' %>
+                </div>
+                
+            </div>
+        </article>
+    </div>
+</div>
+
+<!--  콘텐츠 끝 -->
+<!-- pc 버전 끝  -->
+
+<hr>
+
+
+<!-- 모바일 버전 시작  -->
+<%= render :partial => '/krc/mobile_navbar' %>
+<div id="mobile_wrapper">
+    <div id="mobile_container">
+        <!-- skin : theme/basic -->
+<section id="mobile_bo_w">
+    <h2 id="mobile_container_title">자유게시판 글쓰기</h2>
+
+    <form name="fwrite" id="fwrite" action="http://theme.sir.kr/gnuboard5/bbs/write_update.php" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off">
+    <input type="hidden" name="w" value="">
+    <input type="hidden" name="bo_table" value="free">
+    <input type="hidden" name="wr_id" value="0">
+    <input type="hidden" name="sca" value="">
+    <input type="hidden" name="sfl" value="">
+    <input type="hidden" name="stx" value="">
+    <input type="hidden" name="spt" value="">
+    <input type="hidden" name="sst" value="">
+    <input type="hidden" name="sod" value="">
+    <input type="hidden" name="page" value="">
+   
+    <div class="mobile_tbl_frm01 mobile_tbl_wrap">
+        <table>
+        <tbody>
+            <tr>
+                <th scope="row"><label for="wr_name">이름<strong class="sound_only">필수</strong></label></th>
+                <td><input type="text" name="wr_name" value="" id="wr_name" required="" class="frm_input required" maxlength="20"></td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="wr_password">비밀번호<strong class="sound_only">필수</strong></label></th>
+                <td><input type="password" name="wr_password" id="wr_password" required="" class="frm_input required" maxlength="20"></td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="wr_email">이메일</label></th>
+                <td><input type="email" name="wr_email" value="" id="wr_email" class="frm_input email" maxlength="100"></td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="wr_subject">제목<strong class="sound_only">필수</strong></label></th>
+                <td><input type="text" name="wr_subject" value="" id="wr_subject" required="" class="frm_input required"></td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="wr_content">내용<strong class="sound_only">필수</strong></label></th>
+                <td class="wr_content">
+                <span class="sound_only">웹에디터 시작</span>
+                <textarea id="wr_content" name="wr_content" class="" maxlength="65536" style="width:100%;height:300px"></textarea>
+                <span class="sound_only">웹 에디터 끝</span></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+
+    <div class="mobile_btn_confirm">
+        <input type="submit" value="작성완료" id="btn_submit" class="mobile_btn_submit" accesskey="s">
+        <a href="./board.php?bo_table=free" class="btn_cancel">취소</a>
+    </div>
+    </form>
+</section>
+
+<script>
+function html_auto_br(obj)
+{
+    if (obj.checked) {
+        result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
+        if (result)
+            obj.value = "html2";
+        else
+            obj.value = "html1";
+    }
+    else
+        obj.value = "";
+}
+
+function fwrite_submit(f)
+{
+    var wr_content_editor = document.getElementById('wr_content');
+    if (!wr_content_editor.value) { alert("내용을 입력해 주십시오."); wr_content_editor.focus(); return false; }
+
+    var subject = "";
+    var content = "";
+    $.ajax({
+        url: g5_bbs_url+"/ajax.filter.php",
+        type: "POST",
+        data: {
+            "subject": f.wr_subject.value,
+            "content": f.wr_content.value
+        },
+        dataType: "json",
+        async: false,
+        cache: false,
+        success: function(data, textStatus) {
+            subject = data.subject;
+            content = data.content;
+        }
+    });
+
+    if (subject) {
+        alert("제목에 금지단어('"+subject+"')가 포함되어있습니다");
+        f.wr_subject.focus();
+        return false;
+    }
+
+    if (content) {
+        alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
+        if (typeof(ed_wr_content) != "undefined")
+            ed_wr_content.returnFalse();
+        else
+            f.wr_content.focus();
+        return false;
+    }
+
+    if (document.getElementById("char_count")) {
+        if (char_min > 0 || char_max > 0) {
+            var cnt = parseInt(check_byte("wr_content", "char_count"));
+            if (char_min > 0 && char_min > cnt) {
+                alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");
+                return false;
+            }
+            else if (char_max > 0 && char_max < cnt) {
+                alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
+                return false;
+            }
+        }
+    }
+
+    if (!chk_captcha()) return false;
+
+    document.getElementById("btn_submit").disabled = "disabled";
+
+    return true;
+}
+</script>
+    </div>
+</div>
+
+<!-- 모바일 버전 끝  -->
+
+
+<!-- 하단 시작 { -->
+    <%= render :partial => '/krc/footer' %>
+<!-- } 하단 끝 -->
+
+
+
+<!-- ie6,7에서 사이드뷰가 게시판 목록에서 아래 사이드뷰에 가려지는 현상 수정 -->
+<!--[if lte IE 7]>
+<script>
+$(function() {
+    var $sv_use = $(".sv_use");
+    var count = $sv_use.length;
+
+    $sv_use.each(function() {
+        $(this).css("z-index", count);
+        $(this).css("position", "relative");
+        count = count - 1;
+    });
+});
+</script>
+<![endif]-->
