@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   
   root 'krc#main'
   
+  get 'admin(/:about)', to: 'board#admin'
+  
   match ":controller(/:action(/:id))", :via => [:post,:get]
   #match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
   post "users/registrations/destroy/:id" => 'users/registrations#destroy', as: 'delete_user'

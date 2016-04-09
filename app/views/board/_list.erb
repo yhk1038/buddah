@@ -38,7 +38,11 @@
                 </div>
                 <div class="col-md-8 col-sm-8">
                     <div class="intro">
-                        <p class="intro_title"><%= @intab.name %></p>
+                        <p class="intro_title" style=""><%= @intab.name %></p>
+                        <!-- 게시판 페이지 정보 { -->
+                        <div id="bo_list_total">
+                            <span>Total <%= @intab.posts.all.count %>건</span> <%= @intab.posts.all.count/15 +1 %> 페이지
+                        </div>
                         <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
                     </div>
                     <!-- 게시판 카테고리 시작 { -->
@@ -46,6 +50,7 @@
                     
                     <!-- 게시판 목록 시작 { -->
                     <%= render :partial => '/board/list_table' %>
+                    <%#= render :partial => '/board/list_table2' %>
                     <!-- } 게시판 목록 끝 -->
                     
                     <a href="#hd" id="top_btn">상단으로</a>

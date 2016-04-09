@@ -1,12 +1,12 @@
 <!--메뉴 조회/추가/수정 GUI기반-->
     <!--상위메뉴 정보 조회/수정-->
     
-    <div class="col-md-12" style="background-color:#8cc152; padding:0px">
+    <div class="col-md-12" style="background-color:none; padding:0px">
         
-        <div id="all_tabs" class="col-md-3 list-group" style="background:#a0d468; padding:0px 10px;">
-            <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">상위메뉴</a>
+        <div id="all_tabs" class="col-md-3 list-group" style="background:none; padding:0px 10px;">
+            <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; text-align:center;">상위메뉴</a>
             <% Tab.all.order('turn asc').each do |ytab| %>
-                <a id="ctrl_<%= ytab.id %>" class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px; cursor:pointer;"><%= ytab.name %></a>
+                <a id="ctrl_<%= ytab.id %>" class="list-group-item li_group_cs"><%= ytab.name %></a>
 
                         <script>
                             $( "#ctrl_<%= ytab.id %>" ).click(function() {
@@ -31,6 +31,8 @@
                                 });
                                 $( "#intabs_<%= ytab.id %>" ).fadeIn( "fast", function() {
                                 });
+                                $( "#tab_mod_<%= ytab.id %>" ).fadeIn( "fast", function() {
+                                });
                               } else {
                                 $( "#intabs_<%= ytab.id %>" ).fadeOut( "fast", function() {
                                 });      
@@ -39,7 +41,7 @@
                         </script>
 
             <% end %>
-            <a id="ctrl_0" class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px; cursor:pointer;">+ 새로운 상위메뉴 추가</a>
+            <a id="ctrl_0" class="list-group-item li_group_cs">+ 새로운 상위메뉴 추가</a>
             <script>
             $( "#ctrl_0" ).click(function() {
                if ( $( "#intabs_0").is( ":hidden" )){
@@ -73,25 +75,25 @@
         
         <% Tab.all.order('turn asc').each do |y_tab| %>
         <div id="intabs_<%= y_tab.id %>" class="col-md-6" style="padding:0; display:none;">
-            <div id="tab_mod_<%= y_tab.id %>" class="col-md-6 list-group form-group" style="">
+            <div id="tab_mod_<%= y_tab.id %>" class="col-md-6 list-group form-group">
                 <form action="/board/save_tabs?mod_tab=true" method="POST">
-                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">상위메뉴 수정하기</a>
-                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
-                    메뉴 이름 <input type="text" name="name" class="form-control" value="<%= y_tab.name %>">
+                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; text-align:center;">상위메뉴 수정하기</a>
+                <a class="list-group-item li_group_cs">
+                    메뉴 이름 <br><input type="text" name="name" class="form-control" value="<%= y_tab.name %>">
                 </a><input type="hidden" name="id" value="<%= y_tab.id %>">
-                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
-                    상단메뉴 중 <input type="number" name="turn" class="form-control" value="<%= y_tab.turn %>">번째 메뉴
+                <a class="list-group-item li_group_cs">
+                    상단메뉴 중 <input type="number" name="turn" class="form-control" style="width:65px;padding-left:9px;"value="<%= y_tab.turn %>">번째 메뉴
                 </a>
                 <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
-                    <input type="submit" class="form-control btn-warning" value="수정하기" style="font-size:18px;">
-                    <a href="/board/delete_tabs/<%= y_tab.id %>" class="form-control btn-danger" style="font-size:18px; text-align:center;color:#fff;">삭제하기</a>
+                    <input type="submit" class="form-control btn-warning" value="수정하기" style="font-size:15px;">
+                    <div class="form-control btn-danger" data-toggle="modal" data-target="#iid_<%= y_tab.id %>" style="margin-top:10px; font-size:15px; text-align:center;color:#fff;cursor:pointer;">삭제하기</div>
                 </a>
                 </form>
             </div>
-            <div class="col-md-6 list-group" style="background:#a0d468; padding:0px 10px;">
-                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">[<%= y_tab.name %>]의 하위메뉴</a>
+            <div class="col-md-6 list-group" style="background-color:none; padding:0px 10px;">
+                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; text-align:center;">[<%= y_tab.name %>]의 하위메뉴</a>
                 <% y_tab.intabs.all.order('turn asc').each do |yintab| %>
-                    <a id="ls_<%= yintab.id %>" class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;"><%= yintab.name %></a>
+                    <a id="ls_<%= yintab.id %>" class="list-group-item li_group_cs"><%= yintab.name %></a>
                     <script>
                         $( "#ls_<%= yintab.id %>").click( function(){
                            $( "#tab_mod_<%= y_tab.id %>").fadeOut( "fast", function(){
@@ -122,7 +124,7 @@
                         });
                     </script>
                 <% end %>
-                <a id="ls_<%= y_tab.id %>_0" class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">+ 추가하기</a>
+                <a id="ls_<%= y_tab.id %>_0" class="list-group-item li_group_cs">+ 추가하기</a>
                 <script>
                     $( "#ls_<%= y_tab.id %>_0").click( function(){
                        $( "#tab_mod_<%= y_tab.id %>").fadeOut( "fast", function(){
@@ -157,12 +159,12 @@
         <div id="dt_intab_<%= yl_intab.id %>" class="col-md-12 form-group" style="padding:0; display:none;">
           <form action="/board/save_intabs?mod_intab=true" method="POST">
             <input type="hidden" name="id" value="<%= yl_intab.id %>">
-            <a class="list-group-item" style="background:#48CFAD;; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;border: none;color:#fff;">[<%= yl_intab.name %>] 수정하기</a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item" style="background:#48CFAD;; font-weight:bold; font-size:20px; text-align:center;border: none;color:#fff;">[<%= yl_intab.name %>] 수정하기</a>
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:100px; float:left">메뉴이름</span>
                 <input type="text" name="name" class="form-control" value="<%= yl_intab.name %>" style="width:15%;">
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:100px; float:left">상위메뉴</span>
                 <select name="tab_id" class="form-control" style="width:15%;">
                     <% Tab.all.order('turn asc').each do |x| %>
@@ -170,13 +172,13 @@
                     <% end %>
                 </select>
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item li_group_mo" style="height:56px;">
                 <span style="margin-right:100px; float:left">메뉴순서</span>
                 <input type="number" name="turn" class="form-control" style="width:5%; float:left;" value="<%= yl_intab.turn %>">번째 하위메뉴
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;height: 65px;">
+            <a class="list-group-item li_group_mo" style="height: 65px;">
                 <span style="margin-right:22px; float:left">쓰기 및 읽기 권한</span>
-                <span style="float:left">쓰기 : </span>
+                <span style="float:left; margin-right: 10px;">쓰기 : </span>
                 <select type="text" name="who_can_create" class="form-control" style="width:15%; float:left;">
                     <option value="" <%= "selected" if yl_intab.who_can_create == "" %>>-쓰기권한-</option>
                     <option value="10" <%= "selected" if yl_intab.who_can_create == 10 %>>최고관리자</option>
@@ -191,7 +193,7 @@
                     <option value="1" <%= "selected" if yl_intab.who_can_create == 1 %>>비회원</option>
                     <option value="0" <%= "selected" if yl_intab.who_can_create == 0 %>>방문자</option>
                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style="float:left; margin-left:20px;">읽기 : </span>
+                <span style="float:left; margin-left:20px; margin-right: 10px;">읽기 : </span>
                 <select type="text" name="who_can_read" class="form-control" style="width:15%; float:left;">
                     <option value="" <%= "selected" if yl_intab.who_can_read == "" %>>-읽기권한-</option>
                     <option value="10" <%= "selected" if yl_intab.who_can_read == 10 %>>최고관리자</option>
@@ -207,11 +209,11 @@
                     <option value="0" <%= "selected" if yl_intab.who_can_read == 0 %>>방문자</option>
                 </select>
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px; height:65px;">
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:22px; float:left">소개문구</span>
                 <input type="text" name="subscribe" value="<%= yl_intab.subscribe %>" class="form-control" placeholder="짤막한 소개문구를 입력해주세요" style="width:40%;">
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:22px; float:left">메뉴이미지 사진주소</span>
                 <input id="img_input" type="text" name="img" class="form-control" value="<%= yl_intab.img %>" placeholder="메인 이미지의 주소를 넣어주세요" style="width:70%;">
                 <img id="cc" src="<%= yl_intab.img %>" style="width:376px; height:321px; margin: 2% 30%;">
@@ -222,7 +224,7 @@
                     }).change();
                 </script>
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:22px; float:left">페이지 형식</span>
                 <select id="templete_input" type="text" name="templete" class="form-control" style="width:20%;">
                     <option value="introduce" <%= "selected" if yl_intab.templete == "introduce" %>>소개페이지형</option>
@@ -230,6 +232,7 @@
                     <option value="org" <%= "selected" if yl_intab.templete == "org" %>>분할카드형</option>
                     <option value="org2" <%= "selected" if yl_intab.templete == "org2" %>>조직 구성도</option>
                     <option value="list" <%= "selected" if yl_intab.templete == "list" %>>목록형</option>
+                    <option value="donate" <%= "selected" if yl_intab.templete == "donate" %>>후원하기</option>
                     <option value="open_board" <%= "selected" if yl_intab.templete == "open_board" %>>오픈보드형</option>
                 </select>
                 <img id="dd" src="/<%= yl_intab.templete %>.png" style="width:950px; height:468px; margin: 2% 8%;">
@@ -240,7 +243,7 @@
                     }).change();
                 </script>
             </a>
-            <input type="submit" class="btn-warning" value="수정 사항 저장하기" style="border: none;width: 100%;font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">
+            <input type="submit" class="btn-warning" value="수정 사항 저장하기" style="border: none;width: 18%;font-weight:bold; font-size:15px; float:right; height: 65px; text-align:center; margin-top:10px;">
           </form>
         </div>
         <% end %>
@@ -248,12 +251,12 @@
     <!--하위메뉴 '추가'하기    -->
         <div id="dt_intab_00" class="col-md-12 form-group" style="padding:0; display:none;">
           <form action="/board/save_intabs" method="POST">
-            <a class="list-group-item" style="background:#48CFAD;; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;border: none;color:#fff;">[새 하위메뉴] 추가하기</a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item" style="background:#48CFAD;; font-weight:bold; font-size:20px; text-align:center;border: none;color:#fff;">[새 하위메뉴] 추가하기</a>
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:100px; float:left">메뉴이름</span>
                 <input type="text" name="name" class="form-control" value="<%#= yl_intab.name %>" style="width:15%;">
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:100px; float:left">상위메뉴</span>
                 <select name="tab_id" class="form-control" style="width:15%;">
                     <% Tab.all.order('turn asc').each do |x| %>
@@ -261,13 +264,13 @@
                     <% end %>
                 </select>
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item li_group_mo" style="height:56px;">
                 <span style="margin-right:100px; float:left">메뉴순서</span>
                 <input type="number" name="turn" class="form-control" style="width:5%; float:left;" value="<%#= yl_intab.turn %>">번째 하위메뉴
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;height: 65px;">
+            <a class="list-group-item li_group_mo" style="height: 65px;">
                 <span style="margin-right:22px; float:left">쓰기 및 읽기 권한</span>
-                <span style="float:left">쓰기 : </span>
+                <span style="float:left; margin-right: 10px;">쓰기 :&nbsp</span>
                 <select type="text" name="who_can_create" class="form-control" style="width:15%; float:left;">
                     <option value="" selected>-쓰기권한-</option>
                     <option value="10" <%#= "selected" if yl_intab.who_can_create == 10 %>>최고관리자</option>
@@ -282,7 +285,7 @@
                     <option value="1" <%#= "selected" if yl_intab.who_can_create == 1 %>>비회원</option>
                     <option value="0" <%#= "selected" if yl_intab.who_can_create == 0 %>>방문자</option>
                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style="float:left; margin-left:20px;">읽기 : </span>
+                <span style="float:left; margin-left:20px; margin-right: 10px;">읽기 : &nbsp </span>
                 <select type="text" name="who_can_read" class="form-control" style="width:15%; float:left;">
                     <option value="" selected>-읽기권한-</option>
                     <option value="10" <%#= "selected" if yl_intab.who_can_read == 10 %>>최고관리자</option>
@@ -298,11 +301,11 @@
                     <option value="0" <%#= "selected" if yl_intab.who_can_read == 0 %>>방문자</option>
                 </select>
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px; height:65px;">
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:22px; float:left">소개문구</span>
                 <input type="text" name="subscribe" value="<%#= yl_intab.subscribe %>" class="form-control" placeholder="짤막한 소개문구를 입력해주세요" style="width:40%;">
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:22px; float:left">메뉴이미지 사진주소</span>
                 <input id="img_input" type="text" name="img" class="form-control" value="<%#= yl_intab.img %>" placeholder="메인 이미지의 주소를 넣어주세요" style="width:70%;">
                 <img id="cc" src="<%#= yl_intab.img %>" style="width:376px; height:321px; margin: 2% 30%;">
@@ -313,7 +316,7 @@
                     }).change();
                 </script>
             </a>
-            <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+            <a class="list-group-item li_group_mo">
                 <span style="margin-right:22px; float:left">페이지 형식</span>
                 <select id="templete_input" type="text" name="templete" class="form-control" style="width:20%;">
                     <option value="introduce" <%#= "selected" if yl_intab.templete == "introduce" %>>소개페이지형</option>
@@ -321,6 +324,7 @@
                     <option value="org" <%#= "selected" if yl_intab.templete == "org" %>>분할카드형</option>
                     <option value="org2" <%#= "selected" if yl_intab.templete == "org2" %>>조직 구성도</option>
                     <option value="list" <%#= "selected" if yl_intab.templete == "list" %>>목록형</option>
+                    <option value="donate" <%#= "selected" if yl_intab.templete == "donate" %>>후원하기</option>
                     <option value="open_board" <%#= "selected" if yl_intab.templete == "open_board" %>>오픈보드형</option>
                 </select>
                 <img id="dd" src="/<%#= yl_intab.templete %>.png" style="width:950px; height:468px; margin: 2% 8%;">
@@ -331,27 +335,48 @@
                     }).change();
                 </script>
             </a>
-            <input type="submit" class="btn-warning" value="수정 사항 저장하기" style="border: none;width: 100%;font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">
+            <input type="submit" class="btn-warning" value="수정 사항 저장하기" style="border: none;width: 18%;font-weight:bold; font-size:15px; float:right;padding:15px 50px; text-align:center; margin-top:10px;">
           </form>
         </div>
     <!--/-->
         
-        
+        <div id="iid_<%= y_tab.id %>" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header" style="background: rgba(217, 83, 79, 0.26);">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="font-weight:bold; font-size:16px;">[<%= y_tab.name %>]을(를) 삭제합니다&hellip;</h4>
+              </div>
+              <div class="modal-body">
+                <img src="../theme/krc/img/stop_warning.png" style="width:50%;margin-left: 25%;">
+                <p style="text-align:center; font-size:16px;">정말 삭제 하시겠습니까?</p>
+                <p style="text-align:center;"> - - - - </p>
+                <p style="text-align:center; font-size:16px;">삭제된 메뉴는 복구하기 어렵습니다.</p>
+                <p style="text-align:center; font-size:16px;">삭제할 메뉴의 <b>하위메뉴</b>들 중<br> <b>이동이 필요한 메뉴</b>는 <br>먼저 이동시켜 주십시오.</p>
+                
+              </div>
+              <div class="modal-footer" style="background: rgba(217, 83, 79, 0.26);">
+                <button type="button" class="btn btn-info" data-dismiss="modal">취소</button>
+                <a type="button" class="btn btn-danger" href="/board/delete_tabs/<%= y_tab.id %>" style="color:#fff;">삭제 확인</a>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
             
             
             
         <div id="intabs_0" class="col-md-6" style="padding:0; display:none;">
             <form action="/board/save_tabs" method="POST">
             <div class="col-md-6 list-group form-group" style="">
-                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px; padding:15px 50px; text-align:center;">상위메뉴 추가하기</a>
-                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
+                <a class="list-group-item" style="background:#e9e9e9; font-weight:bold; font-size:20px;text-align:center;">상위메뉴 추가하기</a>
+                <a class="list-group-item li_group_cs">
                     메뉴 이름 <input type="text" name="name" class="form-control" value="<%#= y_tab.name %>">
                 </a>
-                <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
-                    상단메뉴 중 <input type="number" name="turn" class="form-control" value="<%#= y_tab.turn %>">번째 메뉴
+                <a class="list-group-item li_group_cs">
+                    상단메뉴 중 <input type="number" name="turn" class="form-control" value="<%#= y_tab.turn %>" style="width:65px;padding-left:9px;">번째 메뉴
                 </a>
                 <a class="list-group-item" style="font-weight:bold; font-size:20px; padding:15px 50px;">
-                    <input type="submit" class="form-control btn-warning" value="추가하기" style="font-size:18px;">
+                    <input type="submit" class="form-control btn-warning" value="추가하기" style="font-size:15px;">
                 </a>
             </div>
             </form>

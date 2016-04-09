@@ -139,7 +139,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 /* 게시판 읽기 */
 #bo_v {margin:20px 0;padding-bottom:20px}
 #bo_v_table {position:absolute;top:0;right:16px;margin:0;padding:0 5px;height:25px;background:#ff3061;color:#fff;font-weight:bold;line-height:2.2em}
-#bo_v_title {margin-bottom:0px; padding:15px 20px ;color:#444;font-size:1.2em;background:#ebebeb;border:1px solid #c4c4c4}
+#bo_v_title {margin-bottom:0px; padding:15px 20px ;color:#444;font-size:1.2em;background:#ebebeb;border:1px solid #c4c4c4;overflow: hidden;}
 #bo_v_if{padding:15px 20px 10px;border:1px solid #dfdfdf;border-top:none}
 
 #bo_v_info {padding-bottom:5px}
@@ -192,7 +192,7 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 #bo_v_img:after {display:block;visibility:hidden;clear:both;content:""}
 #bo_v_img img {margin-bottom:20px;max-width:100%;height:auto}
 
-#bo_v_con {width:100%;line-height:1.7em;word-break:break-all;overflow:hidden}
+#bo_v_con {width:100%;line-height:1.7em;word-break:break-all;overflow:auto;}
 #bo_v_con a {color:#000;text-decoration:underline}
 #bo_v_con img {max-width:100%;height:auto}
 

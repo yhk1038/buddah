@@ -3,40 +3,11 @@
 <% elsif params[:about] == 'user2' %>
     <%= render :partial => 'adminst/user_ctrl2' %>
 <% elsif params[:about] == 'menu' %>
-    <!--<div class="col-md-12" style="background-color:#48cfad; padding:0px;">-->
-    <!--    <div class="col-md-2" style="height:48px; padding:10px; background-color:#37bc9b; text-align:center; color: white; font-size: 20px; font-weight: bold;">-->
-    <!--        상위메뉴-->
-    <!--    </div>-->
-    <!--    <ul class="col-md-10" style="background-color:#48cfad; padding:10px 0px 10px 45px;">-->
-    <!--    <%# Tab.all.order('turn asc').each do |xtab| %>-->
-    <!--        <li style="float:left; width:10%; text-align:center; color: white; font-size: 20px; font-weight: bold;">-->
-    <!--            <a style="color:#fff; cursor:pointer;" id="sl_tab_<%#= xtab.id %>"><%#= xtab.name %></a>-->
-    <!--        </li>-->
-    <!--        <script>-->
-    <!--            $( "#sl_tab_<%#= xtab.id %>" ).click(function() {-->
-    <!--              if ( $( "#sl_intab_<%#= xtab.id %>").is( ":hidden" )){-->
-    <!--                $( "#sl_intab_1").slideUp( "fast", function() { -->
-    <!--                });-->
-    <!--                $( "#sl_intab_2").slideUp( "fast", function() { -->
-    <!--                });-->
-    <!--                $( "#sl_intab_3").slideUp( "fast", function() { -->
-    <!--                });-->
-    <!--                $( "#sl_intab_4").slideUp( "fast", function() { -->
-    <!--                });-->
-    <!--                $( "#sl_intab_5").slideUp( "fast", function() { -->
-    <!--                });-->
-    <!--                $( "#sl_intab_<%#= xtab.id %>" ).slideDown( "fast", function() {-->
-    <!--                });  -->
-    <!--              } else {-->
-    <!--                $( "#sl_intab_<%#= xtab.id %>" ).slideUp( "fast", function() {-->
-    <!--                });      -->
-    <!--              }-->
-    <!--            });-->
-                
-    <!--        </script>-->
-    <!--    <%# end %>-->
-    <!--    </ul>-->
-    <!--</div>-->
+    <%= render :partial => 'adminst/gui' %>
+<% elsif params[:about] == 'menu2' %>
     <%= render :partial => 'adminst/menu' %>
-    
+<% elsif params[:about] == 'main' %>
+    <%= render :partial => 'adminst/main_edit' %>
+<% elsif params[:about] == 'statistic' %>
+    <%= render partial: 'adminst/statistic' %>
 <% end %>

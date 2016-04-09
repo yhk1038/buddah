@@ -182,6 +182,7 @@
                 <option value="org">분할카드형</option>
                 <option value="org2">조직 구성도</option>
                 <option value="list">목록형</option>
+                <option value="donate">후원하기</option>
                 <option value="open_board">오픈보드형</option>
             </select>
             <input type="text" name="subscribe" value="" placeholder="짤막한 소개문구를 입력해주세요">
@@ -233,7 +234,7 @@
                 <option value="map" <%= "selected" if @intab.templete == "map" %>>지도형</option>
                 <option value="org" <%= "selected" if @intab.templete == "org" %>>분할카드형</option>
                 <option value="list" <%= "selected" if @intab.templete == "list" %>>목록형</option>
-                <option value="donate" <%= "selected" if @intab.templete == "donate" %>>후원형</option>
+                <option value="donate" <%= "selected" if @intab.templete == "donate" %>>후원하기</option>
                 <option value="open_board" <%= "selected" if @intab.templete == "open_board" %>>오픈보드형</option>
             </select>
             <input type="text" name="subscribe" value="<%= @intab.subscribe %>">
@@ -458,6 +459,7 @@
                     <option value="org" <%= "selected" if intabg.templete == "org" %>>분할카드형</option>
                     <option value="org2" <%= "selected" if intabg.templete == "org2" %>>조직 구성도</option>
                     <option value="list" <%= "selected" if intabg.templete == "list" %>>목록형</option>
+                    <option value="donate" <%= "selected" if intabg.templete == "donate" %>>후원하기</option>
                     <option value="open_board" <%= "selected" if intabg.templete == "open_board" %>>오픈보드형</option>
                 </select>
                 <img id="dd" src="/<%= intabg.templete %>.png" style="width:950px; height:468px; margin: 2% 8%;">
@@ -550,6 +552,7 @@
                     <option value="org" <%#= "selected" if intabg.templete == "org" %>>분할카드형</option>
                     <option value="org2" <%#= "selected" if intabg.templete == "org2" %>>조직 구성도</option>
                     <option value="list" <%#= "selected" if intabg.templete == "list" %>>목록형</option>
+                    <option value="donate" <%#= "selected" if intabg.templete == "donate" %>>후원하기</option>
                     <option value="open_board" <%#= "selected" if intabg.templete == "open_board" %>>오픈보드형</option>
                 </select>
                 <img id="dde" src="/<%#= intabg.templete %>.png" style="width:950px; height:468px; margin: 2% 8%;">

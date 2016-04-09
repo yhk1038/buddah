@@ -1,0 +1,74 @@
+
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+        
+        <div style="padding:1px; overflow-y: hidden; height:100%; width:100%;">
+            <!--좌측 네비게이션 상단 계정정보-->
+            <div class="col-md-12 col-sm-12" style="padding:0; width:100%; background:#fff;">
+                <div class="col-md-12 col-sm-12" style="padding:10px; background:#3bafda;">
+                    <p style="text-align:center; color:white;margin: 0;font-size: 15px;font-weight: bold;">자정센터 관리자</p>
+                </div>
+                <div class="col-md-12 col-sm-12" id="admin_profile" style="padding:0;">
+                    <div class="col-md-12 col-sm-12" style="padding:0; margin:15px 0px 15px 0px;">
+                        <div class="col-md-3 col-sm-3"></div>
+                        <div class="col-md-6 col-sm-6" style="height:120px; width:120px; border-radius:100%; border: 1px solid #aeaeae; background-image: url(../theme/krc/img/krc_logo.png);background-size: cover;background-position-x: -25px;">
+                        </div>
+                        <div class="col-md-3 col-sm-3"></div>
+                    </div>
+                    <div class="col-md-12 col-sm-12" style="padding-top:10px;"><p style="margin:0; text-align:center; font-weight:bold; font-size:17px;">김용현</p></div>
+                    <div class="col-md-12 col-sm-12" style="padding-top:10px;"><p style="margin:0; text-align:center; font-weight:bold;">
+                        <span style="float:left;">마지막 방문일</span>
+                        <span style="float:right;"><%= current_user.last_sign_in_at.to_date %></span></p></div>
+                    <div class="col-md-12 col-sm-12" style="padding-top:10px;margin-bottom: 10px;">
+                        <p style="text-align:center; font-weight:bold;">
+                            <span style="float:left;">총 방문 <%= ViewCountSite.all.count %>회</span>
+                            <span style="float:right;">총 게시글 <%= Post.all.count %>개</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+            <div style="width:100%;">
+                <ul class="nav" id="side-menu">
+                
+                    <li><a href="/admin/statistic"><i class="fa fa-bar-chart-o fa-fw"></i>주요 통계 <span style="float:right; font-weight:bold; color:rgba(13, 0, 255, 0.56);">Today <%= ViewCountSite.where(:view_date => Date.parse(Time.zone.now.to_s).to_s).count %><i>!!</i></span></a></li>
+                    <!--회원관리    -->
+                    <li><a><i class="fa fa-users fa-fw"></i>회원 관리 <span style="margin-left: 35%; font-weight:bold; color:rgba(13, 0, 255, 0.56);">New <%= User.where(:created_at => Time.zone.now.to_s).count %><i>!!</i></span><span class="fa arrow" style="float:right;"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="/admin/user2">전체회원정보</a></li>
+                            <li><a href="/admin/user2">후원회원</a></li>
+                            <li><a href="/admin/user2">관리자 현황</a></li>
+                        </ul>
+                    </li>
+                        
+                    <!--메인화면 관리    -->
+                    <li><a href="/admin/main"><i class="fa fa-picture-o fa-fw"></i>메인화면 관리</a></li>
+                    <li>
+                        <a href="#"><i class="fa fa-list-alt fa-fw"></i> 메뉴 관리<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="/admin/menu">메뉴 추가/삭제</a></li>
+                            <li><a href="/admin/menu2">한눈에 보기</a></li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    
+                    <li>
+                        <a><i class="fa fa-tasks fa-fw"></i> 게시글 관리</a><!--<span class="fa arrow"></span>-->
+                        <!--<ul class="nav nav-second-level">-->
+                        <!--    <li><a href="/admin/posts">메뉴 추가/삭제</a></li>-->
+                        <!--    <li><a href="/admin/posts">이름 /순서 변경</a></li>-->
+                        <!--    <li><a href="/admin/posts">템플릿 변경</a></li>-->
+                        <!--</ul>-->
+                        <!-- /.nav-second-level -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+    <!--<script src="/bower_components/jquery/dist/jquery.min.js"></script>-->
+    <!-- Bootstrap Core JavaScript -->
+    <!--<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->

@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   
   
-  $templete = ['introduce','map','org','org2','donate','open_board','list']
+  $templete = ['introduce','map','org','org2','donate','open_board','list', 'center_history']
   $tab = Tab.all.order('turn asc')
 end

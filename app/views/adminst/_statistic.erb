@@ -1,0 +1,126 @@
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header" style="font-size:45px; font-weight:bold;">주요 통계</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+            
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            일일 방문자 수
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="comecount"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Area Chart Example
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-area-chart"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Bar Chart Example
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-bar-chart"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Donut Chart Example
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-donut-chart"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                
+            </div>
+            <!-- /.row -->
+        
+    <!-- Metis Menu Plugin JavaScript -->
+    <!--<script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>-->
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/bower_components/raphael/raphael-min.js"></script>
+    <script src="/bower_components/morrisjs/morris.min.js"></script>
+    <script src="/js/morris-data.js"></script>
+    
+    <script>
+        new Morris.Bar({
+          // ID of the element in which to draw the chart.
+          element: 'comecount',
+          // Chart data records -- each entry in this array corresponds to a point on
+          // the chart.
+          <%
+              date = Date.current.in_time_zone.to_date
+              date -= 5
+          %>
+          data: [
+            { 
+                <% date = date + 1 %>
+                day: '<%= date.mday.to_s %>일', 
+                value: <%= ViewCountSite.where(view_date: date.to_s).count %>
+            },
+            { 
+                <% date = date + 1 %>
+                day: '<%= date.mday.to_s %>일', 
+                value: <%= ViewCountSite.where(view_date: date.to_s).count %>
+            },
+            { 
+                <% date = date + 1 %>
+                day: '<%= date.mday.to_s %>일', 
+                value: <%= ViewCountSite.where(view_date: date.to_s).count %>
+            },
+            { 
+                <% date = date + 1 %>
+                day: '<%= date.mday.to_s %>일', 
+                value: <%= ViewCountSite.where(view_date: date.to_s).count %>
+            },
+            { 
+                <% date = date + 1 %>
+                day: '<%= date.mday.to_s %>일', 
+                value: <%= ViewCountSite.where(view_date: date.to_s).count %>
+            }
+          ],
+          // The name of the data record attribute that contains x-values.
+          xkey: 'day',
+          // A list of names of data record attributes that contain y-values.
+          ykeys: ['value'],
+          // Labels for the ykeys -- will be displayed when you hover over the
+          // chart.
+          labels: ['Value']
+        });
+    </script>

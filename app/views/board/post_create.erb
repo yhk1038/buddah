@@ -57,7 +57,7 @@
                         });
                     
                     </script>
-                    <form name="fwrite" id="fwrite" action="/board/post_save<%= "/" + params[:id] if params[:id] != nil %>" method="post" enctype="multipart/form-data" style="width:100%">
+                    <form name="fwrite" id="fwrite" action="/board/post_save<%= "/#{params[:id]}" if params[:id] != nil %>" method="post" enctype="multipart/form-data" style="width:100%">
                     <input type="hidden" name="intab_id" value="<%= @intab.id %>">
                     <% if current_user.nil? %>
                         
@@ -122,7 +122,7 @@
                             </tr>
                             <tr>
                                 <th scope="row"><label for="title">제목</label></th>
-                                <td><div id="autosave_wrapper"><input type="text" name="title" value="" id="title" required class="frm_input required" size="50" maxlength="255"></div></td>
+                                <td><div id="autosave_wrapper"><input type="text" name="title" value="" id="title" required class="frm_input required" size="50" maxlength="255" style="width:98%;"></div></td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="ir1">내용</label></th>
@@ -138,11 +138,11 @@
                             </tr>
                             <tr>
                                 <th scope="row"><label for="file1">첨부파일1</label></th>
-                                <td><input type="file" name="file1" value="" id="file1" class="frm_input" size="50"></td>
+                                <td><input type="file" name="file1" value="" id="file1" class="frm_input" size="50" style="width: 98%;"></td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="file2">첨부파일2</label></th>
-                                <td><input type="file" name="file2" value="" id="file2" class="frm_input" size="50"></td>
+                                <td><input type="file" name="file2" value="" id="file2" class="frm_input" size="50" style="width: 98%;"></td>
                             </tr>
                         </tbody>
                         </table>

@@ -85,7 +85,9 @@
                             <div id="bo_v_img"></div>
                     
                             <!-- 본문 내용 시작 { -->
-                            <div id="bo_v_con"><pre style="background: none; border: none;"><%= @post.ir1 %></pre></div>
+                            <!--<div id="bo_v_con"><pre style="background: none; border: none;"><%= @post.ir1 %></pre></div>-->
+                            <% content = @post.ir1.html_safe %>
+                            <div id="bo_v_con"><%= content %></div>
                             <!-- } 본문 내용 끝 -->
                             <!-- 스크랩 추천 비추천 시작 { -->
                             <!-- } 스크랩 추천 비추천 끝 -->
@@ -500,14 +502,20 @@
 <%= render :partial => '/krc/mobile_navbar' %>
 <article id="mobile_bo_v" style="width:100%">
     <header>
-        <h1 id="mobile_bo_v_title">테마 공지사항 테스트글입니다</h1>
+        <h1 id="mobile_bo_v_title"><%= @post.title %></h1>
     </header>
     <section id="mobile_bo_v_info">
         <h2>페이지 정보</h2>
-        작성자 <strong><span class="sv_member">최고관리자</span></strong>
-        <span class="sound_only">작성일</span><strong>15-10-08 10:00</strong>
-        조회<strong>1,654회</strong>
-        댓글<strong>1건</strong>
+        작성자 <strong>
+            <% if @post.anonymous == true %>
+                <span class="sv_member"><%= "익명의 글쓴이" %></span>
+            <% else %>
+                <span class="sv_member"><%= @post.author_name %></span>
+            <% end %>
+            </strong>
+        <span class="sound_only">작성일</span><strong><%= Time.parse(@post.created_at.to_s).to_s.first(16).last(14) %></strong>
+        조회<strong><%= @post.view_count_posts.count %>회</strong>
+        댓글<strong><%= @post.replies.count %>건</strong>
     </section>
     <section id="mobile_bo_v_link">
         <h2>관련링크</h2>
@@ -517,7 +525,9 @@
     <section id="mobile_bo_v_atc">
         <h2 id="mobile_bo_v_atc_title">본문</h2>
         <div id="mobile_bo_v_img"></div>
-        <div id="mobile_bo_v_con"><p>테마 공지사항 테스트글입니다&nbsp;</p></div>
+        <!--<div id="mobile_bo_v_con"><p>테마 공지사항 테스트글입니다&nbsp;</p></div>-->
+        <% content = @post.ir1.html_safe %>
+        <div id="mobile_bo_v_con"><%= content %></div>
     </section>
 
     
@@ -557,17 +567,21 @@ var char_max = parseInt(0); // 최대
 
     <aside id="mobile_bo_vc_w">
         <h2>댓글쓰기</h2>
-        <form name="fviewcomment" action="./write_comment_update.php" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off">
+        <% if current_user.nil? %>
+        <form name="fviewcomment" action="/board/reply_save" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off">
+        <input type="hidden" name="author_id" value="00" id="author_id" required="" class="frm_input required" size="5" maxlength="20">
         <input type="hidden" name="w" value="c" id="w">
         <input type="hidden" name="bo_table" value="notice">
-        <input type="hidden" name="wr_id" value="7">
-        <input type="hidden" name="comment_id" value="" id="comment_id">
-        <input type="hidden" name="sca" value="">
-        <input type="hidden" name="sfl" value="">
-        <input type="hidden" name="stx" value="">
-        <input type="hidden" name="spt" value="">
-        <input type="hidden" name="page" value="">
-        <input type="hidden" name="is_good" value="">
+        <% else %>
+        <% end %>
+        <!--<input type="hidden" name="wr_id" value="7">-->
+        <!--<input type="hidden" name="comment_id" value="" id="comment_id">-->
+        <!--<input type="hidden" name="sca" value="">-->
+        <!--<input type="hidden" name="sfl" value="">-->
+        <!--<input type="hidden" name="stx" value="">-->
+        <!--<input type="hidden" name="spt" value="">-->
+        <!--<input type="hidden" name="page" value="">-->
+        <!--<input type="hidden" name="is_good" value="">-->
 
         <div class="mobile_tbl_frm01 mobile_tbl_wrap">
             <table>

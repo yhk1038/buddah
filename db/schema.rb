@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323103631) do
+ActiveRecord::Schema.define(version: 20160327191219) do
 
   create_table "intabs", force: :cascade do |t|
     t.integer  "tab_id"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20160323103631) do
     t.string   "addr",                   default: "", null: false
     t.string   "addr2",                  default: "", null: false
     t.integer  "mb_mailling",            default: 0,  null: false
-    t.integer  "mb_open",                default: 0,  null: false
+    t.integer  "mb_open",                default: 1,  null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -122,6 +122,13 @@ ActiveRecord::Schema.define(version: 20160323103631) do
   create_table "view_count_posts", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "ip_adress"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "view_count_sites", force: :cascade do |t|
+    t.string   "ip_address"
+    t.string   "view_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

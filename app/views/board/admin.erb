@@ -1,99 +1,32 @@
-<div class="col-md-12" style="padding:0;">
-    <div class="col-md-12" style="height:54px; background:#5d9cec;">
+
+
+<div id="wrapper" style="background: rgba(0, 157, 245, 0.03);">
+    <%= render partial: 'adminst/nav' %>
+<div id="page-wrapper" style="background: rgba(0, 0, 0, 0);">
+    <div style="width:100%; margin-top:20px;"></div>
+    <div class="row">
+        <!--<div id="page-wrapper">-->
+            <div class="col-md-12" style="height:100%; padding:0;">
+                <%#= render :partial => "#{@about_page}" %>
+                <%= render :partial => "board/tmp" %>
+            </div>
+        <!--</div>-->
         
     </div>
-    <div class="col-md-12" style="padding:0; height:100%;">
-        <div class="col-md-2" style="padding:1px; background:#3bafda; overflow-y: hidden; height:100%;">
-            <!--좌측 네비게이션 상단 계정정보-->
-            <div class="col-md-12" style="padding:0; width:100%; background:#fff;">
-                <div class="col-md-12" style="padding:10px; background:#3bafda;">
-                    <p style="text-align:center; color:white;margin: 0;font-size: 20px;font-weight: bold;">자정센터 관리자</p>
-                </div>
-                <div class="col-md-12" id="admin_profile" style="padding:0;">
-                    <div class="col-md-12" style="padding:0; margin:15px 0px 15px 0px;">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6" style="height:120px; border-radius:100%; border: 2px solid black;">
-                            <!--관리자 프로필 사진-->
-                        </div>
-                        <div class="col-md-3"></div>
-                    </div>
-                    <div class="col-md-12" style="padding-top:10px;"><p style="margin:0; text-align:center; font-weight:bold; font-size:17px;">김용현</p></div>
-                    <div class="col-md-12" style="padding-top:10px;"><p style="margin:0; text-align:center; font-weight:bold;">
-                        <span style="float:left;">마지막 방문일</span>
-                        <span style="float:right;">2016-03-20</span></p></div>
-                    <div class="col-md-12" style="padding-top:10px;">
-                        <p style="text-align:center; font-weight:bold;">
-                            <span style="float:left;">총 방문자</span>
-                            <span>총 게시글</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <ul id="admin_list" class="col-md-12" style="padding:0;">
-                <li><a href="/board/admin?about=statistic">주요 통계</a></li>
-            <!--회원관리    -->
-                <li><a href="/board/admin?about=user2">회원 관리</a></li>
-            <!--메인화면 관리    -->
-                <li><a href="/board/admin?about=main">메인화면 관리</a></li>
-            <!--메뉴관리    -->
-                <li><a id="about_menu">메뉴 관리</a></li>
-                <ul id="inner_abmenu" style="display: none;">
-                    <li><a href="/board/admin?about=menu">메뉴 추가/삭제</a></li>
-                    <li><a href="/board/admin?about=menu">이름 /순서 변경</a></li>
-                    <li><a href="/board/admin?about=menu">템플릿 변경</a></li>
-                </ul>
-            <!--게시글 관리    -->
-                <li><a id="about_posts">게시글 관리</a></li>
-                <ul id="inner_abposts" style="display: none;">
-                    <li><a href="/board/admin?about=posts">메뉴 추가/삭제</a></li>
-                    <li><a href="/board/admin?about=posts">이름 /순서 변경</a></li>
-                    <li><a href="/board/admin?about=posts">템플릿 변경</a></li>
-                </ul>
-            </ul>
-            <style>
-                #admin_list li{
-                    margin:10px 0px;
-                    text-align:center;
-                    color:white;
-                    font-size:17px;
-                }
-                #admin_list li a{
-                    color:white;
-                    cursor:pointer;
-                }
-                #admin_list ul li{
-                    background-color:#4fc1e9;
-                    margin:0;
-                    padding:10px 0px;
-                }
-            </style>
-            <script>
-                $( "#about_menu" ).click(function() {
-                  if ( $( "#inner_abmenu").is( ":hidden" )){
-                    $( "#inner_abmenu" ).slideDown( "fast", function() {
-                    });  
-                  } else {
-                    $( "#inner_abmenu" ).slideUp( "fast", function() {
-                    });      
-                  }
-                });
-                $( "#about_posts" ).click(function() {
-                    if ( $( "#inner_abposts").is( ":hidden" )){
-                        $( "#inner_abposts" ).slideDown( "fast", function() {
-                        });  
-                    } else {
-                        $( "#inner_abposts" ).slideUp( "fast", function() {
-                        });      
-                    }
-                });
-            </script>
-        </div>
-                
-                
-        <div class="col-md-10" style="height:100%; padding:0;">
-            <%#= render :partial => "#{@about_page}" %>
-            <%= render :partial => "board/tmp" %>
-        </div>
-    </div>
+    <div style="width:100%; margin-top:20px;"></div>
 </div>
+
+    <!-- jQuery -->
+  <!--<script src="/bower_components/jquery/dist/jquery.min.js"></script>-->
+  
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+  
+  <!-- Custom Theme JavaScript -->
+  <script src="/dist/js/sb-admin-2.js"></script>
+
+  <!-- Morris Charts JavaScript -->
+  <!--<script src="/bower_components/raphael/raphael-min.js"></script>-->
+  <!--<script src="/bower_components/morrisjs/morris.min.js"></script>-->
+  
+<!--<script src="/bower_components/jquery/dist/jquery.min.js"></script>-->

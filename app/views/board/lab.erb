@@ -1,3 +1,27 @@
-<% @intab.each do |x| %>
-    <%= x.id %> | <%= x.name %> <br>
-<% end %>
+<%
+if intab.who_can_read == 10
+    who_can_read = '최고관리자'
+elsif intab.who_can_read == 9
+    who_can_read = '사이트 관리자'
+elsif intab.who_can_read == 8
+    who_can_read = '고위임직원'
+elsif intab.who_can_read == 7
+    who_can_read = '일반임직원'
+elsif intab.who_can_read == 6
+    who_can_read = '일반_특별관리자'
+elsif intab.who_can_read == 5
+    who_can_read = '일반_보통관리자'
+elsif intab.who_can_read == 4
+    who_can_read = '정회원'
+elsif intab.who_can_read == 3
+    who_can_read = '후원회원'
+elsif intab.who_can_read == 2
+    who_can_read = '인터넷회원'
+elsif intab.who_can_read == 1
+    who_can_read = '비회원'
+elsif intab.who_can_read == 0
+    who_can_read = '방문자'
+elsif intab.who_can_read == nil
+    who_can_read = '방문자'
+end
+%>

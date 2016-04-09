@@ -16,7 +16,7 @@ textarea, select {font-family:'Nanum Gothic', sans-serif;font-size:1em}
 select {margin:0}
 p {margin:0;padding:0;word-break:break-all}
 hr {display:none}
-pre {overflow-x:scroll;font-size:1.1em}
+pre {overflow-x:hidden;overflow-y:auto;font-size:1.1em;white-space:pre-line;}
 a:link, a:visited {color:#000;text-decoration:none}
 a:hover, a:focus, a:active {color:#000;text-decoration:none}
 
@@ -143,7 +143,7 @@ a.gnb_bg{background:url('/theme/krc/img/gnb_bg.gif') 100px 50%  no-repeat;}
 .accordion-content.default {display: block; width:376px; height:321px;}
 #comp_if{float:left;border-left:1px solid #c8d7d6;border-right:1px solid #c8d7d6}
 #comp_if li{height:193px;width:248px;border-top:1px solid #eee;position:relative}
-#comp_if li h2{position:absolute;top:0px;left:20px;font-size:1.333em}
+#comp_if li h2{position:absolute;top:22px;left:20px;font-size:1.333em}
 #comp_if li p{position:absolute;top:50px;left:20px;color:#566472;font-size:1.083em;line-height:1.4em}
 #comp_if li a{display:block;width:100%;height:100%;text-indent:-99999px;overflow:hidden}
 #comp_if li.com_bg1 a{background:url(../img/tab_bgimg_introduce.jpg) no-repeat bottom right #e7f0f6}
@@ -419,3 +419,9 @@ transition: opacity 300ms ease-out, top 300ms ease-out;
 /*    PADDING-TOP: 0pt;  */
 /*    TOP: 50px; */
 /*}*/
+
+
+/*관리자 페이지 css 시작*/
+.li_group_cs {font-weight:bold; font-size:15px; padding-left:32px; cursor:pointer;}
+.li_group_mo {font-weight:bold; font-size:15px;}
+/*관리자 페이지 css 끝*/

@@ -1,6 +1,12 @@
 class KrcController < ApplicationController
   
   def main
+    
+    mark = ViewCountSite.new
+    mark.ip_address  = request.remote_ip
+    mark.view_date = Date.current.in_time_zone.to_date.to_s
+    mark.save
+    
     @bg = ["https://drscdn.500px.org/photo/66007189/q%3D80_m%3D2000/53f84eed281208de771e12317520398b",
           "https://drscdn.500px.org/photo/37025002/q%3D80_m%3D2000/e24b6abea3de45166a342e23432a307b",
           "https://drscdn.500px.org/photo/30384243/q%3D80_m%3D2000/367c79cc52501d25f729684930d3d8c1",

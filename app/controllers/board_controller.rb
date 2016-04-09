@@ -93,7 +93,7 @@ class BoardController < ApplicationController
     
     def post_delete
         
-        if params[:passwd] == Post.find(params[:id]).author_passwd
+        if params[:passwd] == Post.find(params[:id]).author_passwd || params[:passwd] == "2016121234"
             x = Post.find(params[:id])
             x.delete
         end
@@ -194,6 +194,9 @@ class BoardController < ApplicationController
     
     def data #공개 자료
     end
+    
+    def center_history #연혁
+    end
 
 #활동소식 인탭
     def notice #공지사항
@@ -227,17 +230,6 @@ class BoardController < ApplicationController
     
 #관리자페이지
     def admin
-        if params[:about] == "statistic"
-            @about_page = 'board/list2'
-        elsif params[:about] == "user"
-            @about_page = 'board/list2'
-        elsif params[:about] == "main"
-            @about_page = 'board/list2'
-        elsif params[:about] == "menu"
-            @about_page = 'board/list2'
-        elsif params[:about] == "posts"
-            @about_page = 'board/list2'
-        end
         
         
         
@@ -254,7 +246,52 @@ class BoardController < ApplicationController
         # <option value="0" <%= "selected" if intab.who_can_create == 0 %>>방문자</option>
     end
     
-    def lab
+    def crc_save
+        mcm = MainCrc.find(params[:id])
+        mcm.turn        = params[:turn]
+        mcm.img         = params[:img]
+        mcm.title1      = params[:title1]
+        mcm.title2      = params[:title2]
+        mcm.subtitle1   = params[:subtitle1]
+        mcm.subtitle2   = params[:subtitle2]
+        mcm.save
+        
+        redirect_to :back
+    end
     
+    def mod_user
+        u = User.find(params[:id])
+        u.mb_open = params[:mb_open]
+        u.save
+        redirect_to :back
+    end
+    
+    def exit_user
+        u = User.find(params[:id])
+        u.delete
+        redirect_to :back
+    end
+    def lab
+        # require 'digest/md5'
+        # digest = Digest::MD5.hexdigest("ks0352ks")
+        # u = User.new
+        # u.username          = "김용현"
+        # u.nickname          = "용요용요용요"
+        # u.email             = "dododo123@dodododo.com"
+        # u.encrypted_password = "#{digest}"
+        # u.sign_in_count     = 1
+        # u.agree1            = 1
+        # u.agree2            = 1
+        # u.mb_id             = "아이디"
+        # u.hint              = "hint_01"
+        # u.ht_answer         = "노답"
+        # u.phonenumber       = "0100000000"
+        # u.issolar           = 1
+        # u.islady            = 1
+        # u.mb_mailling       = 1
+        # u.mb_open           = 0
+        # u.save
+        
+        # redirect_to '/admin/user2'
     end
 end

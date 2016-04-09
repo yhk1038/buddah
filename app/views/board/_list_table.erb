@@ -1,17 +1,14 @@
 <div id="bo_list" style="width:100%; margin-top: 20px;">
-    <!-- 게시판 페이지 정보 { -->
-    <div id="bo_list_total">
-        <span>Total <%= @intab.posts.all.count %>건</span> <%= @intab.posts.all.count/15 +1 %> 페이지
-    </div>
+    
     <!-- 게시판 검색 시작 { -->
-    <fieldset id="bo_sch">
-        <legend>게시물 검색</legend>
+    <!--<fieldset id="bo_sch">-->
+    <!--    <legend>게시물 검색</legend>-->
 
-        <form name="fsearch" method="get" action="/board/search_post">
-            <input type="hidden" name="bo_table" value="notice">
-            <input type="hidden" name="sca" value="">
-            <input type="hidden" name="sop" value="and">
-            <label for="sfl" class="sound_only">검색대상</label>
+    <!--    <form name="fsearch" method="get" action="/board/search_post">-->
+    <!--        <input type="hidden" name="bo_table" value="notice">-->
+    <!--        <input type="hidden" name="sca" value="">-->
+    <!--        <input type="hidden" name="sop" value="and">-->
+    <!--        <label for="sfl" class="sound_only">검색대상</label>-->
             <!--<select name="sfl" id="sfl" >-->
             <!--    <option value="wr_subject">제목</option>-->
             <!--    <option value="wr_content">내용</option>-->
@@ -21,29 +18,29 @@
             <!--    <option value="wr_name,1">글쓴이</option>-->
             <!--    <option value="wr_name,0">글쓴이(코)</option>-->
             <!--</select>-->
-            <div class="fancy-select">
-                <select name="sfl" id="sfl" class="fancified" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">
-                    <option value="wr_subject">제목</option>
-                    <option value="wr_content">내용</option>
-                    <option value="wr_subject||wr_content">제목+내용</option>
-                    <option value="mb_id,1">회원아이디</option>
-                    <option value="mb_id,0">회원아이디(코)</option>
-                    <option value="wr_name,1">글쓴이</option>
-                    <option value="wr_name,0">글쓴이(코)</option>
-                </select>
-                <div class="trigger">제목</div>
-                <ul class="options overflowing">
-                    <li data-raw-value="wr_subject" class="selected">제목</li>
-                    <li data-raw-value="wr_content" class="">내용</li><li data-raw-value="wr_subject||wr_content" class="">제목+내용</li>
-                    <li data-raw-value="mb_id,1" class="">회원아이디</li><li data-raw-value="mb_id,0">회원아이디(코)</li>
-                    <li data-raw-value="wr_name,1">글쓴이</li><li data-raw-value="wr_name,0">글쓴이(코)</li>
-                </ul>
-            </div>
-            <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-            <input type="text" name="title" value="" required id="stx" class="frm_input required" size="26" maxlength="20">
-            <input type="submit" value="검색" class="btn_submit">
-        </form>
-    </fieldset>
+            <!--<div class="fancy-select">-->
+            <!--    <select name="sfl" id="sfl" class="fancified" style="width: 1px; height: 1px; display: block; position: absolute; top: 0px; left: 0px; opacity: 0;">-->
+            <!--        <option value="wr_subject">제목</option>-->
+            <!--        <option value="wr_content">내용</option>-->
+            <!--        <option value="wr_subject||wr_content">제목+내용</option>-->
+            <!--        <option value="mb_id,1">회원아이디</option>-->
+            <!--        <option value="mb_id,0">회원아이디(코)</option>-->
+            <!--        <option value="wr_name,1">글쓴이</option>-->
+            <!--        <option value="wr_name,0">글쓴이(코)</option>-->
+            <!--    </select>-->
+            <!--    <div class="trigger">제목</div>-->
+            <!--    <ul class="options overflowing">-->
+            <!--        <li data-raw-value="wr_subject" class="selected">제목</li>-->
+            <!--        <li data-raw-value="wr_content" class="">내용</li><li data-raw-value="wr_subject||wr_content" class="">제목+내용</li>-->
+            <!--        <li data-raw-value="mb_id,1" class="">회원아이디</li><li data-raw-value="mb_id,0">회원아이디(코)</li>-->
+            <!--        <li data-raw-value="wr_name,1">글쓴이</li><li data-raw-value="wr_name,0">글쓴이(코)</li>-->
+            <!--    </ul>-->
+            <!--</div>-->
+            <!--<label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>-->
+            <!--<input type="text" name="title" value="" required id="stx" class="frm_input required" size="26" maxlength="20">-->
+            <!--<input type="submit" value="검색" class="btn_submit">-->
+    <!--    </form>-->
+    <!--</fieldset>-->
     <script type="text/javascript">
         $('#sfl').fancySelect();
     </script>
@@ -62,15 +59,16 @@
         <input type="hidden" name="sw" value="">
     
         <div class="tbl_head01 tbl_wrap">
-            <table>
+        <div class="dataTable_wrapper">
+            <table id="dataTables">
                 <caption>공지사항 목록</caption>
                 <thead>
                     <tr>
                         <th scope="col">번호</th>
                         <th scope="col">제목</th>
                         <th scope="col">글쓴이</th>
-                        <th scope="col"><a href="/gnuboard5/bbs/board.php?bo_table=notice&amp;sop=and&amp;sst=wr_datetime&amp;sod=desc&amp;sfl=&amp;stx=&amp;page=1">날짜</a></th>
-                        <th scope="col"><a href="/gnuboard5/bbs/board.php?bo_table=notice&amp;sop=and&amp;sst=wr_hit&amp;sod=desc&amp;sfl=&amp;stx=&amp;page=1">조회</a></th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">조회</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,40 +86,177 @@
                     <% else %>
                         <% pst_n = 0 %>
                         <% @intab.posts.all.reverse.each do |pst| %>
-                        <tr class="">
-                            <td class="td_num"><%= @intab.posts.count - pst_n %></td>
-                            <td class="td_subject">
-                            <a href="/board/post_read/<%= pst.id %>">
-                                <% if pst.title.length > 35 %>
-                                    <%= pst.title.first(35) + "..." %>
+                            
+                          <% if user_signed_in? %>
+                          <!--로그인 된 사람중에-->
+                            <% if pst.visible == true %>
+                            <!--비공개글의 경우-->
+                                <% if current_user.mb_open >= 7 %>
+                                <!--권한 보유자 라면-->
+                                <!--보인다-->
+                                <tr class="">
+                                    <!--게시글 번호-->
+                                    <td class="td_num"><%= @intab.posts.count - pst_n %></td>
+                                    <!--게시글 제목-->
+                                    <td class="td_subject">
+                                        <a href="/board/post_read/<%= pst.id %>">
+                                            <% if pst.title.length > 35 %>
+                                                <%= pst.title.first(35) + "..." %>
+                                            <% else %>
+                                                <%= pst.title %>
+                                            <% end %>
+                                        <span class="sound_only">댓글</span><span class="cnt_cmt"><%= pst.replies.count %></span><span class="sound_only">개</span>
+                                        </a>
+                                    </td>
+                                    <!--게시글 글쓴이-->
+                                    <% if pst.anonymous == true %>
+                                    <td class="td_name td_date sv_use">
+                                        <span class="sv_member"><%= "익명" %></span>
+                                    </td>
+                                    <% else %>
+                                    <td class="td_name td_date sv_use">
+                                        <span class="sv_member"><%= pst.author_name %></span>
+                                    </td>
+                                    <% end %>
+                                    <!--게시글 작성일-->
+                                    <td class="td_date"><%= Date.parse(pst.created_at.to_s).to_s.last(5) %></td>
+                                    <!--게시글 조회수-->
+                                    <td class="td_num"><%= pst.view_count_posts.count %></td>
+                                </tr>
                                 <% else %>
-                                    <%= pst.title %>
+                                <!--권한 보유자가 아니라면-->
+                                <!--보이지 않는다-->
                                 <% end %>
-                            <span class="sound_only">댓글</span><span class="cnt_cmt"><%= pst.replies.count %></span><span class="sound_only">개</span></a></td>
-                            <% if pst.anonymous == true %>
-                            <td class="td_name td_date sv_use">
-                                <span class="sv_member"><%= "익명" %></span>
-                            </td>
                             <% else %>
-                            <td class="td_name td_date sv_use">
-                                <span class="sv_member"><%= pst.author_name %></span>
-                            </td>
+                            <!--비공개글이 아닌 경우-->
+                                <% if current_user.mb_open >= @intab.who_can_read %>
+                                <!--읽기권한이 있으면-->
+                                <!--보인다-->
+                                <tr class="">
+                                    <!--게시글 번호-->
+                                    <td class="td_num"><%= @intab.posts.count - pst_n %></td>
+                                    <!--게시글 제목-->
+                                    <td class="td_subject">
+                                        <a href="/board/post_read/<%= pst.id %>">
+                                            <% if pst.title.length > 35 %>
+                                                <%= pst.title.first(35) + "..." %>
+                                            <% else %>
+                                                <%= pst.title %>
+                                            <% end %>
+                                        <span class="sound_only">댓글</span><span class="cnt_cmt"><%= pst.replies.count %></span><span class="sound_only">개</span>
+                                        </a>
+                                    </td>
+                                    <!--게시글 글쓴이-->
+                                    <% if pst.anonymous == true %>
+                                        <% if current_user.mb_open >= 7 %>
+                                            <td class="td_name td_date sv_use">
+                                                <% if pst.author_id == 00 %>
+                                                    <span class="sv_member">익명(<%= pst.author_name %>)</span>
+                                                <% else %>
+                                                    <span class="sv_member">익명(<%= User.find(pst.author_id).nickname %>)</span>
+                                                <% end %>
+                                            </td>
+                                        <% else %>
+                                            <td class="td_name td_date sv_use">
+                                                <span class="sv_member"><%= "익명" %></span>
+                                            </td>
+                                        <% end %>
+                                    <% else %>
+                                        <td class="td_name td_date sv_use">
+                                            <% if pst.author_id == 00 %>
+                                                <span class="sv_member"><%= pst.author_name %></span>
+                                            <% else %>
+                                                <span class="sv_member"><%= User.find(pst.author_id).nickname %></span>
+                                            <% end %>
+                                        </td>
+                                    <% end %>
+                                    <!--게시글 작성일-->
+                                    <td class="td_date"><%= Date.parse(pst.created_at.to_s).to_s.last(5) %></td>
+                                    <!--게시글 조회수-->
+                                    <td class="td_num"><%= pst.view_count_posts.count %></td>
+                                </tr>
+                                <% else %>
+                                <!--읽기권한이 없으면-->
+                                <!--안보인다-->
+                                <% end %>
                             <% end %>
-                            <td class="td_date"><%= Date.parse(pst.created_at.to_s).to_s.last(5) %></td>
-                            <td class="td_num"><%= pst.view_count_posts.count %></td>
-                        </tr>
+                          <% else %>
+                          <!--로그인 안돼있으면-->
+                            <% if pst.visible == true %>
+                            <!--비공개글의 경우-->
+                                <!--보이지않는다-->
+                            <% else %>
+                            <!--비공개글이 아닌 경우-->
+                                <% if @intab.who_can_read <= 0 %>
+                                <!--읽기권한이 0이라면-->
+                                <!--보인다-->
+                                <tr class="">
+                                    <!--게시글 번호-->
+                                    <td class="td_num"><%= @intab.posts.count - pst_n %></td>
+                                    <!--게시글 제목-->
+                                    <td class="td_subject">
+                                        <a href="/board/post_read/<%= pst.id %>">
+                                            <% if pst.title.length > 35 %>
+                                                <%= pst.title.first(35) + "..." %>
+                                            <% else %>
+                                                <%= pst.title %>
+                                            <% end %>
+                                        <span class="sound_only">댓글</span><span class="cnt_cmt"><%= pst.replies.count %></span><span class="sound_only">개</span>
+                                        </a>
+                                    </td>
+                                    <!--게시글 글쓴이-->
+                                    <% if pst.anonymous == true %>
+                                        <td class="td_name td_date sv_use">
+                                            <span class="sv_member"><%= "익명" %></span>
+                                        </td>
+                                    <% else %>
+                                        <td class="td_name td_date sv_use">
+                                            <span class="sv_member"><%= pst.author_name %></span>
+                                        </td>
+                                    <% end %>
+                                    <!--게시글 작성일-->
+                                    <td class="td_date"><%= Date.parse(pst.created_at.to_s).to_s.last(5) %></td>
+                                    <!--게시글 조회수-->
+                                    <td class="td_num"><%= pst.view_count_posts.count %></td>
+                                </tr>
+                                <% else %>
+                                <!--읽기권한이 방문자 이상이면(0보다 크면)-->
+                                <!--안보인다-->
+                                <% end %>
+                            <% end %>
+                          <% end %>
                         <% pst_n += 1 %>
                         <% end %>
                     <% end %>
                 </tbody>
             </table>
+            </div>
         </div>
     </form>
     <!-- 글쓰기 버튼 시작 -->
-    <div id="bo_v_bot">
-        <ul class="bo_v_com">
-            <li><a href="/board/post_create?intab=<%= @intab.id %>"><p class="wo_btn_b01">글쓰기</p></a></li>
-         </ul>
-    </div>
+    <% if user_signed_in? %>
+      <% if current_user.mb_open >= @intab.who_can_create %>
+        <div id="bo_v_bot">
+            <ul class="bo_v_com">
+                <li><a href="/board/post_create?intab=<%= @intab.id %>"><p class="wo_btn_b01">글쓰기</p></a></li>
+             </ul>
+        </div>
+      <% end %>
+    <% else %>
+    <% end %>
     <!-- 글쓰기 버튼 끝 -->
 </div>
+
+<!--DataTables JavaScript -->
+<script src="/bower_components/datatables/media/js/jquery.dataTables.kor.js"></script>
+<script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+$(document).ready(function() {
+    $('#dataTables').DataTable({
+            responsive: true,
+            ordering: false
+            // https://datatables.net/reference/option/
+    });
+});
+</script>
