@@ -1,3 +1,8 @@
+<%
+    @introduce_page = Intab.where(:templete => 'introduce').take
+    @map_page = Intab.where(:templete => 'map').take
+
+%>
 <!--모바일 버전 하단 시작-->
 <div id="mobile_ft">
     <div id="mobile_ft_copy">
@@ -21,8 +26,8 @@
 <div id="ft">
     <div id="ft_wr">
         <div id="ft_copy">
-            <a href="/board/page/1">센터소개</a>
-            <a href="/board/page/2">오시는길</a>
+            <a href="/board/page/<%= @introduce_page.id %>">센터소개</a>
+            <a href="/board/page/<%= @map_page.id %>">오시는길</a>
         </div>
         <div id="ft_company">
             <p class="ft_info">교단자정센터 Center for Buddist Ethics & Policy <br>TEL. 02-2278-3417 | FAX. 02-2278-3532 | 서울특별시 중구 동호로 24길 27-17 우리함께빌딩 3층<br></p>

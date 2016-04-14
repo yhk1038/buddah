@@ -6,6 +6,10 @@
     <%= render :partial => 'adminst/gui' %>
 <% elsif params[:about] == 'menu2' %>
     <%= render :partial => 'adminst/menu' %>
+<% elsif params[:about] == 'admin_history' %>
+    <%= render :partial => 'adminst/admin_history' %>
+<% elsif params[:about] == 'admin_introduce' %>
+    <%= render :partial => 'adminst/admin_introduce' %>
 <% elsif params[:about] == 'main' %>
     <%= render :partial => 'adminst/main_edit' %>
 <% elsif params[:about] == 'statistic' %>

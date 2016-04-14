@@ -76,10 +76,24 @@
                     <tr class="">
                         <td class="td_num">0</td>
                         <td class="td_subject">
-                        <a href="/board/post_create?intab=<%= @intab.id %>">
-                            첫 [<%= @intab.name %>] 게시글 작성의 주인공이 되어보세요!
-                        <span class="sound_only">댓글</span><span class="cnt_cmt">0</span><span class="sound_only">개</span></a></td>
-                        <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
+                        <% if current_user.nil? %>
+                            <a href="#">
+                                [<%= @intab.name %>] 게시글이 존재하지 않습니다.(작성권한이 없습니다)
+                            <span class="sound_only">댓글</span><span class="mobile_cnt_cmt">0</span><span class="sound_only">개</span></a></td>
+                            <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
+                        <% else %>
+                            <% if current_user.mb_open >= @intab.who_can_create %>
+                                <a href="/board/post_create?intab=<%= @intab.id %>">
+                                    첫 [<%= @intab.name %>] 게시글 작성의 주인공이 되어보세요!
+                                <span class="sound_only">댓글</span><span class="mobile_cnt_cmt">0</span><span class="sound_only">개</span></a></td>
+                                <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
+                            <% else %>
+                                <a href="#">
+                                    [<%= @intab.name %>] 게시글이 존재하지 않습니다.(작성권한이 없습니다)
+                                <span class="sound_only">댓글</span><span class="mobile_cnt_cmt">0</span><span class="sound_only">개</span></a></td>
+                                <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
+                            <% end %>
+                        <% end %>
                         <td class="td_date">03-10</td>
                         <td class="td_num">***</td>
                     </tr>

@@ -1,6 +1,7 @@
-
-
-
+<%
+    @intab = Intab.where(:templete => 'introduce').take
+    @tab = Tab.find(@intab.tab_id)
+%>
 <!--pc 버전 시작-->
 <!-- 상단 시작 { -->
 <div id="hd">
@@ -37,9 +38,9 @@
                 <div class="col-md-3 col-sm-3">
                     <% @tab.intabs.all.order('turn asc').each do |side_intab| %>
                         <% if side_intab.id == @intab.id %>
-                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menuselect"><%= side_intab.name %></p></span></a>
+                        <a href="#"><span><p class="ctt_con_menuselect"><%= side_intab.name %></p></span></a>
                         <% else %>
-                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menu"><%= side_intab.name %></p></span></a>
+                        <a href="#"><span><p class="ctt_con_menu"><%= side_intab.name %></p></span></a>
                         <% end %>
                     <% end %>
                 
@@ -191,7 +192,7 @@
                                             <% Infor.where(:title => infor).all.each do |each_infor| %>
                                             <!--세부1-->
                                             <li>
-                                                <%= each_infor.content %>
+                                                <%= each_infor.content %> <a href="/board/delete_infor/<%= each_infor.id %>" class="btn btn-sm btn-danger" style="color:#fff; font-weight:bold;">삭제</a> <a href="/admin/admin_introduce/<%= each_infor.id %>" class="btn btn-sm btn-success" style="color:#fff; font-weight:bold;">수정</a>
                                             </li>
                                             <% end %>
                                         </ul>
@@ -206,13 +207,56 @@
                                         <% Infor.where(:title => infor).all.each do |each_infor| %>
                                         <!--세부1-->
                                         <li>
-                                            <%= each_infor.content %>
+                                            <%= each_infor.content %> <a href="/board/delete_infor/<%= each_infor.id %>" class="btn btn-sm btn-danger" style="color:#fff; font-weight:bold;">삭제</a> <a href="/admin/admin_introduce/<%= each_infor.id %>" class="btn btn-sm btn-success" style="color:#fff; font-weight:bold;">수정</a>
                                         </li>
                                         <% end %>
                                     </ul>
                                 <!--/-->
                                 <% end %>
                             <% end %>
+                                <div style="border:2px solid #000; width:100%;"></div>
+                                    <p style="color:#537795; font-size: 14px; font-weight: bold;margin: 10px 0px;">
+                                        (관리자) 아래 빈칸을 통해 소개 항목 또는 내용을 추가할 수 있습니다.<br><br>
+                                        #1. 기존의 타이틀("주력활동", "활동영역" 등)을 그대로 입력하면<br>
+                                        해당 타이틀 아래에 작성하신 항목이 추가됩니다.<br><br>
+                                        
+                                        #2. 타이틀을 빈칸으로 두시면 최상단 회색 박스에<br> 입력하신 내용이 추가됩니다.<br><br>
+                                        
+                                        #3. 새로운 타이틀을 입력하시면 새 타이틀과 항목이<br> 자동으로 페이지 아래쪽에 추가됩니다.
+                                    </p>
+                                <div style="border:2px dotted #000; width:100%; margin-bottom:10px;"></div>
+                                
+                            <!--신규항목-->
+                                <% if params[:id] == nil %>
+                                <form action="/board/add_infor" method="POST">
+                                    <input type="text" name="title" placeholder="ex.진행사업" style="color:#537795; font-size: 18px; font-weight: bold;margin: 0;border-radius: 5px;border: 1px solid #a9a9a9;">
+                                    <div style="border:1px solid #537795; width:100%;"></div>
+                                    <ul style="padding: 3% 0% 3% 6%;font-size: 16px;font-weight: bold;">
+                                        <li>
+                                            <input type="text" name="content" placeholder="항목의 내용을 입력해주세요" style="color:#537795; font-size: 18px; font-weight: bold;margin: 0; width:100%; border-radius: 5px; border: 1px solid #a9a9a9;">
+                                        </li>
+                                        <li>
+                                            <input type="submit" value="저장하기" class="btn btn-info" style="font-size: 18px;font-weight: bold;margin: 15px 0px 0px 0px;width: 100%;border-radius: 5px;">
+                                        </li>
+                                    </ul>
+                                </form>
+                                <% else %>
+                                <% ifif = Infor.find(params[:id]) %>
+                                <form action="/board/add_infor/<%= ifif.id %>" method="POST">
+                                    <input type="text" name="title" value="<%= ifif.title %>" placeholder="ex.진행사업" style="color:#537795; font-size: 18px; font-weight: bold;margin: 0;border-radius: 5px;border: 1px solid #a9a9a9;">
+                                    <div style="border:1px solid #537795; width:100%;"></div>
+                                    <ul style="padding: 3% 0% 3% 6%;font-size: 16px;font-weight: bold;">
+                                        <li>
+                                            <input type="text" name="content" value="<%= ifif.content %>" placeholder="항목의 내용을 입력해주세요" style="color:#537795; font-size: 18px; font-weight: bold;margin: 0; width:100%; border-radius: 5px; border: 1px solid #a9a9a9;">
+                                        </li>
+                                        <li>
+                                            <input type="submit" value="저장하기" class="btn btn-info" style="font-size: 18px;font-weight: bold;margin: 15px 0px 0px 0px;width: 100%;border-radius: 5px;">
+                                        </li>
+                                    </ul>
+                                </form>
+                                <% end %>
+                                <div style="border:2px solid #000; width:100%; margin-top:10px;"></div>
+                            <!--/-->
                         </div>
                         <% end %>
                     </div>

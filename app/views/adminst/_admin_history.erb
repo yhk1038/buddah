@@ -1,3 +1,8 @@
+<%
+    @intab = Intab.where(:templete => 'org2').take
+    @tab = Tab.find(@intab.tab_id)
+%>
+
 <!--pc 버전 시작-->
 <!-- 상단 시작 { -->
 <div id="hd">
@@ -25,9 +30,9 @@
                 <div class="col-md-3 col-sm-3">
                     <% @tab.intabs.all.order('turn asc').each do |side_intab| %>
                         <% if side_intab.id == @intab.id %>
-                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menuselect"><%= side_intab.name %></p></span></a>
+                        <a href="#"><span><p class="ctt_con_menuselect"><%= side_intab.name %></p></span></a>
                         <% else %>
-                        <a href="/board/page/<%= side_intab.id %>"><span><p class="ctt_con_menu"><%= side_intab.name %></p></span></a>
+                        <a href="#"><span><p class="ctt_con_menu"><%= side_intab.name %></p></span></a>
                         <% end %>
                     <% end %>
                 
@@ -74,7 +79,7 @@
                                     <tbody>
                                         <tr><td class="valignT alignJ">
                                         <div class="yearttl2 clice">2014년</div><br>
-                                        <div class="ttlje bor2B borcldim mar10B pad0T">교단자정센터</div>
+                                        <div class="ttlje bor2B borcldim mar10B pad0T">교단자정센터(연혁이 아무것도 입력되지 않았을 때 임시로 보여집니다)</div>
                                         <table width="100%" cellpadding="2" cellspacing="0" border="0" class="mar40B">
                                         <tbody><tr><td class="cellact cldim pad20L">
                                         <table border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;">
@@ -120,123 +125,149 @@
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">01/22(수)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">01/22(수)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">'한반도평화실천기획단(가칭)' 토론회 “남북철도관련 전문가초청 좌담회” </span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">'한반도평화실천기획단(가칭)' 토론회 “남북철도관련 전문가초청 좌담회” </span></p>
                                         	</td>
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">01/27(월)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">01/27(월)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">재가연대 확대임원회의 (아카데미, 자정센터 이사 포함)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">재가연대 확대임원회의 (아카데미, 자정센터 이사 포함)</span></p>
                                         	</td>
                                         </tr>
                                         
                                         <!--2월-->
                                         <tr>
-                                    	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                    	    <p class="HStyle0 history_mth" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;font-weight:&quot;bold&quot;;line-height:130%">2 월</span></p>
-                                    	</td>
-                                    	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                    	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">&nbsp;</span></p>
-                                    	</td>
+                                        	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                        	    <p class="HStyle0 history_mth" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;font-weight:&quot;bold&quot;;line-height:130%">2 월</span></p>
+                                        	</td>
+                                        	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">&nbsp;</span></p>
+                                        	</td>
                                         </tr>
                                         <!--2월 일정-->
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/06(목)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/06(목)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">‘불교개혁을 위한 타운미팅’</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">‘불교개혁을 위한 타운미팅’</span></p>
                                         	</td>
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/12(수)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/12(수)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">원폭피해자및자녀를위한특별법추진연대회의 </span><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;font-weight:&quot;bold&quot;;line-height:130%">“</span><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">기자회견”</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">원폭피해자및자녀를위한특별법추진연대회의 </span><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;font-weight:&quot;bold&quot;;line-height:130%">“</span><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">기자회견”</span></p>
                                         	</td>
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/13(목)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/13(목)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">제6기 7차 운영위원회</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">제6기 7차 운영위원회</span></p>
                                         	</td>
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/15(토)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/15(토)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">재한줌머인연대 보이사비 축제(4월5일) 준비모임</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">재한줌머인연대 보이사비 축제(4월5일) 준비모임</span></p>
                                         	</td>
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/22(토)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/22(토)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">재가연대, 아카데미 정기총회</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">재가연대, 아카데미 정기총회</span></p>
                                         	</td>
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/06(목)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/06(목)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">‘불교개혁을 위한 타운미팅’ 기획회의 참석</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">‘불교개혁을 위한 타운미팅’ 기획회의 참석</span></p>
                                         	</td>
                                         </tr>
                                         <tr>
-                                    	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                    	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/26(수)</span></p>
-                                    	</td>
-                                    	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                    	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">시민사회단체연대회의 총회 참석</span></p>
-                                    	</td>
+                                        	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">02/26(수)</span></p>
+                                        	</td>
+                                        	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">시민사회단체연대회의 총회 참석</span></p>
+                                        	</td>
                                         </tr>
                                         
                                         <!--3월-->
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0 history_mth" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;font-weight:&quot;bold&quot;;line-height:130%">3 월</span></p>
+                                        	    <p class="HStyle0 history_mth" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;font-weight:&quot;bold&quot;;line-height:130%">3 월</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">&nbsp;</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">&nbsp;</span></p>
                                         	</td>
                                         </tr>
                                         <!--3월 일정-->
                                         <tr>
                                         	<td valign="middle" style="width:85;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">03/04(화)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">03/04(화)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">참여불교 리더스포럼 _ </span><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">성원용 교수 (인천대학교)</span></p>
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">“러시아의 철도전략과 한반도 주변정세”</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">참여불교 리더스포럼 _ </span><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">성원용 교수 (인천대학교)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">“러시아의 철도전략과 한반도 주변정세”</span></p>
                                         	</td>
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">03/06(화)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">03/06(화)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">‘불교개혁을 위한 타운미팅’ 참석</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">‘불교개혁을 위한 타운미팅’ 참석</span></p>
                                         	</td>
                                         </tr>
                                         <tr>
                                         	<td valign="middle" style="width:85;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">03/18(화)</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;text-align:center;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">03/18(화)</span></p>
                                         	</td>
                                         	<td valign="middle" style="width:482;height:20;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                        	<p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">제6기 8차 운영위원회</span></p>
+                                        	    <p class="HStyle0" style="margin-left:1.0pt;margin-right:1.0pt;line-height:130%;"><span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%">제6기 8차 운영위원회</span></p>
                                         	</td>
                                         </tr>
+                                        
+                                        <% unless current_user.nil? %>
+                                            <% if current_user.mb_open >= 9 %>
+                                                <% @date = Date.parse(Time.zone.now.to_s).to_s %>
+                                                <form action="/board/add_history" method="POST">
+                                                <tr style="width:100%;">
+                                                    <td valign="middle" colspan="2" style="right: 0; width:100%; height:35;border-left:none;border-right:none;border-top:3px solid;border-bottom:none;padding:15.4pt 5.1pt 1.4pt 5.1pt; margin-top: 25.4pt;">
+                                                        <span style="float:left;left:0;font-weight:bold;font-size:17px;">(관리자)새로운 주요 연혁을 등록합니다.</span>
+                                                        <span style="float:right;right:0;"><input style="width:75px" type="number" name="year" value="<%= @date.first(4) %>">년 <input style="width:75px" type="number" name="month" value="<%= @date.first(7).last(2) %>">월</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:100%">
+                                                	<td valign="middle" style="padding: 0px 5.1pt 0px 5.1pt;height: 100%;;border-left:none;border-right:none;border-top:none;border-bottom:none;">
+                                                    	<input style="width:60px; height:85%;" type="number" name="date" value="<%= @date.first(10).last(2) %>">일
+                                                	</td>
+                                                	<td valign="middle" style="width:71%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                                    	<input type="text" name="content1" style="width:100%;" placeholder="날짜별 첫 번째 주요 연혁 내용을 입력해주세요">
+                                                    	<input type="text" name="content2" style="width:100%;" placeholder="날짜별 두 번째 주요 연혁 내용을 입력해주세요">
+                                                	</td>
+                                                	<td valign="middle" style="width:10%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                                	    <input type="submit" value="저장" class="btn btn-info" style="">
+                                                	</td>
+                                                </tr>
+                                                </form>
+                                            <% end %>
+                                        <% end %>
                                         </tbody></table></td></tr>
                                         </tbody></table>
                                         </td>
@@ -298,13 +329,11 @@
                                                     	    <span style="font-size:9.0pt;font-family:&quot;맑은 고딕&quot;;line-height:130%"><%= each_his.content2 %></span></p>
                                                 	</td>
                                                 	<td valign="middle" style="width:10%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
-                                                	<!-- admin_mute  -->
-                                                	    <%# unless current_user.nil? %>
-                                                            <%# if current_user.mb_open >= 9 %>
-                                                	            <!--<a href="/board/delete_history/<%#= each_his.id %>" class="btn btn-sm btn-danger" style="color:#fff">삭제</a>-->
-                                            	            <%# end %>
-                                        	            <%# end %>
-                                                	<!-- / -->
+                                                	    <% unless current_user.nil? %>
+                                                            <% if current_user.mb_open >= 9 %>
+                                                	            <a href="/board/delete_history/<%= each_his.id %>" class="btn btn-sm btn-danger" style="color:#fff">삭제</a> <a href="/admin/admin_history/<%= each_his.id %>" class="btn btn-sm btn-success" style="color:#fff">수정</a>
+                                            	            <% end %>
+                                        	            <% end %>
                                                 	</td>
                                                 </tr>
                                                 <% i += 1 %>
@@ -312,34 +341,55 @@
                                             <% end %>
                                         <% end %>
                                         
-                                        
-                                    <!-- admin_mute  -->
-                                        <%# unless current_user.nil? %>
-                                            <%# if current_user.mb_open >= 9 %>
-                                                <%# @date = Date.parse(Time.zone.now.to_s).to_s %>
-                                                <!--<form action="/board/add_history" method="POST">-->
-                                                <!--<tr style="width:100%;float: right;">-->
-                                                <!--    <td valign="middle" colspan="3" style="right: 0;float: right; width:100%; height:35;border-left:none;border-right:none;border-top:3px solid;border-bottom:none;padding:15.4pt 5.1pt 1.4pt 5.1pt; margin-top: 25.4pt;">-->
-                                                <!--        <span style="float:left;left:0;font-weight:bold;font-size:17px;">(관리자)새로운 주요 연혁을 등록합니다.</span>-->
-                                                <!--        <span style="float:right;right:0;"><input style="width:75px" type="number" name="year" value="<%#= @date.first(4) %>">년 <input style="width:75px" type="number" name="month" value="<%#= @date.first(7).last(2) %>">월</span>-->
-                                                <!--    </td>-->
-                                                <!--</tr>-->
-                                                <!--<tr style="width:100%">-->
-                                                <!--	<td valign="middle" style="padding: 0px 5.1pt 0px 5.1pt;height: 100%;;border-left:none;border-right:none;border-top:none;border-bottom:none;">-->
-                                                <!--    	<input style="width:60px; height:85%;" type="number" name="date" value="<%#= @date.first(10).last(2) %>">일-->
-                                                <!--	</td>-->
-                                                <!--	<td valign="middle" style="width:71%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">-->
-                                                <!--    	<input type="text" name="content1" style="width:100%;" placeholder="날짜별 첫 번째 주요 연혁 내용을 입력해주세요">-->
-                                                <!--    	<input type="text" name="content2" style="width:100%;" placeholder="날짜별 두 번째 주요 연혁 내용을 입력해주세요">-->
-                                                <!--	</td>-->
-                                                <!--	<td valign="middle" style="width:10%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">-->
-                                                <!--	    <input type="submit" value="저장" class="btn btn-info" style="">-->
-                                                <!--	</td>-->
-                                                <!--</tr>-->
-                                                <!--</form>-->
-                                            <%# end %>
-                                        <%# end %>
-                                    <!-- / -->
+                                        <% unless current_user.nil? %>
+                                            <% if current_user.mb_open >= 9 %>
+                                                <% @date = Date.parse(Time.zone.now.to_s).to_s %>
+                                                <% if params[:id] == nil %>
+                                                <form action="/board/add_history" method="POST">
+                                                <tr style="width:100%;float: right;">
+                                                    <td valign="middle" colspan="3" style="right: 0;float: right; width:100%; height:35;border-left:none;border-right:none;border-top:3px solid;border-bottom:none;padding:15.4pt 5.1pt 1.4pt 5.1pt; margin-top: 25.4pt;">
+                                                        <span style="float:left;left:0;font-weight:bold;font-size:17px;">(관리자)새로운 주요 연혁을 등록합니다.</span>
+                                                        <span style="float:right;right:0;"><input style="width:75px" type="number" name="year" value="<%= @date.first(4) %>">년 <input style="width:75px" type="number" name="month" value="<%= @date.first(7).last(2) %>">월</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:100%">
+                                                	<td valign="middle" style="padding: 0px 5.1pt 0px 5.1pt;height: 100%;;border-left:none;border-right:none;border-top:none;border-bottom:none;">
+                                                    	<input style="width:60px; height:85%;" type="number" name="date" value="<%= @date.first(10).last(2) %>">일
+                                                	</td>
+                                                	<td valign="middle" style="width:71%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                                    	<input type="text" name="content1" style="width:100%;" placeholder="날짜별 첫 번째 주요 연혁 내용을 입력해주세요">
+                                                    	<input type="text" name="content2" style="width:100%;" placeholder="날짜별 두 번째 주요 연혁 내용을 입력해주세요">
+                                                	</td>
+                                                	<td valign="middle" style="width:10%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                                	    <input type="submit" value="저장" class="btn btn-info" style="">
+                                                	</td>
+                                                </tr>
+                                                </form>
+                                                <% else %>
+                                                <% hihi = History.find(params[:id]) %>
+                                                <form action="/board/add_history/<%= hihi.id %>" method="POST">
+                                                <tr style="width:100%;float: right;">
+                                                    <td valign="middle" colspan="3" style="right: 0;float: right; width:100%; height:35;border-left:none;border-right:none;border-top:3px solid;border-bottom:none;padding:15.4pt 5.1pt 1.4pt 5.1pt; margin-top: 25.4pt;">
+                                                        <span style="float:left;left:0;font-weight:bold;font-size:17px;">(관리자) 주요 연혁을 수정합니다.</span>
+                                                        <span style="float:right;right:0;"><input style="width:75px" type="number" name="year" value="<%= hihi.year %>">년 <input style="width:75px" type="number" name="month" value="<%= hihi.month %>">월</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="width:100%">
+                                                	<td valign="middle" style="padding: 0px 5.1pt 0px 5.1pt;height: 100%;;border-left:none;border-right:none;border-top:none;border-bottom:none;">
+                                                    	<input style="width:60px; height:85%;" type="number" name="date" value="<%= hihi.date %>">일
+                                                	</td>
+                                                	<td valign="middle" style="width:71%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                                    	<input type="text" name="content1" style="width:100%;" value="<%= hihi.content1 %>" placeholder="날짜별 첫 번째 주요 연혁 내용을 입력해주세요">
+                                                    	<input type="text" name="content2" style="width:100%;" value="<%= hihi.content2 %>" placeholder="날짜별 두 번째 주요 연혁 내용을 입력해주세요">
+                                                	</td>
+                                                	<td valign="middle" style="width:10%;height:35;border-left:none;border-right:none;border-top:none;border-bottom:none;padding:1.4pt 5.1pt 1.4pt 5.1pt">
+                                                	    <input type="submit" value="저장" class="btn btn-info" style="">
+                                                	</td>
+                                                </tr>
+                                                </form>
+                                                <% end %>
+                                            <% end %>
+                                        <% end %>
                                         </tbody></table></td></tr>
                                         </tbody></table>
                                         </td>

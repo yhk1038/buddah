@@ -443,41 +443,127 @@
                         <ul class="bo_v_com">
                             <li><a href="/board/page/<%= @intab.id %>?pg=<%= @pg %>" class="btn_b01">목록</a></li>
                         </ul>
-                        <%# if @post.author_id == current_user.id %>
-                            <ul class="bo_v_com">
-                                <li><a href="#" class="btn_b01">수정</a></li>
-                            </ul>
-                            <ul class="bo_v_com">
-                                <li><a href="#" data-toggle="modal" data-target="#delete_confirm" class="btn_b01">삭제</a></li>
-                            </ul>
-                            
-                            
-                              <div class="modal fade" id="delete_confirm" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                      <h4 class="modal-title" id="gridSystemModalLabel">정말 삭제합니까?</h4>
-                                    </div>
-                                    <form action="/board/post_delete/<%= @post.id %>" method="post">
-                                    <div class="modal-body">
-                                      <div class="container-fluid">
-                                        <center>
-                                            <h4>게시글 삭제를 위해<br>비밀번호를 입력해주세요</h4>
-                                            <input type="password" name="passwd">
-                                            <input type="hidden" name="intab_id" value="<%= @intab.id %>">
-                                        </center>
-                                      </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                                      <input type="submit" class="btn btn-primary" value="삭제">
-                                    </div>
-                                    </form>
-                                  </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                              </div><!-- /.modal -->
-                        <%# end %>
+                        <% if @post.author_id == nil %>
+                            <% if user_signed_in? %>
+                                <% if current_user.mb_open >= 9 %>
+                                    <!--삭제 수정 버튼 보임-->
+                                    <ul class="bo_v_com">
+                                        <li><a href="#" class="btn_b01">수정</a></li>
+                                    </ul>
+                                    <ul class="bo_v_com">
+                                        <li><a href="#" data-toggle="modal" data-target="#delete_confirm" class="btn_b01">삭제</a></li>
+                                    </ul>
+                                    
+                                    
+                                      <div class="modal fade" id="delete_confirm" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                              <h4 class="modal-title" id="gridSystemModalLabel">정말 삭제합니까?</h4>
+                                            </div>
+                                            <form action="/board/post_delete/<%= @post.id %>" method="post">
+                                            <div class="modal-body">
+                                              <div class="container-fluid">
+                                                <center>
+                                                    <h4>게시글 삭제를 위해<br>비밀번호를 입력해주세요</h4>
+                                                    <input type="password" name="passwd">
+                                                    <input type="hidden" name="intab_id" value="<%= @intab.id %>">
+                                                </center>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                                              <input type="submit" class="btn btn-primary" value="삭제">
+                                            </div>
+                                            </form>
+                                          </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                      </div><!-- /.modal -->
+                                <% else %>
+                                    <!--삭제 수정 버튼 안보임-->
+                                <% end %>
+                            <% else %>
+                                <!--삭제 수정 버튼 안보임-->
+                            <% end %>
+                        <% else %>
+                            <% if user_signed_in? %>
+                                <% if @post.author_id == current_user.id %>
+                                    <ul class="bo_v_com">
+                                        <li><a href="#" class="btn_b01">수정</a></li>
+                                    </ul>
+                                    <ul class="bo_v_com">
+                                        <li><a href="#" data-toggle="modal" data-target="#delete_confirm" class="btn_b01">삭제</a></li>
+                                    </ul>
+                                    
+                                    
+                                      <div class="modal fade" id="delete_confirm" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                              <h4 class="modal-title" id="gridSystemModalLabel">정말 삭제합니까?</h4>
+                                            </div>
+                                            <form action="/board/post_delete/<%= @post.id %>" method="post">
+                                            <div class="modal-body">
+                                              <div class="container-fluid">
+                                                <center>
+                                                    <h4>게시글 삭제를 위해<br>비밀번호를 입력해주세요</h4>
+                                                    <input type="password" name="passwd">
+                                                    <input type="hidden" name="intab_id" value="<%= @intab.id %>">
+                                                </center>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                                              <input type="submit" class="btn btn-primary" value="삭제">
+                                            </div>
+                                            </form>
+                                          </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                      </div><!-- /.modal -->
+                                <% elsif %>
+                                    <!--관리자는 삭제-수정 버튼 보임-->
+                                    <ul class="bo_v_com">
+                                        <li><a href="#" class="btn_b01">수정</a></li>
+                                    </ul>
+                                    <ul class="bo_v_com">
+                                        <li><a href="#" data-toggle="modal" data-target="#delete_confirm" class="btn_b01">삭제</a></li>
+                                    </ul>
+                                    
+                                    
+                                      <div class="modal fade" id="delete_confirm" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                              <h4 class="modal-title" id="gridSystemModalLabel">정말 삭제합니까?</h4>
+                                            </div>
+                                            <form action="/board/post_delete/<%= @post.id %>" method="post">
+                                            <div class="modal-body">
+                                              <div class="container-fluid">
+                                                <center>
+                                                    <h4>게시글 삭제를 위해<br>비밀번호를 입력해주세요</h4>
+                                                    <input type="password" name="passwd">
+                                                    <input type="hidden" name="intab_id" value="<%= @intab.id %>">
+                                                </center>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                                              <input type="submit" class="btn btn-primary" value="삭제">
+                                            </div>
+                                            </form>
+                                          </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                      </div><!-- /.modal -->
+                                <% else %>
+                                    <!--내가 쓴 게시물이 아니면 삭제-수정 버튼 안보임-->
+                                <% end %>
+                            <% else %>
+                                <!--로그인되어있지 않으면 그냥 삭제-수정 버튼 안보임-->
+                            <% end %>
+                        <% end %>
                     </div>
                     <!-- } 링크 버튼 끝 -->
                     

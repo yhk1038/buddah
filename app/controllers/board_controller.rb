@@ -294,4 +294,48 @@ class BoardController < ApplicationController
         
         # redirect_to '/admin/user2'
     end
+    
+    def add_history # 연혁 추가
+        if params[:id] == nil
+            a = History.new
+        else
+            a = History.find(params[:id])
+        end
+        a.year      = params[:year]
+        a.month     = params[:month]
+        a.date      = params[:date]
+        a.content1  = params[:content1]
+        a.content2  = params[:content2]
+        
+        a.save
+        
+        redirect_to '/admin/admin_history'
+    end
+    
+    def delete_history
+        a = History.find(params[:id])
+        a.delete
+        
+        redirect_to '/admin/admin_history'
+    end
+    
+    def add_infor # 소개 추가/변경
+        if params[:id] == nil
+            a = Infor.new
+        else
+            a = Infor.find(params[:id])
+        end
+        a.title = params[:title]
+        a.content = params[:content]
+        a.save
+        
+        redirect_to '/admin/admin_introduce'
+    end
+    
+    def delete_infor
+        a = Infor.find(params[:id])
+        a.delete
+        
+        redirect_to '/admin/admin_introduce'
+    end
 end
