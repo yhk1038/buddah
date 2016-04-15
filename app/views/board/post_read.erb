@@ -54,7 +54,7 @@
                                     <% if @post.anonymous == true %>
                                         <span class="sv_member"><%= "익명의 글쓴이" %></span>
                                     <% else %>
-                                        <span class="sv_member"><%= @post.author_name %></span>
+                                        <span class="sv_member"><%= User.find(@post.author_id).nickname %></span>
                                     <% end %>
                                     </strong>
                                 <span class="sound_only">작성일</span><strong><%= Time.parse(@post.created_at.to_s).to_s.first(16).last(14) %></strong>
@@ -86,8 +86,12 @@
                     
                             <!-- 본문 내용 시작 { -->
                             <!--<div id="bo_v_con"><pre style="background: none; border: none;"><%= @post.ir1 %></pre></div>-->
-                            <% content = @post.ir1.html_safe %>
-                            <div id="bo_v_con"><%= content %></div>
+                            <% if @post.author_id == 1 %>
+                                <div id="bo_v_con"><pre style="background:#fff; border:none;"><%= @post.ir1.html_safe %></pre></div>
+                            <% else %>
+                                <% content = @post.ir1.html_safe %>
+                                <div id="bo_v_con"><%= content %></div>
+                            <% end %>
                             <!-- } 본문 내용 끝 -->
                             <!-- 스크랩 추천 비추천 시작 { -->
                             <!-- } 스크랩 추천 비추천 끝 -->
@@ -113,13 +117,22 @@
                                 <h2>댓글목록</h2>
                                 <article id="c_10">
                                     <header style="z-index:2">
+                                        <% if current_user.mb_open >= 9 %>
+                                        <h1>Re : <%= "익명" %>(<%= reply.author_name %>) 님의 댓글</h1>
+                                        <span class="guest">Re : <%= "익명" %>(<%= reply.author_name %>) 님의 댓글</span>                                    작성일
+                                        <% else %>
                                         <h1>Re : <%= "익명" %> 님의 댓글</h1>
                                         <span class="guest">Re : <%= "익명" %> 님의 댓글</span>                                    작성일
+                                        <% end %>
                                         <span class="bo_vc_hdinfo"><time datetime="<%= reply.created_at.to_s %>"><%= Time.parse(reply.created_at.to_s).to_s.first(16).last(14) %></time></span>
                                     </header>
                             
                                     <!-- 댓글 출력 -->
+                                    <% if current_user.mb_open >= 9 %>
+                                    <pre style="background:none; border:none; margin:0;">(비밀댓글이 설정되어 있습니다.)<%= reply.content %></pre>
+                                    <% else %>
                                     <pre style="background:none; border:none; margin:0;"><%= "비밀댓글의 열람 대상자가 아닙니다." %></pre>
+                                    <% end %>
                                     <span id="edit_10"></span><!-- 수정 -->
                                     <span id="reply_10"></span><!-- 답변 -->
                                     <input type="hidden" value="" id="secret_comment_10">
@@ -127,8 +140,11 @@
                                     
                                     <footer>
                                         <ul class="bo_vc_act">
-                                            <li><a href="#" onclick="comment_box('10', 'c'); return false;">답변</a></li>
-                                            <li><a href="#" onclick="return comment_delete();">삭제</a></li>
+                                            <% if current_user.mb_open >= 9 %>
+                                            <li><a href="/board/reply_save" onclick="comment_box('10', 'c'); return false;">답변</a></li>
+                                            <li><a href="/board/reply_delete/<%= reply.id %>?post_id=<%= @post.id %>" onclick="return comment_delete();">삭제</a></li>
+                                            <% else %>
+                                            <% end %>
                                         </ul>
                                     </footer>
                                 </article>
@@ -153,14 +169,46 @@
                                     
                                     <footer>
                                         <ul class="bo_vc_act">
-                                            <li><a href="./board.php?bo_table=notice&amp;wr_id=7&amp;c_id=10&amp;w=c#bo_vc_w" onclick="comment_box('10', 'c'); return false;">답변</a></li>
-                                            <li><a href="./password.php?w=x&amp;bo_table=notice&amp;comment_id=10&amp;page=" onclick="return comment_delete();">삭제</a></li>
+                                            <% if reply.author_id != current_user.id %>
+                                            <li><a href="#" onclick="comment_box('10', 'c'); return false;">답변</a></li>
+                                                <% if current_user.mb_open >= 9 %>
+                                                <li><a href="/board/reply_delete/<%= reply.id %>?post_id=<%= @post.id %>" onclick="return comment_delete();">삭제</a></li>
+                                                <% end %>
+                                            <% else %>
+                                                <li><a href="/board/reply_delete/<%= reply.id %>?post_id=<%= @post.id %>" onclick="return comment_delete();">삭제</a></li>
+                                            <% end %>
                                         </ul>
                                     </footer>
                                 </article>
                             </section>
                             <% end %>
                         <% else %>
+                            <% if reply.visible == false %>
+                            <section id="bo_vc">
+                                <h2>댓글목록</h2>
+                                <article id="c_10">
+                                    <header style="z-index:2">
+                                        <h1>Re : <%= "익명" %> 님의 댓글</h1>
+                                        <span class="guest">Re : <%= "익명" %> 님의 댓글</span>                                    작성일
+                                        <span class="bo_vc_hdinfo"><time datetime="<%= reply.created_at.to_s %>"><%= Time.parse(reply.created_at.to_s).to_s.first(16).last(14) %></time></span>
+                                    </header>
+                            
+                                    <!-- 댓글 출력 -->
+                                    <pre style="background:none; border:none; margin:0;"><%= "비밀댓글의 열람 대상자가 아닙니다." %></pre>
+                                    <span id="edit_10"></span><!-- 수정 -->
+                                    <span id="reply_10"></span><!-- 답변 -->
+                                    <input type="hidden" value="" id="secret_comment_10">
+                                    <textarea id="save_comment_10" style="display:none"><%#= reply.content %></textarea>
+                                    
+                                    <footer>
+                                        <ul class="bo_vc_act">
+                                            <!--<li><a href="#" onclick="comment_box('10', 'c'); return false;">답변</a></li>-->
+                                            <!--<li><a href="#" onclick="return comment_delete();">삭제</a></li>-->
+                                        </ul>
+                                    </footer>
+                                </article>
+                            </section>
+                            <% else %>
                             <section id="bo_vc">
                                 <h2>댓글목록</h2>
                                 <article id="c_10">
@@ -179,12 +227,13 @@
                                     
                                     <footer>
                                         <ul class="bo_vc_act">
-                                            <li><a href="./board.php?bo_table=notice&amp;wr_id=7&amp;c_id=10&amp;w=c#bo_vc_w" onclick="comment_box('10', 'c'); return false;">답변</a></li>
-                                            <li><a href="./password.php?w=x&amp;bo_table=notice&amp;comment_id=10&amp;page=" onclick="return comment_delete();">삭제</a></li>
+                                            <!--<li><a href="./board.php?bo_table=notice&amp;wr_id=7&amp;c_id=10&amp;w=c#bo_vc_w" onclick="comment_box('10', 'c'); return false;">답변</a></li>-->
+                                            <!--<li><a href="./password.php?w=x&amp;bo_table=notice&amp;comment_id=10&amp;page=" onclick="return comment_delete();">삭제</a></li>-->
                                         </ul>
                                     </footer>
                                 </article>
                             </section>
+                            <% end %>
                         <% end %>
                     <% end %>
                     <!-- } 댓글 끝 -->
@@ -612,8 +661,12 @@
         <h2 id="mobile_bo_v_atc_title">본문</h2>
         <div id="mobile_bo_v_img"></div>
         <!--<div id="mobile_bo_v_con"><p>테마 공지사항 테스트글입니다&nbsp;</p></div>-->
-        <% content = @post.ir1.html_safe %>
-        <div id="mobile_bo_v_con"><%= content %></div>
+        <% if @post.author_id == 1 %>
+            <div id="mobile_bo_v_con"><pre style="background:#fff; border:none;"><%= @post.ir1.html_safe %></pre></div>
+        <% else %>
+            <% content = @post.ir1.html_safe %>
+            <div id="mobile_bo_v_con"><%= content %></div>
+        <% end %>
     </section>
 
     
@@ -624,32 +677,160 @@ var char_max = parseInt(0); // 최대
 </script>
 
 <!-- 댓글 리스트 -->
-<section id="mobile_bo_vc">
-    <h2>댓글목록</h2>
-        <article id="mobile_c_10">
-        <header>
-            <h1>test님의 댓글</h1>
-            <span class="mobile_guest">test</span>                                    작성일
-            <span class="mobile_bo_vc_hdinfo"><time datetime="2015-12-03T17:24:00+09:00">15-12-03 17:24</time></span>
-        </header>
+                    <% if @post.replies.count != 0 %>
+                        <section style="margin-bottom:20px;"></section>
+                    <% end %>
+                    <% @post.replies.all.each do |reply| %>
+                        <% if user_signed_in? %>
+                            <% if reply.visible == false && reply.author_id != current_user.id %>
+                            <!--비밀글이면서 내가쓰지 않은 글은 보이지 않는다-->
+                            <section id="mobile_bo_vc">
+                                <article id="mobile_c_10">
+                                    <header style="z-index:2">
+                                        <% if current_user.mb_open >= 9 %>
+                                        <h1>Re : <%= "익명" %>(<%= reply.author_name %>) 님의 댓글</h1>
+                                        <span class="mobile_guest">Re : <%= "익명" %>(<%= reply.author_name %>) 님의 댓글</span>                                    작성일
+                                        <% else %>
+                                        <h1>Re : <%= "익명" %> 님의 댓글</h1>
+                                        <span class="mobile_guest">Re : <%= "익명" %> 님의 댓글</span>                                    작성일
+                                        <% end %>
+                                        <span class="mobile_bo_vc_hdinfo"><time datetime="<%= reply.created_at.to_s %>"><%= Time.parse(reply.created_at.to_s).to_s.first(16).last(14) %></time></span>
+                                    </header>
+                            
+                                    <!-- 댓글 출력 -->
+                                    <% if current_user.mb_open >= 9 %>
+                                    <pre style="background:none; border:none; margin:0;">(비밀댓글이 설정되어 있습니다.)<%= reply.content %></pre>
+                                    <% else %>
+                                    <pre style="background:none; border:none; margin:0;"><%= "비밀댓글의 열람 대상자가 아닙니다." %></pre>
+                                    <% end %>
+                                    <span id="mobile_edit_10"></span><!-- 수정 -->
+                                    <span id="mobile_reply_10"></span><!-- 답변 -->
+                                    <input type="hidden" value="" id="secret_comment_10">
+                                    <textarea id="save_comment_10" style="display:none"><%#= reply.content %></textarea>
+                                    
+                                    <footer>
+                                        <ul class="mobile_bo_vc_act">
+                                            <% if current_user.mb_open >= 9 %>
+                                            <li><a href="/board/reply_save" onclick="comment_box('10', 'c'); return false;">답변</a></li>
+                                            <li><a href="/board/reply_delete/<%= reply.id %>?post_id=<%= @post.id %>" onclick="return comment_delete();">삭제</a></li>
+                                            <% else %>
+                                            <% end %>
+                                        </ul>
+                                    </footer>
+                                </article>
+                            </section>
+                            <% else %>
+                            <!--다른 경우는 정상적으로 보인다-->
+                            <section id="mobile_bo_vc">
+                                <article id="mobile_c_10">
+                                    <header style="z-index:2">
+                                        <h1>Re : <%= reply.author_name %> 님의 댓글</h1>
+                                        <span class="mobile_guest">Re : <%= reply.author_name %> 님의 댓글</span>                                    작성일
+                                        <span class="mobile_bo_vc_hdinfo"><time datetime="<%= reply.created_at.to_s %>"><%= Time.parse(reply.created_at.to_s).to_s.first(16).last(14) %></time></span>
+                                    </header>
+                            
+                                    <!-- 댓글 출력 -->
+                                    <pre style="background:none; border:none; margin:0;"><%= reply.content %></pre>
+                                    <span id="mobile_edit_10"></span><!-- 수정 -->
+                                    <span id="mobile_reply_10"></span><!-- 답변 -->
+                                    <input type="hidden" value="" id="secret_comment_10">
+                                    <textarea id="save_comment_10" style="display:none"><%= reply.content %></textarea>
+                                    
+                                    <footer>
+                                        <ul class="mobile_bo_vc_act">
+                                            <% if reply.author_id != current_user.id %>
+                                            <li><a href="#" onclick="comment_box('10', 'c'); return false;">답변</a></li>
+                                                <% if current_user.mb_open >= 9 %>
+                                                <li><a href="/board/reply_delete/<%= reply.id %>?post_id=<%= @post.id %>" onclick="return comment_delete();">삭제</a></li>
+                                                <% end %>
+                                            <% else %>
+                                                <li><a href="/board/reply_delete/<%= reply.id %>?post_id=<%= @post.id %>" onclick="return comment_delete();">삭제</a></li>
+                                            <% end %>
+                                        </ul>
+                                    </footer>
+                                </article>
+                            </section>
+                            <% end %>
+                        <% else %>
+                            <% if reply.visible == false %>
+                            <section id="mobile_bo_vc">
+                                <article id="mobile_c_10">
+                                    <header style="z-index:2">
+                                        <h1>Re : <%= "익명" %> 님의 댓글</h1>
+                                        <span class="mobile_guest">Re : <%= "익명" %> 님의 댓글</span>                                    작성일
+                                        <span class="mobile_bo_vc_hdinfo"><time datetime="<%= reply.created_at.to_s %>"><%= Time.parse(reply.created_at.to_s).to_s.first(16).last(14) %></time></span>
+                                    </header>
+                            
+                                    <!-- 댓글 출력 -->
+                                    <pre style="background:none; border:none; margin:0;"><%= "비밀댓글의 열람 대상자가 아닙니다." %></pre>
+                                    <span id="mobile_edit_10"></span><!-- 수정 -->
+                                    <span id="mobile_reply_10"></span><!-- 답변 -->
+                                    <input type="hidden" value="" id="secret_comment_10">
+                                    <textarea id="save_comment_10" style="display:none"><%#= reply.content %></textarea>
+                                    
+                                    <footer>
+                                        <ul class="mobile_bo_vc_atc">
+                                            <!--<li><a href="#" onclick="comment_box('10', 'c'); return false;">답변</a></li>-->
+                                            <!--<li><a href="#" onclick="return comment_delete();">삭제</a></li>-->
+                                        </ul>
+                                    </footer>
+                                </article>
+                            </section>
+                            <% else %>
+                            <section id="mobile_bo_vc">
+                                <article id="mobile_c_10">
+                                    <header style="z-index:2">
+                                        <h1>Re : <%= reply.author_name %> 님의 댓글</h1>
+                                        <span class="mobile_guest">Re : <%= reply.author_name %> 님의 댓글</span>                                    작성일
+                                        <span class="mobile_bo_vc_hdinfo"><time datetime="<%= reply.created_at.to_s %>"><%= Time.parse(reply.created_at.to_s).to_s.first(16).last(14) %></time></span>
+                                    </header>
+                            
+                                    <!-- 댓글 출력 -->
+                                    <pre style="background:none; border:none; margin:0;"><%#= reply.content %>로그인하신 후 댓글을 열람하실 수 있습니다.</pre>
+                                    <span id="mobile_edit_10"></span><!-- 수정 -->
+                                    <span id="mobile_reply_10"></span><!-- 답변 -->
+                                    <input type="hidden" value="" id="secret_comment_10">
+                                    <textarea id="save_comment_10" style="display:none"><%#= reply.content %>로그인하신 후 댓글을 열람하실 수 있습니다.</textarea>
+                                    
+                                    <footer>
+                                        <ul class="mobile_bo_vc_act">
+                                            <!--<li><a href="./board.php?bo_table=notice&amp;wr_id=7&amp;c_id=10&amp;w=c#bo_vc_w" onclick="comment_box('10', 'c'); return false;">답변</a></li>-->
+                                            <!--<li><a href="./password.php?w=x&amp;bo_table=notice&amp;comment_id=10&amp;page=" onclick="return comment_delete();">삭제</a></li>-->
+                                        </ul>
+                                    </footer>
+                                </article>
+                            </section>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+<!--<section id="mobile_bo_vc">-->
+<!--    <h2>댓글목록</h2>-->
+<!--        <article id="mobile_c_10">-->
+<!--        <header>-->
+<!--            <h1>test님의 댓글</h1>-->
+<!--            <span class="mobile_guest">test</span>                                    작성일-->
+<!--            <span class="mobile_bo_vc_hdinfo"><time datetime="2015-12-03T17:24:00+09:00">15-12-03 17:24</time></span>-->
+<!--        </header>-->
 
         <!-- 댓글 출력 -->
-        <p>test</p>
+<!--        <p>test</p>-->
+        
+        <!-- 수정 -->
+<!--        <span id="mobile_edit_10"></span>-->
+        <!-- 답변 -->
+<!--        <span id="mobile_reply_10"></span>-->
 
-        <span id="mobile_edit_10"></span><!-- 수정 -->
-        <span id="mobile_reply_10"></span><!-- 답변 -->
+<!--        <input type="hidden" id="secret_comment_10" value="">-->
+<!--        <textarea id="save_comment_10" style="display:none">test</textarea>-->
 
-        <input type="hidden" id="secret_comment_10" value="">
-        <textarea id="save_comment_10" style="display:none">test</textarea>
-
-        <footer>
-            <ul class="mobile_bo_vc_act">
-                <li><a href="./board.php?bo_table=notice&amp;wr_id=7&amp;c_id=10&amp;w=c#bo_vc_w" onclick="comment_box('10', 'c'); return false;">답변</a></li>
-                <li><a href="./password.php?w=x&amp;bo_table=notice&amp;comment_id=10&amp;page=" onclick="return comment_delete();">삭제</a></li>
-            </ul>
-        </footer>
-        </article>
-</section>
+<!--        <footer>-->
+<!--            <ul class="mobile_bo_vc_act">-->
+<!--                <li><a href="/board/reply_save" onclick="comment_box('10', 'c'); return false;">답변</a></li>-->
+<!--                <li><a href="#" onclick="return comment_delete();">삭제</a></li>-->
+<!--            </ul>-->
+<!--        </footer>-->
+<!--        </article>-->
+<!--</section>-->
 
     <aside id="mobile_bo_vc_w">
         <h2>댓글쓰기</h2>

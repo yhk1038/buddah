@@ -123,7 +123,10 @@ class BoardController < ApplicationController
     end
     
     def reply_delete
+        rprp = Reply.find(params[:id])
+        rprp.delete
         
+        redirect_to "/board/post_read/#{params[:post_id]}"
     end
     
     #############//
