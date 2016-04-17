@@ -83,7 +83,7 @@
                         <section id="bo_v_atc">
                             <h2 id="bo_v_atc_title">본문</h2>
                             <div id="bo_v_img"></div>
-                    
+                            
                             <!-- 본문 내용 시작 { -->
                             <!--<div id="bo_v_con"><pre style="background: none; border: none;"><%= @post.ir1 %></pre></div>-->
                             <% if @post.author_id == 1 %>
@@ -159,7 +159,7 @@
                                         <span class="guest">Re : <%= reply.author_name %> 님의 댓글</span>                                    작성일
                                         <span class="bo_vc_hdinfo"><time datetime="<%= reply.created_at.to_s %>"><%= Time.parse(reply.created_at.to_s).to_s.first(16).last(14) %></time></span>
                                     </header>
-                            
+                                    
                                     <!-- 댓글 출력 -->
                                     <pre style="background:none; border:none; margin:0;"><%= reply.content %></pre>
                                     <span id="edit_10"></span><!-- 수정 -->
