@@ -33,10 +33,12 @@
                     <!--<a href="/board/donate"><span><p class="ctt_con_menu">후원하기</p></span></a>-->
                 </div>
                 <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-9">
+                
+                <div id="ver_normal" class="col-md-9">
+                    
                     <div class="intro">
                         <p class="intro_title"><%= @intab.name %></p>
-                        <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
+                        <span class="site_navi"><a href="#" class="btn btn-xs btn-primary sign_toggle" style="color:#fff; margin-right:15px;">서명글 작성모드</a> <a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
                     </div>
                     <!-- 게시물 작성/수정 시작 { -->
                     <script type="text/javascript" src="./se2/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -64,6 +66,7 @@
                     <% else %>
                         <input type="hidden" name="author_name" value="<%= current_user.username %>">
                         <input type="hidden" name="author_id" value="<%= current_user.id %>">
+                        <input type="hidden" name="author_passwd" value="<%= current_user.goraebang4d %>">
                     <% end %>
                     
                     <!--<input type="hidden" name="wr_id" value="0">-->
@@ -105,6 +108,7 @@
                                 <td style="padding:0;">
                                     <table>
                                         <tbody>
+                                            <% if @intab.id >= 11 %>
                                             <tr>
                                                 <th scope="row" style="border-left: none;"><label for="visible">공개여부</label></th>
                                                 <td>
@@ -116,6 +120,18 @@
                                                     <input type="checkbox" name="anonymous" value="true" id="anonymous" class="frm_input email"> 익명
                                                 </td>
                                             </tr>
+                                            <% else %>
+                                            <tr>
+                                                <th scope="row" style="border-left: none;"><label for="visible">공개여부</label></th>
+                                                <td>
+                                                    <input type="hidden" name="visible" value="false" id="wr_email" class="frm_input email">
+                                                </td>
+                                                <th scope="row"><label for="anonymous">작성자</label></th>
+                                                <td>
+                                                    <input type="hidden" name="anonymous" value="false" id="anonymous" class="frm_input email">
+                                                </td>
+                                            </tr>
+                                            <% end %>
                                         </tbody>
                                     </table>
                                 </td>
@@ -138,18 +154,24 @@
                             </tr>
                             <tr>
                                 <th scope="row"><label for="file1">첨부파일1</label></th>
-                                <td><input type="file" name="file1" value="" id="file1" class="frm_input" size="50" style="width: 98%;"></td>
+                                <td><%= file_field 'file1', 'datafile', class: "frm_input", size: "50", style: "width: 98%;" %></td>
+                                    <!--<input type="file" name="file1" value="" id="file1" class="frm_input" size="50" style="width: 98%;">-->
+                                    <%#= file_field 'upload', 'datafile', style: "margin: 0; float: left;" %>
+                                    <!--<input type="file" name="upload[datafile]" id="upload_datafile" style="margin: 0; float: left;" >-->
+                                
                             </tr>
                             <tr>
                                 <th scope="row"><label for="file2">첨부파일2</label></th>
-                                <td><input type="file" name="file2" value="" id="file2" class="frm_input" size="50" style="width: 98%;"></td>
+                                <td><%= file_field 'file2', 'datafile', class: "frm_input", size: "50", style: "width: 98%;" %></td>
+                                <!--<td><input type="file" name="file2" value="" id="file2" class="frm_input" size="50" style="width: 98%;"></td>-->
                             </tr>
                         </tbody>
                         </table>
                     </div>
                 
                     <div class="btn_confirm">
-                        <input type="submit" value="작성완료" id="" class="btn_submit">
+                        <!--<input type="submit" value="작성완료" id="" class="btn_submit">-->
+                        <%= submit_tag "작성완료", class: "btn_submit" %>
                         <a href="/board/page/<%= @intab.id %>" class="btn_cancel">취소</a>
                     </div>
                     </form>
@@ -236,7 +258,13 @@
                 
                 <%= render :partial => '/board/list_table' %>
                 </div>
-                
+                <%= render :partial => 'post_create_signature' %>
+                <script>
+                    $(".sign_toggle").click(function(){
+                        $("#ver_normal").toggle();
+                        $("#ver_signature").toggle();
+                    });
+                </script>
             </div>
         </article>
     </div>
@@ -405,3 +433,4 @@ $(function() {
 });
 </script>
 <![endif]-->
+

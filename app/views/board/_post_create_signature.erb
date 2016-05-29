@@ -1,0 +1,330 @@
+
+                <article id="ver_signature" class="col-md-9" style="display:none;">
+                    <%#= flash[:error] %>
+                    <div class="intro">
+                        <p class="intro_title"><%= @intab.name %></p>
+                        <span class="site_navi"><a href="#" class="btn btn-xs btn-primary sign_toggle" style="color:#fff; margin-right:15px;">서명글 작성모드</a> <a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
+                    </div>
+                    <form name="fwrite" id="fwrite" class="form-group" action="/board/post_save<%= "/#{params[:id]}" if params[:id] != nil %>?sign=true" method="post" enctype="multipart/form-data" style="width:100%">
+                        <header>
+                            <h1 id="bo_v_title">
+                                <input type="text" name="title" class="form-control" placeholder="서명 또는 청원 모집의 제목을 입력해 주세요">
+                            </h1>
+                        </header>
+                        <input type="hidden" name="intab_id" value="<%= @intab.id %>">
+                        <% if current_user.nil? %>
+                            
+                        <% else %>
+                            <input type="hidden" name="author_name" value="<%= current_user.username %>">
+                            <input type="hidden" name="author_id" value="<%= current_user.id %>">
+                            <input type="hidden" name="author_passwd" value="<%= current_user.goraebang4d %>">
+                        <% end %>
+                        <input type="hidden" name="visible" value="true">
+                        <input type="hidden" name="anonymous" value="false">
+                        <section id="bo_v_atc">
+                            <h2 id="bo_v_atc_title">본문</h2>
+                            <div id="bo_v_img"></div>
+                            
+                            <!-- 본문 내용 시작 { -->
+                            <!--<div id="bo_v_con"><pre style="background: none; border: none;"><%#= @post.ir1 %></pre></div>-->
+                            <%# if @post.author_id == 1 %>
+                                <div>
+                                    <!--id="bo_v_con"-->
+                                    <div class="sn_row">
+                                        <div class="sn_inline d6" style="float: left;font-size: 15px;"><span class="sn_message">서명(청원) 모집의 내용은 이미지 파일로 업로드 해주시기 바랍니다(필수)<br>(주 파일: 파일1, 보조 파일: 파일2)</span></div>
+                                        <div class="sn_inline d4">
+                                            파일1 : <%= file_field 'file1', 'datafile' %><br>
+                                            파일2 : <%= file_field 'file2', 'datafile' %><br>
+                                        </div>
+                                    </div>
+                                    <div style="border:2px solid rgba(255, 235, 59, 0.75); width:100%; padding: 3%; background:rgba(255, 235, 59, 0.25);">
+                                        <div>
+                                            <img src="/tts_1.gif">
+                                            
+                                        </div>
+                                        <div>
+                                            <div style="">
+                                                <img src="/시한폭탄__timebomb.png" style="width:24.5%; height:auto;">
+                                                <span class="sn_message" style="font-size:30px; color:red;">들끓는 국민의 소리를 들려주세요!!</span><br>
+                                                <!--<span class="sn_message" style="font-size:30px; color:red;">종료 10일 전</span>-->
+                                            </div>
+                                        </div>
+                                        <div class="sn_row">
+                                            <div class="sn_inline d1">이름</div>
+                                            <div class="sn_inline d4"><input type="text" name="sg_name" class="sg_name" disabled></div>
+                                            <div class="sn_inline d1">생년월일</div>
+                                            <div class="sn_inline d4"><input type="text" name="sg_birth" class="sg_birth" disabled> 예) 850321</div>
+                                        </div>
+                                        <div class="sn_row">
+                                            <div class="sn_inline d1">연락처</div>
+                                            <div class="sn_inline d9"><input type="text" name="sg_tel_1" class="sg_tel_1" placeholder="010" disabled>&nbsp;-&nbsp;<input type="text" name="sg_tel_2" class="sg_tel_2" placeholder="1234" disabled>&nbsp;-&nbsp;<input type="text" name="sg_tel_3" class="sg_tel_3" placeholder="5678" disabled></div>
+                                        </div>
+                                        <div class="sn_row">
+                                            <div class="sn_inline d1">이메일</div>
+                                            <div class="sn_inline d9"><input type="text" name="sg_mail_1" class="sg_mail_1" disabled>&nbsp;@&nbsp;<input type="text" name="sg_mail_2" class="sg_mail_2" value="" disabled>&nbsp;
+                                                <select type="text" name="sg_mail_3" class="sg_mail_3" disabled>
+                                                    <option value="">직접입력</option>
+                                            		<option value="naver.com">naver.com</option>
+                                            		<option value="hanmail.net">hanmail.net</option>
+                                            		<option value="hotmail.com">hotmail.com</option>
+                                            		<option value="nate.com">nate.com</option>
+                                            		<option value="yahoo.co.kr">yahoo.co.kr</option>
+                                            		<option value="empas.com">empas.com</option>
+                                            		<option value="dreamwiz.com">dreamwiz.com</option>
+                                            		<option value="freechal.com">freechal.com</option>
+                                            		<option value="lycos.co.kr">lycos.co.kr</option>
+                                            		<option value="korea.com">korea.com</option>
+                                            		<option value="gmail.com">gmail.com</option>
+                                            		<option value="hanmir.com">hanmir.com</option>
+                                            		<option value="paran.com">paran.com</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="sn_row">
+                                            <div class="sn_inline d1" style="padding: 0 0 8.5% 0;"><span style="float: left;">의견</span></div>
+                                            <div class="sn_inline d9"><textarea name="sg_opinion" class="sg_opinion" disabled></textarea></div>
+                                        </div>
+                                        <div class="sn_row">
+                                            <div class="sn_inline d2">&nbsp;</div>
+                                            <div class="sn_inline d6">서명참여를 위한 개인정보 제공에 동의합니다 <input type="checkbox" name="sg_check" class="sg_check" disabled> <a href="#" class="btn btn-sm btn-warning">전문보기</a></div>
+                                            <div class="sn_inline d2">&nbsp;</div>
+                                        </div>
+                                        <div class="sn_row" style="margin-bottom:50px">
+                                            <div class="sn_inline d1">&nbsp;</div>
+                                            <div class="sn_inline d8" style="text-align:center;"><span style="font-size:11px;">※서명에 참여하시면 재가연대의 인터넷회원(준회원)이 되어 자정소식 등을 받아보실 수 있습니다.</span></div>
+                                            <div class="sn_inline d1">&nbsp;</div>
+                                        </div>
+                                        <div class="sn_row">
+                                            <div class="sn_inline d5 btn btn-success btn-lg" style="border-radius:0px;"><input type="radio" name="for_ir1" value="1"> 사이버 서명만 노출하기</div>
+                                            <div class="sn_inline d5 btn btn-success btn-lg" style="border-radius:0px;"><input type="radio" name="for_ir1" value="2"> 후원 패널 함께 노출하기</div>
+                                        </div>
+                                        <div style="background-color:rgba(255, 235, 59, 0.45); padding-bottom:15px;">
+                                            <div>
+                                                <img src="/tts_2.gif">
+                                                
+                                            </div>
+                                            <div style="margin-top:15px;">
+                                                <div class="sn_inline d3">
+                                                    <img src="/struggle-1271657_960_720.png" style="width:100%; height:auto; margin-top: -70px;">
+                                                </div>
+                                                <div class="sn_inline d7" style="padding-top: 20px;">
+                                                    <span class="sn_message" style="font-size:25px; color:red;">자정활동에 힘을 모아주세요!!</span><br>
+                                                    <span class="sn_message" style="font-size:16px; color:red;">교단의 부정부패를 예방하고, 해결하기위해 노력합니다</span>
+                                                    <img src="/team-150149_640.png" style="width:100%;height: 100px;">
+                                                </div>
+                                            </div>
+                                            <div class="sn_row">
+                                                <div class="sn_inline d2">&nbsp;</div>
+                                                <div class="sn_inline d6"><a href="#" class="btn btn-lg btn-warning" style="width:100%; font-weight:bold;">후원하기</a></div>
+                                                <div class="sn_inline d2">&nbsp;</div>
+                                            </div>
+                                        </div>
+                                        <div class="sn_row">
+                                            <div class="sn_inline d1">&nbsp;</div>
+                                            <div class="sn_inline d8">
+                                                <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin-right:2%; color:#fff">서명하기</a>
+                                                <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin:0 1%; color:#fff">후원+서명하기</a>
+                                                <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin-left:2%; color:#fff">새로 참여하기</a>
+                                            </div>
+                                            <div class="sn_inline d1">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <style>
+                                    .sn_message{
+                                        font-family:'나눔바른고딕';
+                                        font-weight: bold;
+                                    }
+                                    .sn_row{
+                                        margin:20px 0px;
+                                    }
+                                    .sn_inline{
+                                        display:inline-block;
+                                    }
+                                    <% (1..10).to_a.each do |i| %>
+                                        <% width = (i*10).to_f - (i*0.9) %>
+                                        .d<%= i %>{
+                                            width: <%= width %>%;
+                                        }
+                                    <% end %>
+                                    .sg_name{
+                                        width:90%;
+                                    }
+                                    .sg_tel_1{
+                                        width:10%;
+                                    }
+                                    .sg_tel_2{
+                                        width:15%;
+                                    }
+                                    .sg_tel_3{
+                                        width:15%;
+                                    }
+                                    .sg_mail_1{
+                                        width:20%;
+                                    }
+                                    .sg_opinion{
+                                        width:100%;
+                                        height:80px;
+                                    }
+                                </style>
+                                <script>
+                                    $(".sg_mail_3").change(function(){
+                                        var domain = $(this).val();
+                                        $(".sg_mail_2").attr("value", domain);
+                                    })
+                                </script>
+                            <%# else %>
+                                <%# content = @post.ir1.html_safe %>
+                                <!--<div id="bo_v_con"><%#= content %></div>-->
+                            <%# end %>
+                            <!-- } 본문 내용 끝 -->
+                            <!-- 스크랩 추천 비추천 시작 { -->
+                            <!-- } 스크랩 추천 비추천 끝 -->
+                        </section>
+                        <div class="btn_confirm">
+                            <!--<input type="submit" value="작성완료" id="" class="btn_submit">-->
+                            <%= submit_tag "작성완료", class: "btn_submit" %>
+                            <a href="/board/page/<%= @intab.id %>" class="btn_cancel">취소</a>
+                        </div>
+                    </form>
+                    <script src="/theme/krc/js/md5.js"></script>
+                    
+                </article>
+                
+                
+                <div id="" class="col-md-9" style="display:none;">
+                    <div class="intro">
+                        <p class="intro_title"><%= @intab.name %></p>
+                        <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
+                    </div>
+                    <!-- 게시물 작성/수정 시작 { -->
+                    <script type="text/javascript" src="./se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+                    <script type="text/javascript">
+                    
+                        var oEditors = [];
+                        
+                        nhn.husky.EZCreator.createInIFrame({
+                        
+                            oAppRef: oEditors,
+                        
+                            elPlaceHolder: "ir1",
+                        
+                            sSkinURI: "./se2/SmartEditor2Skin.html",
+                        
+                            fCreator: "createSEditor2"
+                        
+                        });
+                    
+                    </script>
+                    <form name="fwrite" id="fwrite" action="/board/post_save<%= "/#{params[:id]}" if params[:id] != nil %>" method="post" enctype="multipart/form-data" style="width:100%">
+                        <input type="hidden" name="intab_id" value="<%= @intab.id %>">
+                        <% if current_user.nil? %>
+                            
+                        <% else %>
+                            <input type="hidden" name="author_name" value="<%= current_user.username %>">
+                            <input type="hidden" name="author_id" value="<%= current_user.id %>">
+                            <input type="hidden" name="author_passwd" value="<%= current_user.goraebang4d %>">
+                        <% end %>
+                        <div class="tbl_frm01 tbl_wrap">
+                            <table>
+                            <tbody>
+                                <% if current_user.nil? %>
+                                <tr>
+                                    <th scope="row"><label for="author_name">비회원</label></th>
+                                    <td style="padding:0;">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row" style="border-left: none;"><label for="author_name">이름</label></th>
+                                                    <td>
+                                                        <input type="hidden" name="author_id" value="00">
+                                                        <input type="input" name="author_name" value="" id="author_name" required class="frm_input required" style="width:100%;">
+                                                    </td>
+                                                    <th scope="row"><label for="">비밀번호</label></th>
+                                                    <td>
+                                                        <input type="password" name="author_passwd" id="author_passwd" required class="frm_input required" style="width:100%;">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <% end %>
+                                <!--설정 행-->
+                                <tr>
+                                    <th scope="row"><label for="visible">설정</label></th>
+                                    <td style="padding:0;">
+                                        <table>
+                                            <tbody>
+                                                <% if @intab.id >= 11 %>
+                                                <tr>
+                                                    <th scope="row" style="border-left: none;"><label for="visible">공개여부</label></th>
+                                                    <td>
+                                                        <input type="radio" name="visible" value="false" id="wr_email" class="frm_input email" checked>공개
+                                                        <input type="radio" name="visible" value="true" id="wr_email" class="frm_input email">비공개
+                                                    </td>
+                                                    <th scope="row"><label for="anonymous">작성자</label></th>
+                                                    <td>
+                                                        <input type="checkbox" name="anonymous" value="true" id="anonymous" class="frm_input email"> 익명
+                                                    </td>
+                                                </tr>
+                                                <% else %>
+                                                <tr>
+                                                    <th scope="row" style="border-left: none;"><label for="visible">공개여부</label></th>
+                                                    <td>
+                                                        <input type="hidden" name="visible" value="false" id="wr_email" class="frm_input email">
+                                                    </td>
+                                                    <th scope="row"><label for="anonymous">작성자</label></th>
+                                                    <td>
+                                                        <input type="hidden" name="anonymous" value="false" id="anonymous" class="frm_input email">
+                                                    </td>
+                                                </tr>
+                                                <% end %>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!--제목 행-->
+                                <tr>
+                                    <th scope="row"><label for="title">제목</label></th>
+                                    <td><div id="autosave_wrapper"><input type="text" name="title" value="" id="title" required class="frm_input required" size="50" maxlength="255" style="width:98%;"></div></td>
+                                </tr>
+                                <!--내용 행-->
+                                <tr>
+                                    <th scope="row"><label for="ir1">내용</label></th>
+                                    <td class="wr_content">
+                                        <!--<span class="sound_only">웹에디터 시작</span>-->
+                                        <!--    <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="65536" style="width:100%;height:300px"></textarea>-->
+                                            
+                                        <textarea name="ir1" id="ir1" rows="100" cols="100" style="height: 400px;"></textarea>
+        
+                                            
+                                        <!--<span class="sound_only">웹 에디터 끝</span>-->
+                                    </td>
+                                </tr>
+                                <!--첨부파일 1행-->
+                                <tr>
+                                    <th scope="row"><label for="file1">첨부파일1</label></th>
+                                    <td><%= file_field 'file1', 'datafile', class: "frm_input", size: "50", style: "width: 98%;" %></td>
+                                </tr>
+                                <!--첨부파일 2행-->
+                                <tr>
+                                    <th scope="row"><label for="file2">첨부파일2</label></th>
+                                    <td><%= file_field 'file2', 'datafile', class: "frm_input", size: "50", style: "width: 98%;" %></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                        <div class="btn_confirm">
+                            <!--<input type="submit" value="작성완료" id="" class="btn_submit">-->
+                            <%= submit_tag "작성완료", class: "btn_submit" %>
+                            <a href="/board/page/<%= @intab.id %>" class="btn_cancel">취소</a>
+                        </div>
+                    </form>
+                </section>
+                <!-- } 게시물 작성/수정 끝 -->
+                    <a href="#hd" id="top_btn">상단으로</a>
+                
+                <%#= render :partial => '/board/list_table' %>
+                </div>
+                

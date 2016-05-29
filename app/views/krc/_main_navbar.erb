@@ -8,14 +8,6 @@
             <button type="button" id="gnb_open" class="hd_opener">메뉴<span class="sound_only">열기</span></button>
             
         <!--모바일 드롭다운 버튼 끝-->
-        
-        <!--<nav id="gnb">-->
-        <!--    <h2>메인메뉴</h2>-->
-        <!--    <ul id="menubar">-->
-        <!--        <li class="gnb_1dli" style="z-index:999">-->
-        <!--            <a href="/" class="gnb_1da">HOME</a>-->
-        <!--        </li>-->
-                
                 <!--드롭다운 시작-->
                 <div class="dropdown">
                 <nav id="gnb" style="width:85%;">
@@ -59,93 +51,8 @@
                     <% n = n + 1%>
                 <% end %>
                 </div>
-                    <!--<ul class="gnb_2dul">-->
-                    <!--    <li class="gnb_2dli"><a href="/board/introduce" target="_self" class="gnb_2da">센터소개</a></li>-->
-                    <!--    <li class="gnb_2dli"><a href="/board/map" target="_self" class="gnb_2da">오시는 길</a></li>-->
-                    <!--    <li class="gnb_2dli"><a href="/board/org" target="_self" class="gnb_2da">참여불교재가연대</a></li>-->
-                    <!--    <li class="gnb_2dli"><a href="/board/data" target="_self" class="gnb_2da">공개 자료</a></li>-->
-                    <!--</ul>-->
-                <!--드롭다운 끝-->
-                
-                
-                <!--<li class="gnb_1dli" style="z-index:997">-->
-                <!--    <a href="#" class="gnb_1da gnb_bg">활동소식</a>-->
-                <!--    <ul id="submenu02" class="gnb_2dul">-->
-                <!--        <li><a href="/board/notice" class="gnb_2da">공지사항</a></li>-->
-                <!--        <li><a href="/board/activity" class="gnb_2da">활동 보고</a></li>-->
-                <!--        <li><a href="/board/press" class="gnb_2da">언론 보도</a></li>-->
-                <!--    </ul>-->
-                <!--</li>-->
-                
-                <!--<li class="gnb_1dli" style="z-index:996">-->
-                <!--    <a href="#" class="gnb_1da gnb_bg">자정활동참여</a>-->
-                <!--    <ul id="submenu03" class="gnb_2dul">-->
-                <!--        <li><a href="/board/report" class="gnb_2da">제보하기</a></li>-->
-                <!--        <li><a href="/board/councel" class="gnb_2da">상담하기</a></li>-->
-                <!--        <li><a href="/board/donate" class="gnb_2da">후원하기</a></li>-->
-                <!--    </ul>-->
-                <!--</li>-->
-                
-                <!--<li class="gnb_1dli" style="z-index:995">-->
-                <!--    <a href="#" class="gnb_1da gnb_bg">자료실</a>-->
-                <!--    <ul id="submenu04" class="gnb_2dul">-->
-                <!--        <li><a href="#" class="gnb_2da">컨텐츠1</a></li>-->
-                <!--        <li><a href="#" class="gnb_2da">컨텐츠2</a></li>-->
-                <!--        <li><a href="#" class="gnb_2da">컨텐츠3</a></li>-->
-                <!--    </ul>-->
-                <!--</li>-->
-                
-                <!--<li class="gnb_1dli" style="z-index:994">-->
-                <!--    <a href="#" class="gnb_1da gnb_bg">열린광장</a>-->
-                <!--    <ul id="submenu05" class="gnb_2dul">-->
-                <!--        <li><a href="#" class="gnb_2da">자유갤러리</a></li>-->
-                <!--        <li><a href="#" class="gnb_2da">갤러리1</a></li>-->
-                <!--        <li><a href="#" class="gnb_2da">갤러리2</a></li>-->
-                <!--    </ul>-->
-                <!--</li>-->
             </ul>
         </nav>
-        
-        <!--<fieldset id="hd_sch">-->
-        <!--    <legend>사이트 내 전체검색</legend>-->
-        <!--    <form name="fsearchbox" method="get" onsubmit="return fsearchbox_submit(this);"> <!--action="사이트 내 전체검색.php"-->
-        <!--        <input type="hidden" name="sfl" value="wr_subject||wr_content">-->
-        <!--        <input type="hidden" name="sop" value="and">-->
-                
-        <!--        <label for="sch_stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>-->
-        <!--        <input type="text" name="stx" id="sch_stx" maxlength="20">-->
-        <!--        <input type="submit" id="sch_submit" value="검색">-->
-        <!--    </form>-->
-
-        <!--    // <script>-->
-            <!--// function fsearchbox_submit(f)-->
-            <!--// {-->
-            <!--//     if (f.stx.value.length < 2) {-->
-            <!--//         alert("검색어는 두글자 이상 입력하십시오.");-->
-            <!--//         f.stx.select();-->
-            <!--//         f.stx.focus();-->
-            <!--//         return false;-->
-            <!--//     }-->
-
-            <!--//     // 검색에 많은 부하가 걸리는 경우 이 주석을 제거하세요.-->
-            <!--//     var cnt = 0;-->
-            <!--//     for (var i=0; i<f.stx.value.length; i++) {-->
-            <!--//         if (f.stx.value.charAt(i) == ' ')-->
-            <!--//             cnt++;-->
-            <!--//     }-->
-
-            <!--//     if (cnt > 1) {-->
-            <!--//         alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");-->
-            <!--//         f.stx.select();-->
-            <!--//         f.stx.focus();-->
-            <!--//         return false;-->
-            <!--//     }-->
-
-            <!--//     return true;-->
-            <!--// }-->
-            <!--// </script>-->
-        <!--</fieldset>-->
-
         <ul id="tnb">
             <% if flash[:special_message] == "" || flash[:special_message] == nil %>
             <% else %>

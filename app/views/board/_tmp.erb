@@ -14,4 +14,6 @@
     <%= render :partial => 'adminst/main_edit' %>
 <% elsif params[:about] == 'statistic' %>
     <%= render partial: 'adminst/statistic' %>
+<% else %>
+    <%= render partial: "adminst/#{params[:about].to_s}" %>
 <% end %>

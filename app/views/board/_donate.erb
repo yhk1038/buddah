@@ -1,7 +1,7 @@
 <!-- pc 버전 시작  -->
 <!-- 상단 시작 { -->
 <div id="hd">
-    <h1 id="hd_h1">그누보드5 테마데모</h1>
+    <h1 id="hd_h1"></h1>
     <div id="skip_to_container">
         <a href="#container">본문 바로가기</a>
     </div>
@@ -218,25 +218,34 @@
                         <br>
             
                         <div class="ttlje">결제정보</div>
-                        <table width="100%" cellpadding="8" cellspacing="0" class="tbasenew">   <colgroup><col width="140">
-                            </colgroup><tbody><tr class="tbrow cldim"> <td class="tbcell clice bold alignC">후원하실 곳*</td>
+                        <table width="100%" cellpadding="8" cellspacing="0" class="tbasenew">
+                            <colgroup>
+                                <col width="140">
+                            </colgroup>
+                            <tbody>
+                            <tr class="tbrow cldim"> <td class="tbcell clice bold alignC">결제방법*</td>
                                 <td>
+                                    <input type="radio" name="paymethod" value="CMS" checked="" id="paycms"> CMS(자동 계좌이체 방식)
+                                    <input type="radio" name="paymethod" value="DIRECT" id="paydirect"> 직접이체
+                                </td>
+                            </tr>
+                            <tr class="tbrow cldim" id="lpayfor"> <td class="tbcell clice bold alignC">후원하실 곳*</td>
+                                <td>
+                                    <!--<div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay1site" value="참여불교재가연대"> 참여불교재가연대</div>-->
+                                    <!--<select name="pay1don">-->
+                                    <!--    <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>-->
+                                    <!--    <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>-->
+                                    <!--</select>-->
+                                    <!--기타금액<input type="text" name="pay1don2" size="6" value="0" onkeydown="onlyNumber()">원<br>-->
             
-                                    <div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay1site" value="참여불교재가연대"> 참여불교재가연대</div>
-                                    <select name="pay1don">
-                                        <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>
-                                        <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>
-                                    </select>
-                                    기타금액<input type="text" name="pay1don2" size="6" value="0" onkeydown="onlyNumber()">원<br>
+                                    <!--<div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay2site" value="불교아카데미"> 불교아카데미</div>-->
+                                    <!--<select name="pay2don">-->
+                                    <!--    <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>-->
+                                    <!--    <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>-->
+                                    <!--</select>-->
+                                    <!--기타금액<input type="text" name="pay2don2" size="6" value="0" onkeydown="onlyNumber()">원<br>-->
             
-                                    <div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay2site" value="불교아카데미"> 불교아카데미</div>
-                                    <select name="pay2don">
-                                        <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>
-                                        <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>
-                                    </select>
-                                    기타금액<input type="text" name="pay2don2" size="6" value="0" onkeydown="onlyNumber()">원<br>
-            
-                                    <div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay3site" value="교단자정센터"> 교단자정센터</div>
+                                    <div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay3site" value="교단자정센터" checked> 교단자정센터</div>
                                     <select name="pay3don">
                                         <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>
                                         <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>
@@ -250,28 +259,22 @@
                                     </select>
                                     기타금액<input type="text" name="pay4don2" size="6" value="0" onkeydown="onlyNumber()">원<br> -->
             
-                                    <div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay5site" value="국제협력기금"> 국제협력기금</div>
-                                    <select name="pay5don">
-                                        <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>
-                                        <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>
-                                    </select>
-                                    기타금액<input type="text" name="pay5don2" size="6" value="0" onkeydown="onlyNumber()">원<br>
+                                    <!--<div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay5site" value="국제협력기금"> 국제협력기금</div>-->
+                                    <!--<select name="pay5don">-->
+                                    <!--    <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>-->
+                                    <!--    <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>-->
+                                    <!--</select>-->
+                                    <!--기타금액<input type="text" name="pay5don2" size="6" value="0" onkeydown="onlyNumber()">원<br>-->
             
-                                    <div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay6site" value="일반후원"> 일반후원</div>
-                                    <select name="pay6don">
-                                        <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>
-                                        <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>
-                                    </select>
-                                    기타금액<input type="text" name="pay6don2" size="6" value="0" onkeydown="onlyNumber()">원<br>
+                                    <!--<div style="width: 150px; display: inline-block;"><input type="checkbox" name="pay6site" value="일반후원"> 일반후원</div>-->
+                                    <!--<select name="pay6don">-->
+                                    <!--    <option value="0">후원금</option>       <option value="5000">5,000</option>     <option value="10000">10,000</option>-->
+                                    <!--    <option value="20000">20,000</option>   <option value="30000">30,000</option>   <option value="50000">50,000</option>-->
+                                    <!--</select>-->
+                                    <!--기타금액<input type="text" name="pay6don2" size="6" value="0" onkeydown="onlyNumber()">원<br>-->
                                 </td>
                             </tr>
-                            <tr class="tbrow cldim"> <td class="tbcell clice bold alignC">결제방법*</td>
-                                <td>
-                                    <input type="radio" name="paymethod" value="CMS" checked=""> CMS(자동 계좌이체 방식)
-                                    <input type="radio" name="paymethod" value="DIRECT"> 직접이체
-                                </td>
-                            </tr>
-                            <tr class="tbrow cldim"> <td class="tbcell clhot bold alignC">결제계좌◇<br>CMS 결제시 필수</td>
+                            <tr class="tbrow cldim" id="lpaycms" style=""> <td class="tbcell clhot bold alignC">결제계좌◇<br>CMS 결제시 필수</td>
                                 <td>
                                     <div style="width: 80px; display: inline-block;">은행명</div><input type="text" name="paybank" size="20"><br>
                                     <div style="width: 80px; display: inline-block;">계좌번호</div><input type="text" name="payaccount" size="20"><br>
@@ -280,6 +283,24 @@
                                     신청완료후 CMS 이체를 위한 주민등록번호 문의를 위해 연락을 드리겠습니다.
                                 </td>
                             </tr>
+                            <tr class="tbrow cldim" id="lpaydirect" style="display:none;"> <td class="tbcell clhot bold alignC">교단자정센터<br>후원계좌◇</td>
+                                <td>
+                                    <div style="font-size: 16px; font-weight:bold; display: inline-block;">우리은행 1005-501-135210</div><br>
+                                    <div style="font-size: 16px; display: inline-block;">(예금주 : 참여불교재가연대)</div><br>
+                                </td>
+                            </tr>
+                            <script>
+                                $("#paydirect").click(function(){
+                                    $("#lpaycms").toggle();
+                                    $("#lpaydirect").toggle();
+                                    $("#lpayfor").toggle();
+                                });
+                                $("#paycms").click(function(){
+                                    $("#lpaycms").toggle();
+                                    $("#lpaydirect").toggle();
+                                    $("#lpayfor").toggle();
+                                });
+                            </script>
                         </tbody></table><br><br>
                         <center><input type="submit" value="후원하기"></center>
                     </form><!-- FORM END ★★★★★★★★★★★★★★★★★★★ -->

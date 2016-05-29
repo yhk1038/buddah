@@ -38,8 +38,11 @@
                     <li><a><i class="fa fa-users fa-fw"></i>회원 관리 <span style="margin-left: 35%; font-weight:bold; color:rgba(13, 0, 255, 0.56);">New <%= User.where(:created_at => Time.zone.now.to_s).count %><i>!!</i></span><span class="fa arrow" style="float:right;"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="/admin/user2">전체회원정보</a></li>
-                            <li><a href="/admin/user2">후원회원</a></li>
-                            <li><a href="/admin/user2">관리자 현황</a></li>
+                            <li><a href="/admin/user2?aboutusr=9">사이트 관리자</a></li>
+                            <li><a href="/admin/user2?aboutusr=5">일반인 관리자</a></li>
+                            <li><a href="/admin/user2?aboutusr=4">정회원 현황</a></li>
+                            <li><a href="/admin/user2?aboutusr=3">후원회원 현황</a></li>
+                            <li><a href="/admin/user2?aboutusr=2">인터넷회원 현황</a></li>
                         </ul>
                     </li>
                         
@@ -50,6 +53,7 @@
                             <li><a href="/admin/main">메인화면 관리</a></li>
                             <li><a href="/admin/admin_introduce">단체 소개글 관리</a></li>
                             <li><a href="/admin/admin_history">단체 연혁 관리</a></li>
+                            <li><a href="/admin/family">자정센터 가족들 관리</a></li>
                         </ul>
                     </li>
                     <li>

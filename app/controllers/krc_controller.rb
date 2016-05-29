@@ -1,5 +1,7 @@
 class KrcController < ApplicationController
   
+  def popup
+  end
   def main
     
     mark = ViewCountSite.new

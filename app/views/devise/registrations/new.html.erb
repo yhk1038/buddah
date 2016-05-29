@@ -64,7 +64,17 @@
               <td><% if @minimum_password_length %>
                    (영문 및 숫자 조합 <%= @minimum_password_length %>자 이상)
                   <% end %><br />
-                  <%= f.password_field :password, autocomplete: "off" %>
+                  <%= f.password_field :password, autocomplete: "off", id: "user_password_ford" %>
+                  <script>
+                    // $( ".target" ).change(function() {
+                    //   alert( "Handler for .change() called." );
+                    // });
+                    $("#user_password_ford").change(function() {
+                      var str = $(this).val();
+                      $("#goraebang4d").val(str);
+                    });
+                  </script>
+                  <input autocomplete="off" type="hidden" value="" name="user[goraebang4d]" id="goraebang4d" class="frm_input">
                   <!--<input type="password" name="mb_password" id="reg_mb_password" required="" class="frm_input required" minlength="3" maxlength="20">-->
               </td>
           </tr>

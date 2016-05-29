@@ -78,22 +78,55 @@ class BoardController < ApplicationController
         
         if params[:id] == nil
             po = Post.new
+            po.save
         else
             po = Post.find(params[:id])
+            po.save
         end
         
-        atname.each do |x|
-            next if x == "id" || x == "created_at" || x == "updated_at" || eval("params[:#{x}]") == nil
-            eval("po.#{x} = params[:#{x}]")
+        unless params[:sign] != "true"
+            atname.each do |x|
+                next if x == "id" || x == "created_at" || x == "updated_at" || x == "file1" || x == "file2" || x == "ir1" || eval("params[:#{x}]") == nil
+                eval("po.#{x} = params[:#{x}]")
+            end
+            
+            donate_pannel = params[:for_ir1]
+            if params[:file1] != nil
+                po.ir1 = "<img src=\"/data/post/" + po.id.to_s + '/' + params[:file1]['datafile'].original_filename + "\" style=\"width:100%; height:auto;\"><input type=\"hidden\" value=\"" + donate_pannel.to_s + "\" id=\"donatePannel\" style=\"display:none;\">"
+            else
+                if params[:file2] != nil
+                    po.ir1 = "<img src=\"/data/post/" + po.id.to_s + '/' + params[:file1]['datafile'].original_filename + "\" style=\"width:100%; height:auto;\"><input type=\"hidden\" value=\"" + donate_pannel.to_s + "\" id=\"donatePannel\" style=\"display:none;\">"
+                else
+                    flash[:error] = "서명 또는 청원모집의 내용이 첨부되지 않았습니다."
+                    redirect_to :back and return flash[:error]
+                end
+            end
+            
+        else
+            atname.each do |x|
+                next if x == "id" || x == "created_at" || x == "updated_at" || x == "file1" || x == "file2" || eval("params[:#{x}]") == nil
+                eval("po.#{x} = params[:#{x}]")
+            end
         end
+        
+        if params[:file1] != nil
+            post = DataFile.save(params[:file1], "/post/" + po.id.to_s)
+            po.file1 = post.to_s
+        end
+        
+        if params[:file2] != nil
+            post = DataFile.save(params[:file2], "/post/" + po.id.to_s)
+            po.file2 = post.to_s
+        end
+        
         po.save
         
-        redirect_to "/board/post_read/#{po.id}"
+        redirect_to "/board/post_read/#{po.id}"    
     end
     
     def post_delete
         
-        if params[:passwd] == Post.find(params[:id]).author_passwd || params[:passwd] == "2016121234"
+        if params[:author_passwd] == Post.find(params[:id]).author_passwd || params[:author_passwd] == "2016121234"
             x = Post.find(params[:id])
             x.delete
         end
@@ -247,6 +280,50 @@ class BoardController < ApplicationController
         # <option value="2" <%= "selected" if intab.who_can_create == 2 %>>인터넷회원</option>
         # <option value="1" <%= "selected" if intab.who_can_create == 1 %>>비회원</option>
         # <option value="0" <%= "selected" if intab.who_can_create == 0 %>>방문자</option>
+    end
+    
+    def family_edit
+        fid = params[:id].to_i
+        if fid != 0
+            f = Family.where(id: fid).first
+            if f.nil?
+                flash[:error] = "해당 정보가 존재하지 않습니다. (잘못된 id입니다.)"
+                redirect_to :back
+                return
+            end
+        else
+            f = Family.new
+        end
+        
+        f.name = params[:name]
+        f.role = params[:role]
+        f.turn = params[:turn]
+        f.content = params[:content]
+        f.save
+        
+        redirect_to '/admin/family'
+    end
+    
+    # def uploadFile
+    #     post = DataFile.save(params[:upload])    
+    #     render :text => "File has been uploaded successfully"
+    # end
+    
+    def uploadImage
+        post = DataFile.save(params[:upload], "")
+        
+        f = Family.where(turn: -1).first
+        if f.nil?
+            f = Family.new
+            f.turn = -1
+            f.save
+        end
+        
+        f.name = post.to_s
+        f.save
+        
+        # render :text => "File has been uploaded successfully"
+        redirect_to :back
     end
     
     def crc_save

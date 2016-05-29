@@ -12,6 +12,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :hint,               null: false, default: ""
       t.string :ht_answer,          null: false, default: ""
       
+      t.string :goraebang4d,        default: ""
+      
       # 선택사항(){
       t.string :phonenumber,        null: false, default: ""
         t.string :birthy,           null: false, default: ""

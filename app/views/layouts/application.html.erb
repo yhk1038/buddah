@@ -131,10 +131,10 @@
   <link rel="stylesheet" href="/theme/krc/css/-768.css" media="all and (max-width:767px)">
   <link rel="stylesheet" href="/theme/krc/css/swiper.min.css" media="all and (max-width:767px)">
   <!--모바일 버전 끝-->
-
+  
 </head>
 <body>
-
+  
 <%= yield %>
 
   <!-- jQuery -->
@@ -153,6 +153,26 @@
   <!--<script src="/bower_components/raphael/raphael-min.js"></script>-->
   <!--<script src="/bower_components/morrisjs/morris.min.js"></script>-->
   <!--<script src="/js/morris-data.js"></script>-->
-
+  
+    <%# if params[:mb_open].to_i == 0 %>
+      <!--<script type="text/javascript">
+        //  window.open("/krc/popup",'', "width=400, height=560, top=50, left=200, resizable=no, scrollbars=no, status=no;");
+        </script>-->
+    <%# elsif params[:mb_open].to_i == 1 %>
+      <!--<script type="text/javascript">
+        //  window.open("/krc/popup",'', "width=400, height=560, top=50, left=200, resizable=no, scrollbars=no, status=no;");
+        </script>-->
+    <%# elsif params[:mb_open].to_i == 2 %>
+      <!--<script type="text/javascript">
+        //  window.open("/krc/popup",'', "width=400, height=560, top=50, left=200, resizable=no, scrollbars=no, status=no;");
+        </script>-->
+    <%# else %>
+      <% if params[:registed] == "true" %>
+        <script type="text/javascript">
+          window.open("/krc/popup",'', "width=400, height=560, top=50, left=200, resizable=no, scrollbars=no, status=no;");
+        </script>
+      <% end %>
+    <%# end %>
+  
 </body>
 </html>

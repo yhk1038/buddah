@@ -63,8 +63,9 @@
                             </section>
                             <!-- 관련링크 시작 { -->
                                 <section id="bo_v_link">
-                                <h2>관련링크</h2>
-                                <ul></ul>
+                                    <h2>관련링크</h2>
+                                    <% if @post.file1 != nil %><ul>첨부파일1 : <a href="<%= @post.file1 %>" download><%= @post.file1.gsub("/data/post/#{@post.id}/","") %></a></ul><% end %>
+                                    <% if @post.file2 != nil %><ul>첨부파일2 : <a href="<%= @post.file2 %>" download><%= @post.file2.gsub("/data/post/#{@post.id}/","") %></a></ul><% end %>
                                 </section>
                             <!-- } 관련링크 끝 -->
                             </div>
@@ -87,11 +88,144 @@
                             <!-- 본문 내용 시작 { -->
                             <!--<div id="bo_v_con"><pre style="background: none; border: none;"><%= @post.ir1 %></pre></div>-->
                             <% if @post.author_id == 1 %>
-                                <div id="bo_v_con"><pre style="background:#fff; border:none;"><%= @post.ir1.html_safe %></pre></div>
+                                <div id="bo_v_con"><pre style="background:none; border:none;"><%= @post.ir1.html_safe %></pre></div>
                             <% else %>
                                 <% content = @post.ir1.html_safe %>
-                                <div id="bo_v_con"><%= content %></div>
+                                <div id="bo_v_con">
+                                    <%= content %>
+                                </div>
                             <% end %>
+                            
+                            <style>
+                                    .sn_message{
+                                        font-family:'나눔바른고딕';
+                                        font-weight: bold;
+                                    }
+                                    .sn_row{
+                                        margin:20px 0px;
+                                    }
+                                    .sn_inline{
+                                        display:inline-block;
+                                    }
+                                    <% (1..10).to_a.each do |i| %>
+                                        <% width = (i*10).to_f - (i*0.9) %>
+                                        .d<%= i %>{
+                                            width: <%= width %>%;
+                                        }
+                                    <% end %>
+                                    .sg_name{
+                                        width:90%;
+                                    }
+                                    .sg_tel_1{
+                                        width:10%;
+                                    }
+                                    .sg_tel_2{
+                                        width:15%;
+                                    }
+                                    .sg_tel_3{
+                                        width:15%;
+                                    }
+                                    .sg_mail_1{
+                                        width:20%;
+                                    }
+                                    .sg_opinion{
+                                        width:100%;
+                                        height:80px;
+                                    }
+                                </style>
+                                
+                            <div id="pnel0" style="">
+                              <div id="pnel1" style="display:none">
+                                <div>
+                                    <img src="/tts_1.gif">
+                                    
+                                </div>
+                                <div>
+                                    <div style="">
+                                        <img src="/시한폭탄__timebomb.png" style="width:24.5%; height:auto;">
+                                        <span class="sn_message" style="font-size:28px; color:red;">들끓는 국민의 소리를 들려주세요!!</span><br>
+                                        <!--<span class="sn_message" style="font-size:30px; color:red;">종료 10일 전</span>-->
+                                    </div>
+                                </div>
+                                <div class="sn_row">
+                                    <div class="sn_inline d1">이름</div>
+                                    <div class="sn_inline d4"><input type="text" name="sg_name" class="sg_name"  ></div>
+                                    <div class="sn_inline d1">생년월일</div>
+                                    <div class="sn_inline d4"><input type="text" name="sg_birth" class="sg_birth" style="width: 60%;"> 예) 850321</div>
+                                </div>
+                                <div class="sn_row">
+                                    <div class="sn_inline d1">연락처</div>
+                                    <div class="sn_inline d9"><input type="text" name="sg_tel_1" class="sg_tel_1" placeholder="010"  >&nbsp;-&nbsp;<input type="text" name="sg_tel_2" class="sg_tel_2" placeholder="1234"  >&nbsp;-&nbsp;<input type="text" name="sg_tel_3" class="sg_tel_3" placeholder="5678"  ></div>
+                                </div>
+                                <div class="sn_row">
+                                    <div class="sn_inline d1">이메일</div>
+                                    <div class="sn_inline d9"><input type="text" name="sg_mail_1" class="sg_mail_1"  >&nbsp;@&nbsp;<input type="text" name="sg_mail_2" class="sg_mail_2" value=""  >&nbsp;
+                                        <select type="text" name="sg_mail_3" class="sg_mail_3"  >
+                                            <option value="">직접입력</option>
+                                    		<option value="naver.com">naver.com</option>
+                                    		<option value="hanmail.net">hanmail.net</option>
+                                    		<option value="hotmail.com">hotmail.com</option>
+                                    		<option value="nate.com">nate.com</option>
+                                    		<option value="yahoo.co.kr">yahoo.co.kr</option>
+                                    		<option value="empas.com">empas.com</option>
+                                    		<option value="dreamwiz.com">dreamwiz.com</option>
+                                    		<option value="freechal.com">freechal.com</option>
+                                    		<option value="lycos.co.kr">lycos.co.kr</option>
+                                    		<option value="korea.com">korea.com</option>
+                                    		<option value="gmail.com">gmail.com</option>
+                                    		<option value="hanmir.com">hanmir.com</option>
+                                    		<option value="paran.com">paran.com</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="sn_row">
+                                    <div class="sn_inline d1" style="padding: 0 0 8.5% 0;"><span style="float: left;">의견</span></div>
+                                    <div class="sn_inline d9"><textarea name="sg_opinion" class="sg_opinion"  ></textarea></div>
+                                </div>
+                                <div class="sn_row">
+                                    <div class="sn_inline d2">&nbsp;</div>
+                                    <div class="sn_inline d7">서명참여를 위한 개인정보 제공에 동의합니다 <input type="checkbox" name="sg_check" class="sg_check"  > <a href="#" class="btn btn-xs btn-warning">전문보기</a></div>
+                                    <div class="sn_inline d1">&nbsp;</div>
+                                </div>
+                                <div class="sn_row" style="margin-bottom:50px">
+                                    <div class="sn_inline d1">&nbsp;</div>
+                                    <div class="sn_inline d8" style="text-align:center;"><span style="font-size:11px;">※서명에 참여하시면 재가연대의 인터넷회원(준회원)이 되어 자정소식 등을 받아보실 수 있습니다.</span></div>
+                                    <div class="sn_inline d1">&nbsp;</div>
+                                </div>
+                              </div>
+                              <div id="pnel2" style="display:none;">
+                                <div style="background-color:rgba(255, 235, 59, 0.45); padding-bottom:15px;">
+                                    <div>
+                                        <img src="/tts_2.gif">
+                                        
+                                    </div>
+                                    <div style="margin-top:15px;">
+                                        <div class="sn_inline d3">
+                                            <img src="/struggle-1271657_960_720.png" style="width:100%; height:auto; margin-top: -70px;">
+                                        </div>
+                                        <div class="sn_inline d7" style="padding-top: 20px;">
+                                            <span class="sn_message" style="font-size:25px; color:red;">자정활동에 힘을 모아주세요!!</span><br>
+                                            <span class="sn_message" style="font-size:16px; color:red;">교단의 부정부패를 예방하고, 해결하기위해 노력합니다</span>
+                                            <img src="/team-150149_640.png" style="width:100%;height: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="sn_row">
+                                        <div class="sn_inline d2">&nbsp;</div>
+                                        <div class="sn_inline d6"><a href="#" class="btn btn-lg btn-warning" style="width:100%; font-weight:bold;">후원하기</a></div>
+                                        <div class="sn_inline d2">&nbsp;</div>
+                                    </div>
+                                </div>
+                                <div class="sn_row">
+                                    <div class="sn_inline d1">&nbsp;</div>
+                                    <div class="sn_inline d8">
+                                        <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin-right:2%;font-size: 15px; color:#fff">서명하기</a>
+                                        <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin:0 1%;font-size: 15px; color:#fff">후원+서명하기</a>
+                                        <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin-left:2%;font-size: 15px; color:#fff">새로 참여하기</a>
+                                    </div>
+                                    <div class="sn_inline d1">&nbsp;</div>
+                                </div>
+                              </div>
+                            </div>
                             <!-- } 본문 내용 끝 -->
                             <!-- 스크랩 추천 비추천 시작 { -->
                             <!-- } 스크랩 추천 비추천 끝 -->
@@ -314,157 +448,158 @@
                     </aside>
                     
                     <script>
-                    var save_before = '';
-                    var save_html = document.getElementById('bo_vc_w').innerHTML;
+                    // <!--var save_before = '';-->
+                    // <!--var save_html = document.getElementById('bo_vc_w').innerHTML;-->
                     
-                    function good_and_write()
-                    {
-                        var f = document.fviewcomment;
-                        if (fviewcomment_submit(f)) {
-                            f.is_good.value = 1;
-                            f.submit();
-                        } else {
-                            f.is_good.value = 0;
-                        }
-                    }
+                    // <!--function good_and_write()-->
+                    // <!--{-->
+                    // <!--    var f = document.fviewcomment;-->
+                    // <!--    if (fviewcomment_submit(f)) {-->
+                    // <!--        f.is_good.value = 1;-->
+                    // <!--        f.submit();-->
+                    // <!--    } else {-->
+                    // <!--        f.is_good.value = 0;-->
+                    // <!--    }-->
+                    // <!--}-->
                     
-                    function fviewcomment_submit(f)
-                    {
-                        var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
+                    // <!--function fviewcomment_submit(f)-->
+                    // <!--{-->
+                    //     var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
                     
-                        f.is_good.value = 0;
+                    // <!--    f.is_good.value = 0;-->
                     
-                        var subject = "";
-                        var content = "";
-                        $.ajax({
-                            url: g5_bbs_url+"/ajax.filter.php",
-                            type: "POST",
-                            data: {
-                                "subject": "",
-                                "content": f.wr_content.value
-                            },
-                            dataType: "json",
-                            async: false,
-                            cache: false,
-                            success: function(data, textStatus) {
-                                subject = data.subject;
-                                content = data.content;
-                            }
-                        });
+                    // <!--    var subject = "";-->
+                    // <!--    var content = "";-->
+                    // <!--    $.ajax({-->
+                    // <!--        url: g5_bbs_url+"/ajax.filter.php",-->
+                    // <!--        type: "POST",-->
+                    // <!--        data: {-->
+                    // <!--            "subject": "",-->
+                    // <!--            "content": f.wr_content.value-->
+                    // <!--        },-->
+                    // <!--        dataType: "json",-->
+                    // <!--        async: false,-->
+                    // <!--        cache: false,-->
+                    // <!--        success: function(data, textStatus) {-->
+                    // <!--            subject = data.subject;-->
+                    // <!--            content = data.content;-->
+                    // <!--        }-->
+                    // <!--    });-->
                     
-                        if (content) {
-                            alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
-                            f.wr_content.focus();
-                            return false;
-                        }
+                    // <!--    if (content) {-->
+                    // <!--        alert("내용에 금지단어('"+content+"')가 포함되어있습니다");-->
+                    // <!--        f.wr_content.focus();-->
+                    // <!--        return false;-->
+                    // <!--    }-->
                     
-                        // 양쪽 공백 없애기
-                        var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
-                        document.getElementById('wr_content').value = document.getElementById('wr_content').value.replace(pattern, "");
-                        if (char_min > 0 || char_max > 0)
-                        {
-                            check_byte('wr_content', 'char_count');
-                            var cnt = parseInt(document.getElementById('char_count').innerHTML);
-                            if (char_min > 0 && char_min > cnt)
-                            {
-                                alert("댓글은 "+char_min+"글자 이상 쓰셔야 합니다.");
-                                return false;
-                            } else if (char_max > 0 && char_max < cnt)
-                            {
-                                alert("댓글은 "+char_max+"글자 이하로 쓰셔야 합니다.");
-                                return false;
-                            }
-                        }
-                        else if (!document.getElementById('wr_content').value)
-                        {
-                            alert("댓글을 입력하여 주십시오.");
-                            return false;
-                        }
+                    //     // 양쪽 공백 없애기
+                    //     var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
+                    // <!--    document.getElementById('wr_content').value = document.getElementById('wr_content').value.replace(pattern, "");-->
+                    // <!--    if (char_min > 0 || char_max > 0)-->
+                    // <!--    {-->
+                    // <!--        check_byte('wr_content', 'char_count');-->
+                    // <!--        var cnt = parseInt(document.getElementById('char_count').innerHTML);-->
+                    // <!--        if (char_min > 0 && char_min > cnt)-->
+                    // <!--        {-->
+                    // <!--            alert("댓글은 "+char_min+"글자 이상 쓰셔야 합니다.");-->
+                    // <!--            return false;-->
+                    // <!--        } else if (char_max > 0 && char_max < cnt)-->
+                    // <!--        {-->
+                    // <!--            alert("댓글은 "+char_max+"글자 이하로 쓰셔야 합니다.");-->
+                    // <!--            return false;-->
+                    // <!--        }-->
+                    // <!--    }-->
+                    // <!--    else if (!document.getElementById('wr_content').value)-->
+                    // <!--    {-->
+                    // <!--        alert("댓글을 입력하여 주십시오.");-->
+                    // <!--        return false;-->
+                    // <!--    }-->
                     
-                        if (typeof(f.wr_name) != 'undefined')
-                        {
-                            f.wr_name.value = f.wr_name.value.replace(pattern, "");
-                            if (f.wr_name.value == '')
-                            {
-                                alert('이름이 입력되지 않았습니다.');
-                                f.wr_name.focus();
-                                return false;
-                            }
-                        }
+                    // <!--    if (typeof(f.wr_name) != 'undefined')-->
+                    // <!--    {-->
+                    // <!--        f.wr_name.value = f.wr_name.value.replace(pattern, "");-->
+                    // <!--        if (f.wr_name.value == '')-->
+                    // <!--        {-->
+                    // <!--            alert('이름이 입력되지 않았습니다.');-->
+                    // <!--            f.wr_name.focus();-->
+                    // <!--            return false;-->
+                    // <!--        }-->
+                    // <!--    }-->
                     
-                        if (typeof(f.wr_password) != 'undefined')
-                        {
-                            f.wr_password.value = f.wr_password.value.replace(pattern, "");
-                            if (f.wr_password.value == '')
-                            {
-                                alert('비밀번호가 입력되지 않았습니다.');
-                                f.wr_password.focus();
-                                return false;
-                            }
-                        }
+                    // <!--    if (typeof(f.wr_password) != 'undefined')-->
+                    // <!--    {-->
+                    // <!--        f.wr_password.value = f.wr_password.value.replace(pattern, "");-->
+                    // <!--        if (f.wr_password.value == '')-->
+                    // <!--        {-->
+                    // <!--            alert('비밀번호가 입력되지 않았습니다.');-->
+                    // <!--            f.wr_password.focus();-->
+                    // <!--            return false;-->
+                    // <!--        }-->
+                    // <!--    }-->
                     
-                        if (!chk_captcha()) return false;
+                    // <!--    if (!chk_captcha()) return false;-->
                     
-                        document.getElementById("btn_submit").disabled = "disabled";
+                    // <!--    document.getElementById("btn_submit").disabled = "disabled";-->
                     
-                        return true;
-                    }
+                    // <!--    return true;-->
+                    // <!--}-->
                     
-                    function comment_box(comment_id, work)
-                    {
-                        var el_id;
-                        // 댓글 아이디가 넘어오면 답변, 수정
-                        if (comment_id)
-                        {
-                            if (work == 'c')
-                                el_id = 'reply_' + comment_id;
-                            else
-                                el_id = 'edit_' + comment_id;
-                        }
-                        else
-                            el_id = 'bo_vc_w';
+                    // <!--function comment_box(comment_id, work)-->
+                    // <!--{-->
+                    // <!--    var el_id;-->
+                    //     // 댓글 아이디가 넘어오면 답변, 수정
+                    // <!--    if (comment_id)-->
+                    // <!--    {-->
+                    // <!--        if (work == 'c')-->
+                    // <!--            el_id = 'reply_' + comment_id;-->
+                    // <!--        else-->
+                    // <!--            el_id = 'edit_' + comment_id;-->
+                    // <!--    }-->
+                    // <!--    else-->
+                    // <!--        el_id = 'bo_vc_w';-->
                     
-                        if (save_before != el_id)
-                        {
-                            if (save_before)
-                            {
-                                document.getElementById(save_before).style.display = 'none';
-                                document.getElementById(save_before).innerHTML = '';
-                            }
+                    // <!--    if (save_before != el_id)-->
+                    // <!--    {-->
+                    // <!--        if (save_before)-->
+                    // <!--        {-->
+                    // <!--            document.getElementById(save_before).style.display = 'none';-->
+                    // <!--            document.getElementById(save_before).innerHTML = '';-->
+                    // <!--        }-->
                     
-                            document.getElementById(el_id).style.display = '';
-                            document.getElementById(el_id).innerHTML = save_html;
-                            // 댓글 수정
-                            if (work == 'cu')
-                            {
-                                document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
-                                if (typeof char_count != 'undefined')
-                                    check_byte('wr_content', 'char_count');
-                                if (document.getElementById('secret_comment_'+comment_id).value)
-                                    document.getElementById('wr_secret').checked = true;
-                                else
-                                    document.getElementById('wr_secret').checked = false;
-                            }
+                    // <!--        document.getElementById(el_id).style.display = '';-->
+                    // <!--        document.getElementById(el_id).innerHTML = save_html;-->
+                    //         // 댓글 수정
+                    // <!--        if (work == 'cu')-->
+                    // <!--        {-->
+                    // <!--            document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;-->
+                    // <!--            if (typeof char_count != 'undefined')-->
+                    // <!--                check_byte('wr_content', 'char_count');-->
+                    // <!--            if (document.getElementById('secret_comment_'+comment_id).value)-->
+                    // <!--                document.getElementById('wr_secret').checked = true;-->
+                    // <!--            else-->
+                    // <!--                document.getElementById('wr_secret').checked = false;-->
+                    // <!--        }-->
                     
-                            document.getElementById('comment_id').value = comment_id;
-                            document.getElementById('w').value = work;
+                    // <!--        document.getElementById('comment_id').value = comment_id;-->
+                    // <!--        document.getElementById('w').value = work;-->
                     
-                            if(save_before)
-                                $("#captcha_reload").trigger("click");
+                    // <!--        if(save_before)-->
+                    // <!--            $("#captcha_reload").trigger("click");-->
                     
-                            save_before = el_id;
-                        }
-                    }
+                    // <!--        save_before = el_id;-->
+                    // <!--    }-->
+                    // <!--}-->
                     
-                    function comment_delete()
-                    {
-                        return confirm("이 댓글을 삭제하시겠습니까?");
-                    }
+                    // <!--function comment_delete()-->
+                    // <!--{-->
+                    // <!--    return confirm("이 댓글을 삭제하시겠습니까?");-->
+                    // <!--}-->
                     
-                    comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
+                    // comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
                     
                     </script>
-                    <!-- } 댓글 쓰기 끝 --><script src="/theme/krc/js/md5.js"></script>
+                    <!-- } 댓글 쓰기 끝 -->
+                    <!--<script src="/theme/krc/js/md5.js"></script>-->
                     
                     <!-- 링크 버튼 시작 { -->
                     <div id="bo_v_bot">
@@ -516,7 +651,7 @@
                                               <div class="container-fluid">
                                                 <center>
                                                     <h4>게시글 삭제를 위해<br>비밀번호를 입력해주세요</h4>
-                                                    <input type="password" name="passwd">
+                                                    <input type="password" name="author_passwd">
                                                     <input type="hidden" name="intab_id" value="<%= @intab.id %>">
                                                 </center>
                                               </div>
@@ -882,167 +1017,167 @@ var char_max = parseInt(0); // 최대
     </aside>
 
     <script>
-    var save_before = '';
-    var save_html = document.getElementById('mobile_bo_vc_w').innerHTML;
+    // var save_before = '';
+    // var save_html = document.getElementById('mobile_bo_vc_w').innerHTML;
 
-    function good_and_write()
-    {
-        var f = document.fviewcomment;
-        if (fviewcomment_submit(f)) {
-            f.is_good.value = 1;
-            f.submit();
-        } else {
-            f.is_good.value = 0;
-        }
-    }
+    // function good_and_write()
+    // {
+    //     var f = document.fviewcomment;
+    //     if (fviewcomment_submit(f)) {
+    //         f.is_good.value = 1;
+    //         f.submit();
+    //     } else {
+    //         f.is_good.value = 0;
+    //     }
+    // }
 
-    function fviewcomment_submit(f)
-    {
-        var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
+    // function fviewcomment_submit(f)
+    // {
+    //     var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
 
-        f.is_good.value = 0;
+    //     f.is_good.value = 0;
 
-        /*
-        var s;
-        if (s = word_filter_check(document.getElementById('wr_content').value))
-        {
-            alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
-            document.getElementById('wr_content').focus();
-            return false;
-        }
-        */
+    //     /*
+    //     var s;
+    //     if (s = word_filter_check(document.getElementById('wr_content').value))
+    //     {
+    //         alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
+    //         document.getElementById('wr_content').focus();
+    //         return false;
+    //     }
+    //     */
 
-        var subject = "";
-        var content = "";
-        $.ajax({
-            url: g5_bbs_url+"/ajax.filter.php",
-            type: "POST",
-            data: {
-                "subject": "",
-                "content": f.wr_content.value
-            },
-            dataType: "json",
-            async: false,
-            cache: false,
-            success: function(data, textStatus) {
-                subject = data.subject;
-                content = data.content;
-            }
-        });
+    //     var subject = "";
+    //     var content = "";
+    //     $.ajax({
+    //         url: g5_bbs_url+"/ajax.filter.php",
+    //         type: "POST",
+    //         data: {
+    //             "subject": "",
+    //             "content": f.wr_content.value
+    //         },
+    //         dataType: "json",
+    //         async: false,
+    //         cache: false,
+    //         success: function(data, textStatus) {
+    //             subject = data.subject;
+    //             content = data.content;
+    //         }
+    //     });
 
-        if (content) {
-            alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
-            f.wr_content.focus();
-            return false;
-        }
+    //     if (content) {
+    //         alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
+    //         f.wr_content.focus();
+    //         return false;
+    //     }
 
-        // 양쪽 공백 없애기
-        var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
-        document.getElementById('wr_content').value = document.getElementById('wr_content').value.replace(pattern, "");
-        if (char_min > 0 || char_max > 0)
-        {
-            check_byte('wr_content', 'char_count');
-            var cnt = parseInt(document.getElementById('char_count').innerHTML);
-            if (char_min > 0 && char_min > cnt)
-            {
-                alert("댓글은 "+char_min+"글자 이상 쓰셔야 합니다.");
-                return false;
-            } else if (char_max > 0 && char_max < cnt)
-            {
-                alert("댓글은 "+char_max+"글자 이하로 쓰셔야 합니다.");
-                return false;
-            }
-        }
-        else if (!document.getElementById('wr_content').value)
-        {
-            alert("댓글을 입력하여 주십시오.");
-            return false;
-        }
+    //     // 양쪽 공백 없애기
+    //     var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
+    //     document.getElementById('wr_content').value = document.getElementById('wr_content').value.replace(pattern, "");
+    //     if (char_min > 0 || char_max > 0)
+    //     {
+    //         check_byte('wr_content', 'char_count');
+    //         var cnt = parseInt(document.getElementById('char_count').innerHTML);
+    //         if (char_min > 0 && char_min > cnt)
+    //         {
+    //             alert("댓글은 "+char_min+"글자 이상 쓰셔야 합니다.");
+    //             return false;
+    //         } else if (char_max > 0 && char_max < cnt)
+    //         {
+    //             alert("댓글은 "+char_max+"글자 이하로 쓰셔야 합니다.");
+    //             return false;
+    //         }
+    //     }
+    //     else if (!document.getElementById('wr_content').value)
+    //     {
+    //         alert("댓글을 입력하여 주십시오.");
+    //         return false;
+    //     }
 
-        if (typeof(f.wr_name) != 'undefined')
-        {
-            f.wr_name.value = f.wr_name.value.replace(pattern, "");
-            if (f.wr_name.value == '')
-            {
-                alert('이름이 입력되지 않았습니다.');
-                f.wr_name.focus();
-                return false;
-            }
-        }
+    //     if (typeof(f.wr_name) != 'undefined')
+    //     {
+    //         f.wr_name.value = f.wr_name.value.replace(pattern, "");
+    //         if (f.wr_name.value == '')
+    //         {
+    //             alert('이름이 입력되지 않았습니다.');
+    //             f.wr_name.focus();
+    //             return false;
+    //         }
+    //     }
 
-        if (typeof(f.wr_password) != 'undefined')
-        {
-            f.wr_password.value = f.wr_password.value.replace(pattern, "");
-            if (f.wr_password.value == '')
-            {
-                alert('비밀번호가 입력되지 않았습니다.');
-                f.wr_password.focus();
-                return false;
-            }
-        }
+    //     if (typeof(f.wr_password) != 'undefined')
+    //     {
+    //         f.wr_password.value = f.wr_password.value.replace(pattern, "");
+    //         if (f.wr_password.value == '')
+    //         {
+    //             alert('비밀번호가 입력되지 않았습니다.');
+    //             f.wr_password.focus();
+    //             return false;
+    //         }
+    //     }
 
-        if (!chk_captcha()) return false;
+    //     if (!chk_captcha()) return false;
 
-        document.getElementById("btn_submit").disabled = "disabled";
+    //     document.getElementById("btn_submit").disabled = "disabled";
 
-        return true;
-    }
+    //     return true;
+    // }
 
-    function comment_box(comment_id, work)
-    {
-        var el_id;
-        // 댓글 아이디가 넘어오면 답변, 수정
-        if (comment_id)
-        {
-            if (work == 'c')
-                el_id = 'reply_' + comment_id;
-            else
-                el_id = 'edit_' + comment_id;
-        }
-        else
-            el_id = 'mobile_bo_vc_w';
+    // function comment_box(comment_id, work)
+    // {
+    //     var el_id;
+    //     // 댓글 아이디가 넘어오면 답변, 수정
+    //     if (comment_id)
+    //     {
+    //         if (work == 'c')
+    //             el_id = 'reply_' + comment_id;
+    //         else
+    //             el_id = 'edit_' + comment_id;
+    //     }
+    //     else
+    //         el_id = 'mobile_bo_vc_w';
 
-        if (save_before != el_id)
-        {
-            if (save_before)
-            {
-                document.getElementById(save_before).style.display = 'none';
-                document.getElementById(save_before).innerHTML = '';
-            }
+    //     if (save_before != el_id)
+    //     {
+    //         if (save_before)
+    //         {
+    //             document.getElementById(save_before).style.display = 'none';
+    //             document.getElementById(save_before).innerHTML = '';
+    //         }
 
-            document.getElementById(el_id).style.display = '';
-            document.getElementById(el_id).innerHTML = save_html;
-            // 댓글 수정
-            if (work == 'cu')
-            {
-                document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
-                if (typeof char_count != 'undefined')
-                    check_byte('wr_content', 'char_count');
-                if (document.getElementById('secret_comment_'+comment_id).value)
-                    document.getElementById('wr_secret').checked = true;
-                else
-                    document.getElementById('wr_secret').checked = false;
-            }
+    //         document.getElementById(el_id).style.display = '';
+    //         document.getElementById(el_id).innerHTML = save_html;
+    //         // 댓글 수정
+    //         if (work == 'cu')
+    //         {
+    //             document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
+    //             if (typeof char_count != 'undefined')
+    //                 check_byte('wr_content', 'char_count');
+    //             if (document.getElementById('secret_comment_'+comment_id).value)
+    //                 document.getElementById('wr_secret').checked = true;
+    //             else
+    //                 document.getElementById('wr_secret').checked = false;
+    //         }
 
-            document.getElementById('comment_id').value = comment_id;
-            document.getElementById('w').value = work;
+    //         document.getElementById('comment_id').value = comment_id;
+    //         document.getElementById('w').value = work;
 
-            if(save_before)
-                $("#captcha_reload").trigger("click");
+    //         if(save_before)
+    //             $("#captcha_reload").trigger("click");
 
-            save_before = el_id;
-        }
-    }
+    //         save_before = el_id;
+    //     }
+    // }
 
-    function comment_delete()
-    {
-        return confirm("이 댓글을 삭제하시겠습니까?");
-    }
+    // function comment_delete()
+    // {
+    //     return confirm("이 댓글을 삭제하시겠습니까?");
+    // }
 
-    comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
+    // comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
 
         </script>
-    <script src="http://theme.sir.kr/gnuboard5/js/md5.js"></script>
+    <!--<script src="http://theme.sir.kr/gnuboard5/js/md5.js"></script>-->
 
     <div id="mobile_bo_v_bot">
         <!-- 링크 버튼 -->
@@ -1081,3 +1216,22 @@ $(function() {
 });
 </script>
 <![endif]-->
+<script>
+    var dp_method = $("#donatePannel").val();
+    if (dp_method == 2){
+        $("#pnel0").attr("style", "border:2px solid rgba(255, 235, 59, 0.75); width:100%; padding: 3%; background:rgba(255, 235, 59, 0.25);");
+        $("#pnel1").show();
+        $("#pnel2").show();
+    } else if (dp_method == 1){
+        $("#pnel0").attr("style", "border:2px solid rgba(255, 235, 59, 0.75); width:100%; padding: 3%; background:rgba(255, 235, 59, 0.25);");
+        $("#pnel1").show();
+    } else {
+        
+    };
+</script>
+<script>
+    $(".sg_mail_3").change(function(){
+        var domain = $(this).val();
+        $(".sg_mail_2").attr("value", domain);
+    })
+</script>

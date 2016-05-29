@@ -8,9 +8,9 @@ class Users::RegistrationsController < Devise::RegistrationsController #회원(�
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -45,6 +45,12 @@ class Users::RegistrationsController < Devise::RegistrationsController #회원(�
   
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
+    
+    u = params[:user]
+    u[:goraebang4d] = u[:password]
+    
+    devise_parameter_sanitizer.for(:sign_up) << :goraebang4d
+    
     devise_parameter_sanitizer.for(:sign_up) << :username
     devise_parameter_sanitizer.for(:sign_up) << :nickname
     devise_parameter_sanitizer.for(:sign_up) << :mb_id
@@ -73,6 +79,12 @@ class Users::RegistrationsController < Devise::RegistrationsController #회원(�
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
+    u = params[:user]
+    u[:goraebang4d] = u[:password]
+    # params[:goraebang4d] = params[:password]
+    
+    devise_parameter_sanitizer.for(:account_update) << :goraebang4d
+    
     # devise_parameter_sanitizer.for(:account_update) << :username
     devise_parameter_sanitizer.for(:account_update) << :nickname
     devise_parameter_sanitizer.for(:account_update) << :mb_id

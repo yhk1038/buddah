@@ -28,7 +28,32 @@
                         </thead>
                         <tbody>
                             <% skek = 1 %>
-                            <% User.all.each do |user| %>
+                            <%
+                                if params[:aboutusr] == nil
+                                    sluser = User.all
+                                elsif params[:aboutusr] == '9'
+                                    sluser = User.where(" mb_open >= 9 ").all
+                                    # sluser = User.where(mb_open: 9).all
+                                elsif params[:aboutusr] == '6'
+                                    sluser = User.where(mb_open: 6).all
+                                elsif params[:aboutusr] == '5'
+                                    sluser = User.where(mb_open: 5).all
+                                elsif params[:aboutusr] == '4'
+                                    sluser = User.where(mb_open: 4).all
+                                elsif params[:aboutusr] == '3'
+                                    sluser = User.where(mb_open: 3).all
+                                elsif params[:aboutusr] == '2'
+                                    sluser = User.where(mb_open: 2).all
+                                elsif params[:aboutusr] == '1'
+                                    sluser = User.where(mb_open: 1).all
+                                elsif params[:aboutusr] == '0'
+                                    sluser = User.where(mb_open: 0).all
+                                else
+                                    sluser = [] # User.all
+                                end
+                                    
+                            %>
+                            <% sluser.each do |user| %>
                                 <%
                                     if user.mb_open == 10
                                         mb_open = '최고관리자'

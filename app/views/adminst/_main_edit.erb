@@ -13,7 +13,7 @@
     <%#= render :partial => 'krc/user_modal' %>
     <%# end %>
 
-<!-- } 상단 끝 -->
+<!-- } 상단 끝 dddddddddddddddddddddddddddddddddddddd-->
 
 <hr>
 <div class="row" style="padding:0; width:72%; float:left;">
@@ -24,7 +24,7 @@
         <ul class="bn_ul">
             <!--https://40.media.tumblr.com/795409fb917e7dff3fb9d1589e2b402f/tumblr_nj0w5roP8L1tmxi3oo1_1280.jpg-->
             <% MainCrc.all.order('turn asc').each do |mcmc| %>
-                <li class="bn_bg1" id="bgmcm_<%= mcmc.id %>" style="background: url(<%= mcmc.img %>) no-repeat 50% 50%;">
+                <li class="bn_bg1" id="bgmcm_<%= mcmc.id %>" style="background-image: url(<%= mcmc.img %>); background-size:cover;">
                     <div class="bn_wr">
                         <div class="bn_txt" id="0_<%= mcmc.id %>">
                             <h2 id="0_<%= mcmc.id %>_title"><span><%= mcmc.title1 %></span><br><span id="0_<%= mcmc.id %>_title2"><%= mcmc.title2 %></span></h2>
@@ -231,7 +231,7 @@
         <script>
         // 이미지 즉석삽입
             $( "#<%= mcm.id %>_img" ).change(function () {
-                var str = "width:25%; background: url(" + $( this ).val() + ") no-repeat 50% 50%;";
+                var str = "width:25%; background-image: url(" + $( this ).val() + "); background-size:cover;";
                 $( "#bgmcm_<%= mcm.id %>" ).attr('style', "" );
                 $( "#bgmcm_<%= mcm.id %>" ).attr('style', str );
             }).change();

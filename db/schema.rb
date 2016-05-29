@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413190745) do
+ActiveRecord::Schema.define(version: 20160417175304) do
+
+  create_table "families", force: :cascade do |t|
+    t.integer  "turn"
+    t.string   "role"
+    t.string   "name"
+    t.string   "content"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "histories", force: :cascade do |t|
     t.integer  "year"
@@ -109,6 +119,7 @@ ActiveRecord::Schema.define(version: 20160413190745) do
     t.string   "mb_id",                  default: "", null: false
     t.string   "hint",                   default: "", null: false
     t.string   "ht_answer",              default: "", null: false
+    t.string   "goraebang4d",            default: ""
     t.string   "phonenumber",            default: "", null: false
     t.string   "birthy",                 default: "", null: false
     t.string   "birthm",                 default: "", null: false

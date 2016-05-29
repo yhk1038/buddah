@@ -1,0 +1,61 @@
+<div class="panel panel-default col-md-12" style="padding:0;">
+    
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="font-size:25px;">
+        <b>총 <%= Family.count -1 %></b>
+    </div>
+    <div class="panel-body">
+        <p style="font-size:14px;">Familes</p>
+        <hr style="display:block;border:1px solid grey">
+    </div>
+    
+    <div class="panel-body">
+        <p>이미지 수정</p>
+        <img src="<%= Family.where(turn: -1).first.name %>" style="width:50%"/>
+        <form method="POST" enctype="multipart/form-data" action="/board/uploadImage">
+        <%#= start_form_tag ({:action => 'uploadImage'}, 
+                        :multipart => true) %>
+            <p><label for="upload_file">이미지 파일을 넣으시고 등록해주세요</label></p>
+            <%= file_field 'upload', 'datafile', style: "margin: 0; float: left;" %>
+            <%= submit_tag "저장", class: "btn btn-primary btn-sm" %><br>
+        </form>
+        <%#= end_form_tag %>
+    </div>
+    <br><br>
+    <!-- Table -->
+    <table class="table" style="//text-align:center;">
+    <thead>
+        <tr style="font-weight:bold;">
+            <td>순서(turn)</td>            
+            <td>직급</td>
+            <td>이름(name)</td>
+            <td>내용</td>
+            <td>기능</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% Family.all.order('turn asc').each do |f| %>
+            <% next if f.turn == -1 %>
+            <tr>
+                <td><%= f.turn %></td>
+                <td><%= f.role %></td>
+                <td><%= f.name %></td>
+                <td><%= f.content %></td>
+                <td><a href="/admin/family_edit/<%= f.id %>"><button class="btn btn-sm btn-warning">수정</a></td>
+            </tr>
+        <% end %>
+        <form method="POST" action="/board/family_edit">
+            
+            <tr>
+                <input type="hidden" name="id" value="0">
+                <td><input type="number" min="1" value="0" name="turn"></td>
+                <td><input type="text" placeholder="직급" name="role"></td>
+                <td><input type="text" placeholder="이름" name="name"></td>
+                <td><input type="text" placeholder="내용" name="content"></td>
+                <td><input class="btn btn-sm btn-primary" type="submit" value="등록"></td>
+            </tr>
+        </form>
+    </tbody>
+  </table>
+  <br>
+</div>

@@ -94,7 +94,7 @@
                                 <td class="td_name sv_use"><span class="sv_member">최고관리자</span></td>
                             <% end %>
                         <% end %>
-                        <td class="td_date">03-10</td>
+                        <td class="td_date"><%= Date.parse(@intab.created_at.to_s).to_s.last(5) %></td>
                         <td class="td_num">***</td>
                     </tr>
                     <% else %>

@@ -1,0 +1,46 @@
+<div class="panel panel-default col-md-12" style="padding:0;">
+    
+    <%
+        f = Family.where(id: params[:id]).first
+        if f.nil?
+            flash[:error] = "존재하지 않은 정보입니다. (잘못된 id)"
+            redirect_to '/admin/family'
+            return
+        end
+    %>
+    
+    <!-- Default panel contents -->
+    <div class="panel-body">
+        <p>Family 수정 페이지</p>
+    </div>
+    
+    <!-- Table -->
+    <table class="table" style="//text-align:center;">
+    <thead>
+        <tr style="font-weight:bold;">
+            <td>순서(turn)</td>            
+            <td>직급</td>
+            <td>이름(name)</td>
+            <td>내용</td>
+            <td>기능</td>
+        </tr>
+    </thead>
+    <tbody>
+        <form method="POST" action="/board/family_edit">
+            <tr>
+                <input type="hidden" name="id" value="<%= f.id %>">
+                <td><input type="number" min="1" name="turn" value="<%= f.turn %>" required></td>
+                <td><input type="text" placeholder="직급" name="role" value="<%= f.role %>" required></td>
+                <td><input type="text" placeholder="이름" name="name" value="<%= f.name %>" required></td>
+                <td><input type="text" placeholder="내용" name="content" value="<%= f.content %>"></td>
+                <td>
+                    <input class="btn btn-sm btn-primary" type="submit" value="수정"><br>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+  </table>
+  <br>
+  <hr style="border:1x solid grey;display: block;">
+  <div style="float:right;padding:5px;padding-right:10px;margin-right:10px;"><a href="/admin/family" style="color:white;"><button class="btn btn-danger">취소</a></div>
+</div>
