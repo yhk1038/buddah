@@ -164,6 +164,18 @@ class BoardController < ApplicationController
     
     #############//
     
+    def signature_save
+       
+       sn = Signature.new
+       Signature.attribute_names.each do |att| 
+           next if att == "id" || att == "created_at" || att == "updated_at" || eval("params[:#{att}]") == nil
+           eval("sn.#{att} = params[:#{att}]")
+       end
+       sn.save
+       
+       redirect_to :back
+    end
+    
 ##########
     def save_tabs
         if params[:mod_tab] != nil

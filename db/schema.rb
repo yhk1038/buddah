@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417175304) do
+ActiveRecord::Schema.define(version: 20160602005219) do
 
   create_table "families", force: :cascade do |t|
     t.integer  "turn"
@@ -90,6 +90,21 @@ ActiveRecord::Schema.define(version: 20160417175304) do
     t.boolean  "anonymous"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "signatures", force: :cascade do |t|
+    t.integer  "sg_signNm"
+    t.string   "sg_signTitle"
+    t.string   "sg_name"
+    t.string   "sg_birth"
+    t.integer  "sg_tel_1"
+    t.integer  "sg_tel_2"
+    t.integer  "sg_tel_3"
+    t.string   "sg_mail_1"
+    t.string   "sg_mail_2"
+    t.text     "sg_opinion"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "tabs", force: :cascade do |t|

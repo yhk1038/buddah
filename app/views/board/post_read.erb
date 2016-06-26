@@ -133,7 +133,7 @@
                                         height:80px;
                                     }
                                 </style>
-                                
+                            <form id="sign_form" action="/board/signature_save" method="POST">    
                             <div id="pnel0" style="">
                               <div id="pnel1" style="display:none">
                                 <div>
@@ -148,6 +148,8 @@
                                     </div>
                                 </div>
                                 <div class="sn_row">
+                                    <input type="hidden" name="sg_signNm" value="<%= @post.id %>">
+                                    <input type="hidden" name="sg_signTitle" value="<%= @post.title %>">
                                     <div class="sn_inline d1">이름</div>
                                     <div class="sn_inline d4"><input type="text" name="sg_name" class="sg_name"  ></div>
                                     <div class="sn_inline d1">생년월일</div>
@@ -184,7 +186,7 @@
                                 </div>
                                 <div class="sn_row">
                                     <div class="sn_inline d2">&nbsp;</div>
-                                    <div class="sn_inline d7">서명참여를 위한 개인정보 제공에 동의합니다 <input type="checkbox" name="sg_check" class="sg_check"  > <a href="#" class="btn btn-xs btn-warning">전문보기</a></div>
+                                    <div class="sn_inline d7">서명참여를 위한 개인정보 제공에 동의합니다 <input type="checkbox" name="sg_check" class="sg_check" checked> <a href="#" class="btn btn-xs btn-warning" >전문보기</a></div>
                                     <div class="sn_inline d1">&nbsp;</div>
                                 </div>
                                 <div class="sn_row" style="margin-bottom:50px">
@@ -209,26 +211,72 @@
                                             <img src="/team-150149_640.png" style="width:100%;height: 100px;">
                                         </div>
                                     </div>
-                                    <div class="sn_row">
-                                        <div class="sn_inline d2">&nbsp;</div>
-                                        <div class="sn_inline d6"><a href="#" class="btn btn-lg btn-warning" style="width:100%; font-weight:bold;">후원하기</a></div>
-                                        <div class="sn_inline d2">&nbsp;</div>
-                                    </div>
                                 </div>
                                 <div class="sn_row">
-                                    <div class="sn_inline d1">&nbsp;</div>
-                                    <div class="sn_inline d8">
-                                        <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin-right:2%;font-size: 15px; color:#fff">서명하기</a>
-                                        <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin:0 1%;font-size: 15px; color:#fff">후원+서명하기</a>
-                                        <a href="#" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin-left:2%;font-size: 15px; color:#fff">새로 참여하기</a>
-                                    </div>
-                                    <div class="sn_inline d1">&nbsp;</div>
+                                    <div class="sn_inline d2">&nbsp;</div>
+                                    <div class="sn_inline d6"><a href="#" class="btn btn-lg btn-warning" style="width:100%; font-weight:bold;">후원하기</a></div>
+                                    <div class="sn_inline d2">&nbsp;</div>
                                 </div>
+                                
                               </div>
+                              <div class="sn_row">
+                                  <div class="sn_inline d1">&nbsp;</div>
+                                  <div class="sn_inline d8">
+                                      <button type="submit" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin-right:2%;font-size: 15px; color:#fff">서명하기</button>
+                                      <button type="submit" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin:0 1%;font-size: 15px; color:#fff">후원+서명하기</button>
+                                      <button type="submit" class="btn btn-lg btn-info" style="width:30%; font-weight:bold; margin-left:2%;font-size: 15px; color:#fff">새로 참여하기</button>
+                                  </div>
+                                  <div class="sn_inline d1">&nbsp;</div>
+                              </div>
+                              <% signP_all = Signature.where(sg_signNm: @post.id) %>
+                              <div style="width:100%;">
+                                  <div class="" style="padding:0; background:#aeaeae; color:#fff; font-size:16px; font-weight:bold;">
+                                      <div class="sn_inline d2">
+                                          <p style="text-align:center;">순번(총<%= signP_all.count %>)</p>
+                                      </div>
+                                      <div class="sn_inline d2">
+                                          <p style="text-align:center;">참여자</p>
+                                      </div>
+                                      <div class="sn_inline d5">
+                                          <p style="text-align:center;">의견</p>
+                                      </div>
+                                  </div>
+                                  <% if signP_all.count == 0 %>
+                                      <div style="padding:0; background:#fff; color:#000; font-size:14px;">
+                                          <div class="sn_inline d2">
+                                              <p style="text-align:center;"><%= "0" %></p>
+                                          </div>
+                                          <div class="sn_inline d3">
+                                              <p style=""><%= "" %></p>
+                                          </div>
+                                          <div class="sn_inline d5">
+                                              <p style=""><%= "첫 번째 서명에 참여해주세요!" %></p>
+                                          </div>
+                                      </div>
+                                  <% else %>
+                                      <% co = 1 %>
+                                      <% signP_all.each do |spx| %>
+                                          <div style="padding:0; background:#fff; color:#000; font-size:14px;">
+                                              <div class="sn_inline d2">
+                                                  <p style="text-align:center;"><%= co %></p>
+                                              </div>
+                                              <div class="sn_inline d3">
+                                                  <p style=""><%= spx.sg_name %></p>
+                                              </div>
+                                              <div class="sn_inline d5">
+                                                  <p style=""><%= spx.sg_opinion %></p>
+                                              </div>
+                                          </div>
+                                          <% co += 1 %>
+                                      <% end %>
+                                  <% end %>
+                              </div>
+                              
                             </div>
                             <!-- } 본문 내용 끝 -->
                             <!-- 스크랩 추천 비추천 시작 { -->
                             <!-- } 스크랩 추천 비추천 끝 -->
+                            </form>
                         </section>
                     
                         

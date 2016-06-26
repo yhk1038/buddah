@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sg_signNm: 1
+  sg_signTitle: MyString
+  sg_name: MyString
+  sg_birth: MyString
+  sg_tel_1: 1
+  sg_tel_2: 1
+  sg_tel_3: 1
+  sg_mail_1: MyString
+  sg_mail_2: MyString
+  sg_opinion: MyText
+
+two:
+  sg_signNm: 1
+  sg_signTitle: MyString
+  sg_name: MyString
+  sg_birth: MyString
+  sg_tel_1: 1
+  sg_tel_2: 1
+  sg_tel_3: 1
+  sg_mail_1: MyString
+  sg_mail_2: MyString
+  sg_opinion: MyText
