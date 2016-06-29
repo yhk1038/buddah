@@ -57,14 +57,72 @@
                             <% if History.count == 0 %>
                                 <li class="active" rel="tab1">2014</li>
                             <% end %>
-                            <% @years.each do |years| %>
-                                <li rel="tab<%= years.to_s %>"><%= years %></li>
+                            <%
+                                dev = @years.count/6
+                                if @years.count%6 != 0
+                                    dev += 1
+                                end
+                                
+                                dev.times do |d|
+                                    eval("@years_#{(dev+1)-(d+1)} = @years.last(6*#{d+1}).first(6)")
+                                end
+                            %>
+                            <li id="show_prev" style="width: <%= "12.5%" %>; display:block;">PREV</li>
+                            
+                            <% dev.times do |i| %>
+                                <div id="dev_<%= i+1 %>" value="<%= i+1 %>" style="<%= "display:block;" if i+1 == dev %><%= "display:none;" if i+1 != dev %>">
+                                <% eval("@years_#{i+1}").each do |years| %>
+                                    <li rel="tab<%= years.to_s %>" style="width: <%= "12.5%" %>;"><%= years %></li>
+                                <% end %>
+                                </div>
                             <% end %>
-                            <!--<li rel="tab3">2016</li>-->
-                            <!--<li rel="tab4">2017</li>-->
-                            <!--<li rel="tab5">2018</li>-->
-                            <!--<li rel="tab6">2019</li>-->
-                            <!--<li rel="tab11">2021</li>-->
+                            
+                            <li id="show_next" style="width: <%= "12.5%" %>; display:block;">NEXT</li>
+                            <style>
+                                .lia{
+                                    float: left;
+                                    text-align: center;
+                                    cursor: pointer;
+                                    width: 82px;
+                                    height: 31px;
+                                    line-height: 31px;
+                                    border: 1px solid #eee;
+                                    border-left: none;
+                                    font-weight: bold;
+                                    background: #fafafa;
+                                    overflow: hidden;
+                                    position: relative;
+                                    color: rgb(51, 51, 51);
+                                    list-style: none;
+                                    margin: 0;
+                                    padding: 0;
+                                    font-family: "dotum";
+                                    font-size: 12px;
+                                }
+                            </style>
+                            <script>
+                                $("#show_prev").click(function(){
+                                    // if ( $("#dev_3").display === true ){
+                                        $("#dev_3").hide();
+                                        $("#dev_2").show();
+                                    // } else if ( $("#dev_2").display === true ){
+                                    //     $("#dev_2").hide();
+                                    //     $("#dev_1").show();
+                                    // } else if ( $("#dev_1").display === true ){
+                                    //     alert("표시할 수 없습니다.");
+                                });
+                                
+                                $("#show_next").click(function(){
+                                    if ( $("#dev_1").display === true ){
+                                        $("#dev_1").hide();
+                                        $("#dev_2").show();
+                                    } else if ( $("#dev_2").display === true ){
+                                        $("#dev_2").hide();
+                                        $("#dev_3").show();
+                                    } else if ( $("#dev_3").display === true ){
+                                        alert("표시할 수 없습니다.");
+                                });
+                            </script>
                         </ul>
                         <div class="tab_container">
                             <% if History.count == 0 %>
@@ -249,7 +307,7 @@
                             
                             
                             
-                            <% @years.each do |yyyy| %>
+                            <% @years.reverse.each do |yyyy| %>
                             <div id="tab<%= yyyy %>" class="tab_content">
                                <!--참여불교 재가연대 2014년 내용 시작-->
                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -449,7 +507,7 @@
                                 <li class="active" rel="tab1">2014</li>
                             <% end %>
                             <% @years.each do |years| %>
-                                <li rel="tab<%= years.to_s %>"><%= years %></li>
+                                <li rel="tab<%= years.to_s %>" style="width: <%= (100/8).to_s + "%" %>"><%= years %></li>
                             <% end %>
                             <!--<li rel="tab3">2016</li>-->
                             <!--<li rel="tab4">2017</li>-->

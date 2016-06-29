@@ -1,0 +1,2 @@
+module EtcconfigHelper
+end

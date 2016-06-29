@@ -37,6 +37,9 @@ Family.create!([
   {turn: 8, role: "정책위원장", name: "조재현", content: "", image: nil},
   {turn: 9, role: "고문", name: "김원보", content: "", image: nil}
 ])
+FontFamily.create!([
+  {intab_id: 1, ftype: "Nanum Gothic"}
+])
 History.create!([
   {year: 1999, month: 3, date: 0, content1: "제12대 중앙종회의 승인 하에 중앙종회 참관, 종단의 예·결산 등 중요 정책 결정 감시와 대안제시 활동", content2: "창립기념심포지엄 (주제 : 출가정신과 재가연대)"},
   {year: 1999, month: 5, date: 0, content1: "부처님 오신날 봉축심포지엄 (주제 : 사부대중 공의에 의한 사찰운영의 실현)", content2: ""},
@@ -1200,5 +1203,20 @@ ViewCountSite.create!([
   {ip_address: "121.160.152.88", view_date: "2016-06-29"},
   {ip_address: "106.241.15.225", view_date: "2016-06-30"},
   {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+<<<<<<< HEAD
+=======
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
+>>>>>>> 32dca8a89bd96eaef4c2fe75376d4882eb413674
   {ip_address: "106.241.15.225", view_date: "2016-06-30"}
 ])
