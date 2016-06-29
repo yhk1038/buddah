@@ -133,6 +133,7 @@
                                         height:80px;
                                     }
                                 </style>
+                            <% if @intab.id == 24 %>
                             <form id="sign_form" action="/board/signature_save" method="POST">    
                             <div id="pnel0" style="">
                               <div id="pnel1" style="display:none">
@@ -151,17 +152,17 @@
                                     <input type="hidden" name="sg_signNm" value="<%= @post.id %>">
                                     <input type="hidden" name="sg_signTitle" value="<%= @post.title %>">
                                     <div class="sn_inline d1">이름</div>
-                                    <div class="sn_inline d4"><input type="text" name="sg_name" class="sg_name"  ></div>
+                                    <div class="sn_inline d4"><input type="text" name="sg_name" class="sg_name" required></div>
                                     <div class="sn_inline d1">생년월일</div>
-                                    <div class="sn_inline d4"><input type="text" name="sg_birth" class="sg_birth" style="width: 60%;"> 예) 850321</div>
+                                    <div class="sn_inline d4"><input type="text" name="sg_birth" class="sg_birth" style="width: 60%;" required> 예) 850321</div>
                                 </div>
                                 <div class="sn_row">
                                     <div class="sn_inline d1">연락처</div>
-                                    <div class="sn_inline d9"><input type="text" name="sg_tel_1" class="sg_tel_1" placeholder="010"  >&nbsp;-&nbsp;<input type="text" name="sg_tel_2" class="sg_tel_2" placeholder="1234"  >&nbsp;-&nbsp;<input type="text" name="sg_tel_3" class="sg_tel_3" placeholder="5678"  ></div>
+                                    <div class="sn_inline d9"><input type="text" name="sg_tel_1" class="sg_tel_1" placeholder="010" required>&nbsp;-&nbsp;<input type="text" name="sg_tel_2" class="sg_tel_2" placeholder="1234"  >&nbsp;-&nbsp;<input type="text" name="sg_tel_3" class="sg_tel_3" placeholder="5678"  ></div>
                                 </div>
                                 <div class="sn_row">
                                     <div class="sn_inline d1">이메일</div>
-                                    <div class="sn_inline d9"><input type="text" name="sg_mail_1" class="sg_mail_1"  >&nbsp;@&nbsp;<input type="text" name="sg_mail_2" class="sg_mail_2" value=""  >&nbsp;
+                                    <div class="sn_inline d9"><input type="text" name="sg_mail_1" class="sg_mail_1" required>&nbsp;@&nbsp;<input type="text" name="sg_mail_2" class="sg_mail_2" value="" required>&nbsp;
                                         <select type="text" name="sg_mail_3" class="sg_mail_3"  >
                                             <option value="">직접입력</option>
                                     		<option value="naver.com">naver.com</option>
@@ -277,6 +278,7 @@
                             <!-- 스크랩 추천 비추천 시작 { -->
                             <!-- } 스크랩 추천 비추천 끝 -->
                             </form>
+                            <% end %>
                         </section>
                     
                         

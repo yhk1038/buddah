@@ -91,6 +91,7 @@ class BoardController < ApplicationController
             end
             
             donate_pannel = params[:for_ir1]
+            po.visible = false
             if params[:file1] != nil
                 po.ir1 = "<img src=\"/data/post/" + po.id.to_s + '/' + params[:file1]['datafile'].original_filename + "\" style=\"width:100%; height:auto;\"><input type=\"hidden\" value=\"" + donate_pannel.to_s + "\" id=\"donatePannel\" style=\"display:none;\">"
             else

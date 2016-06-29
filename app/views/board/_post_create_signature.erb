@@ -1,5 +1,5 @@
 
-                <article id="ver_signature" class="col-md-9" style="display:none;">
+                <article id="ver_signature" class="col-md-9" style="display:<% if @intab.id == 24 %><%= "block" %><% else %><%= "none" %><% end %>;">
                     <%#= flash[:error] %>
                     <div class="intro">
                         <p class="intro_title"><%= @intab.name %></p>

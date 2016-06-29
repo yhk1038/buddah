@@ -34,11 +34,11 @@
                 </div>
                 <div class="col-md-3">&nbsp;</div>
                 
-                <div id="ver_normal" class="col-md-9">
+                <div id="ver_normal" class="col-md-9" style="display:<%= "block" if @intab.id != 24 %><%= "none" if @intab.id == 24 %>">
                     
                     <div class="intro">
                         <p class="intro_title"><%= @intab.name %></p>
-                        <span class="site_navi"><a href="#" class="btn btn-xs btn-primary sign_toggle" style="color:#fff; margin-right:15px;">서명글 작성모드</a> <a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
+                        <span class="site_navi"><% if @intab.id == 24 %><a href="#" class="btn btn-xs btn-primary sign_toggle" style="color:#fff; margin-right:15px;">서명글 작성모드</a><% end %> <a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
                     </div>
                     <!-- 게시물 작성/수정 시작 { -->
                     <script type="text/javascript" src="./se2/js/HuskyEZCreator.js" charset="utf-8"></script>
