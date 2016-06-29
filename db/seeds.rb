@@ -1202,21 +1202,5 @@ ViewCountSite.create!([
   {ip_address: "121.160.152.88", view_date: "2016-06-29"},
   {ip_address: "121.160.152.88", view_date: "2016-06-29"},
   {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-<<<<<<< HEAD
-=======
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
-  {ip_address: "106.241.15.225", view_date: "2016-06-30"},
->>>>>>> 32dca8a89bd96eaef4c2fe75376d4882eb413674
   {ip_address: "106.241.15.225", view_date: "2016-06-30"}
 ])
