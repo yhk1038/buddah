@@ -14,7 +14,7 @@ class EtcconfigController < ApplicationController
       
     f.ftype = params[:ftype]
     f.save
-    
+    #dkdkdkdk
     redirect_to :back
   end
 end
