@@ -1,7 +1,7 @@
 <div id="hd_wrapper">
 
         <div id="logo">
-            <a href="#"><img src="/theme/krc/img/logo.jpg" alt="교단자정센터" class="logo_banner" title="" data-pin-nopin="true"></a>
+            <a href="/"><img src="/theme/krc/img/logo.jpg" alt="교단자정센터" class="logo_banner" title="" data-pin-nopin="true"></a>
         </div>
 
         <!--모바일 드롭다운 버튼 시작-->
@@ -15,17 +15,17 @@
                 <ul id="menubar">
                 
                 
-                    <li class="gnb_1dli gnb_1dli_on gnb_1dli_over2" style="z-index:999; width:<%= 100/(Tab.count+1) %>%">
-                        <a href="/"><button class="drop_btn">
-                            HOME
-                        </button></a>
-                    </li>
+                    <!--<li class="gnb_1dli gnb_1dli_on gnb_1dli_over2" style="z-index:999; width:<%= 100/(Tab.count+1) %>%">-->
+                    <!--    <a href="/"><button class="drop_btn">-->
+                    <!--        HOME-->
+                    <!--    </button></a>-->
+                    <!--</li>-->
                     <!--<li class="gnb_1dli" style="z-index:999">-->
                     <!--    <a href="/" class="gnb_1da">HOME</a>-->
                     <!--</li>-->
                 <% n = 0 %>
                 <% $tab.order('turn asc').each do |tab| %>
-                    <li class="gnb_1dli" style="z-index:<%= 998 - n %>; width:<%= 100/(Tab.count+1) %>%;">
+                    <li class="gnb_1dli" style="<%= "margin-left: 4%;" if n == 0 %> z-index:<%= 998 - n %>; width:<%= 90/(Tab.count) %>%; font-size:17px">
                     <% if tab.intabs.count == 0 %>
                         <a href="#">
                         <button class="drop_btn">

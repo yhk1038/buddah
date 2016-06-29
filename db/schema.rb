@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602005219) do
+ActiveRecord::Schema.define(version: 20160629182728) do
 
   create_table "families", force: :cascade do |t|
     t.integer  "turn"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20160602005219) do
     t.string   "name"
     t.string   "content"
     t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "font_families", force: :cascade do |t|
+    t.integer  "intab_id"
+    t.string   "ftype"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

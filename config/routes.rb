@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'etcconfig/font_family'
+
   devise_for :users, controllers: {
     registrations: "registrations"
   }

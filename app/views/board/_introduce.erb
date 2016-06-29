@@ -49,7 +49,7 @@
                         <span class="site_navi"><a href="/" style="color: inherit;">Home</a> &gt; <%= @tab.name %> &gt; <strong><%= @intab.name %></strong></span>
                     </div>
                     <p align="center">&nbsp;</p>
-                    <div class="col-md-12" style="padding:0;">
+                    <div class="col-md-12" style="padding:0; <% if FontFamily.where(intab_id: @intab.id).count != 0 %>font-family: <%= FontFamily.where(intab_id: @intab.id).take.ftype %>;<% end %>">
                         <% if Infor.all.count == 0 %>
                         <div class="col-md-2" style="padding:0;">
                             <img src="/theme/krc/img/cc101h1i1.png">
