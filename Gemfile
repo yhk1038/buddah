@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'figaro'
 # gem 'smart_editor', github: "goodoc/smart_editor_rails", branch: "rails4"
 # gem 'carrierwave'
 gem 'seed_dump'
