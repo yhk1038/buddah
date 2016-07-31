@@ -12,6 +12,9 @@
     <%= render :partial => '/krc/main_navbar' %>
     <hr>
 </div>
+<% if current_user %>
+    <%= render :partial => 'krc/user_modal' %>
+<% end %>
 <!-- 상단 끝 -->
 
 <hr>
@@ -64,12 +67,12 @@
                                 <% end %>
                             </dd>
                         <% end %>
-                        <dt style="font-size:18px;">후원회원</dt>
-                        <dd><br><span style="font-size:17px;">
-                            <% User.where("mb_open >= 3 AND mb_open < 5").each do |d| %>
-                                <%= d.username %>(<%= d.email %>) &nbsp&nbsp&nbsp 
-                            <% end %></span>
-                        </dd>
+                        <!--<dt style="font-size:18px;">후원회원</dt>-->
+                        <!--<dd><br><span style="font-size:17px;">-->
+                        <!--    <%# User.where("mb_open >= 3 AND mb_open < 5").each do |d| %>-->
+                        <!--        <%#= d.username %>(<%#= d.email %>) &nbsp&nbsp&nbsp -->
+                        <!--    <%# end %></span>-->
+                        <!--</dd>-->
                     </dl>
                     
                     <p style="text-align: center; " align="center">&nbsp;</p>
