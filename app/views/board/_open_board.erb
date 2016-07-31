@@ -12,6 +12,9 @@
     <%= render :partial => '/krc/main_navbar' %>
     <hr>
 </div>
+<% if current_user %>
+    <%= render :partial => 'krc/user_modal' %>
+<% end %>
 <!-- } 상단 끝 -->
 
 <!-- 콘텐츠 시작 { -->

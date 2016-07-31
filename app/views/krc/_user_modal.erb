@@ -8,38 +8,11 @@
       <div class="modal-body" style="padding:0;">
         <div class="panel panel-default" style="margin:0;border:0px;">
           <!-- Default panel contents -->
-            <%
-                if current_user.mb_open == 10
-                    mb_open = '최고관리자'
-                elsif current_user.mb_open == 9
-                    mb_open = '개별 사이트관리자'
-                elsif current_user.mb_open == 8
-                    mb_open = '고위임직원'
-                elsif current_user.mb_open == 7
-                    mb_open = '일반임직원'
-                elsif current_user.mb_open == 6
-                    mb_open = '일반_특별관리자'
-                elsif current_user.mb_open == 5
-                    mb_open = '일반_보통관리자'
-                elsif current_user.mb_open == 4
-                    mb_open = '정회원'
-                elsif current_user.mb_open == 3
-                    mb_open = '후원회원'
-                elsif current_user.mb_open == 2
-                    mb_open = '인터넷회원'
-                elsif current_user.mb_open == 1
-                    mb_open = '비회원'
-                elsif current_user.mb_open == 0
-                    mb_open = '방문자'
-                elsif current_user.mb_open == nil
-                    mb_open = '방문자'
-                end
-            %>
           <div class="panel-heading" style="text-align: center; font-size: 20px; font-weight: bold; background-color: #f2dede;">
-              회원님은 <span style="font-size:22px; color:#D23232;"><%= mb_open %></span> 입니다.
+              회원님은 <span style="font-size:22px; color:#D23232;"><%= current_user.authority %></span> 입니다.
           </div>
           <div class="panel-body">
-              <% if current_user.mb_open >= 7 %>
+              <% if current_user.mb_open > 7 %>
               <p style="font-size: 20px; font-weight:bold;">회원님은 관리자페이지에 <a href="/admin/statistic" class="btn btn-info" style="color:#fff; font-weight:bold;">접속</a>하실 수 있습니다.</p>
               <% else %>
               <p>정회원이란 ...</p>

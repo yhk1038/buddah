@@ -28,7 +28,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
         # }
         # 개인설정(){
         t.integer :mb_mailling,     null: false, default: 0
-        t.integer :mb_open,         null: false, default: 1
+        t.integer :mb_open,         null: false, default: 2
         # }
       # }
       

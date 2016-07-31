@@ -17,6 +17,15 @@ class BoardController < ApplicationController
             @intab = Intab.find(params[:id])
         end
         @tab = Tab.where(:id => @intab.tab_id).take
+        
+        if current_user
+          x = current_user.for_myInfo_modal
+          i = 0
+          $myInfo.each do |info|
+            eval("#{info} = x[#{i}]")
+            i += 1
+          end
+        end
     end
     
     def tmp
@@ -280,19 +289,6 @@ class BoardController < ApplicationController
 #관리자페이지
     def admin
         
-        
-        
-        # <option value="10" <%= "selected" if intab.who_can_create == 10 %>>최고관리자</option>
-        # <option value="9" <%= "selected" if intab.who_can_create == 9 %>>부분 관리자</option>
-        # <option value="8" <%= "selected" if intab.who_can_create == 8 %>>고위 임직원</option>
-        # <option value="7" <%= "selected" if intab.who_can_create == 7 %>>일반 임직원</option>
-        # <option value="6" <%= "selected" if intab.who_can_create == 6 %>>?</option>
-        # <option value="5" <%= "selected" if intab.who_can_create == 5 %>>?</option>
-        # <option value="4" <%= "selected" if intab.who_can_create == 4 %>>정회원</option>
-        # <option value="3" <%= "selected" if intab.who_can_create == 3 %>>후원회원</option>
-        # <option value="2" <%= "selected" if intab.who_can_create == 2 %>>인터넷회원</option>
-        # <option value="1" <%= "selected" if intab.who_can_create == 1 %>>비회원</option>
-        # <option value="0" <%= "selected" if intab.who_can_create == 0 %>>방문자</option>
     end
     
     def family_edit

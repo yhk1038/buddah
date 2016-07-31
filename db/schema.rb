@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 20160629182728) do
     t.string   "addr",                   default: "", null: false
     t.string   "addr2",                  default: "", null: false
     t.integer  "mb_mailling",            default: 0,  null: false
-    t.integer  "mb_open",                default: 1,  null: false
+    t.integer  "mb_open",                default: 2,  null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

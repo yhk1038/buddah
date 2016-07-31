@@ -182,31 +182,23 @@
                 <select type="text" name="who_can_create" class="form-control" style="width:15%; float:left;">
                     <option value="" <%= "selected" if yl_intab.who_can_create == "" %>>-쓰기권한-</option>
                     <option value="10" <%= "selected" if yl_intab.who_can_create == 10 %>>최고관리자</option>
-                    <option value="9" <%= "selected" if yl_intab.who_can_create == 9 %>>부분 관리자</option>
-                    <option value="8" <%= "selected" if yl_intab.who_can_create == 8 %>>고위 임직원</option>
-                    <option value="7" <%= "selected" if yl_intab.who_can_create == 7 %>>일반 임직원</option>
-                    <option value="6" <%= "selected" if yl_intab.who_can_create == 6 %>>?</option>
-                    <option value="5" <%= "selected" if yl_intab.who_can_create == 5 %>>?</option>
-                    <option value="4" <%= "selected" if yl_intab.who_can_create == 4 %>>정회원</option>
-                    <option value="3" <%= "selected" if yl_intab.who_can_create == 3 %>>후원회원</option>
+                    <option value="9" <%= "selected" if yl_intab.who_can_create == 9 %>>사이트 관리자</option>
+                    <option value="8" <%= "selected" if yl_intab.who_can_create == 8 %>>직원</option>
+                    <option value="5" <%= "selected" if yl_intab.who_can_create == 5 %>>일반 관리자</option>
+                    <option value="3" <%= "selected" if yl_intab.who_can_create == 3 %>>정회원</option>
                     <option value="2" <%= "selected" if yl_intab.who_can_create == 2 %>>인터넷회원</option>
-                    <option value="1" <%= "selected" if yl_intab.who_can_create == 1 %>>비회원</option>
-                    <option value="0" <%= "selected" if yl_intab.who_can_create == 0 %>>방문자</option>
+                    <option value="1" <%= "selected" if yl_intab.who_can_create == 1 %>>전체</option>
                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style="float:left; margin-left:20px; margin-right: 10px;">읽기 : </span>
                 <select type="text" name="who_can_read" class="form-control" style="width:15%; float:left;">
                     <option value="" <%= "selected" if yl_intab.who_can_read == "" %>>-읽기권한-</option>
                     <option value="10" <%= "selected" if yl_intab.who_can_read == 10 %>>최고관리자</option>
-                    <option value="9" <%= "selected" if yl_intab.who_can_read == 9 %>>부분 관리자</option>
-                    <option value="8" <%= "selected" if yl_intab.who_can_read == 8 %>>고위 임직원</option>
-                    <option value="7" <%= "selected" if yl_intab.who_can_read == 7 %>>일반 임직원</option>
-                    <option value="6" <%= "selected" if yl_intab.who_can_read == 6 %>>?</option>
-                    <option value="5" <%= "selected" if yl_intab.who_can_read == 5 %>>?</option>
-                    <option value="4" <%= "selected" if yl_intab.who_can_read == 4 %>>정회원</option>
-                    <option value="3" <%= "selected" if yl_intab.who_can_read == 3 %>>후원회원</option>
+                    <option value="9" <%= "selected" if yl_intab.who_can_read == 9 %>>사이트 관리자</option>
+                    <option value="8" <%= "selected" if yl_intab.who_can_read == 8 %>>직원</option>
+                    <option value="5" <%= "selected" if yl_intab.who_can_read == 5 %>>일반 관리자</option>
+                    <option value="3" <%= "selected" if yl_intab.who_can_read == 3 %>>정회원</option>
                     <option value="2" <%= "selected" if yl_intab.who_can_read == 2 %>>인터넷회원</option>
-                    <option value="1" <%= "selected" if yl_intab.who_can_read == 1 %>>비회원</option>
-                    <option value="0" <%= "selected" if yl_intab.who_can_read == 0 %>>방문자</option>
+                    <option value="1" <%= "selected" if yl_intab.who_can_read == 1 %>>전체</option>
                 </select>
             </a>
             <a class="list-group-item li_group_mo">
@@ -274,31 +266,23 @@
                 <select type="text" name="who_can_create" class="form-control" style="width:15%; float:left;">
                     <option value="" selected>-쓰기권한-</option>
                     <option value="10" <%#= "selected" if yl_intab.who_can_create == 10 %>>최고관리자</option>
-                    <option value="9" <%#= "selected" if yl_intab.who_can_create == 9 %>>부분 관리자</option>
-                    <option value="8" <%#= "selected" if yl_intab.who_can_create == 8 %>>고위 임직원</option>
-                    <option value="7" <%#= "selected" if yl_intab.who_can_create == 7 %>>일반 임직원</option>
-                    <option value="6" <%#= "selected" if yl_intab.who_can_create == 6 %>>?</option>
-                    <option value="5" <%#= "selected" if yl_intab.who_can_create == 5 %>>?</option>
-                    <option value="4" <%#= "selected" if yl_intab.who_can_create == 4 %>>정회원</option>
-                    <option value="3" <%#= "selected" if yl_intab.who_can_create == 3 %>>후원회원</option>
+                    <option value="9" <%#= "selected" if yl_intab.who_can_create == 9 %>>사이트 관리자</option>
+                    <option value="8" <%#= "selected" if yl_intab.who_can_create == 8 %>>직원</option>
+                    <option value="5" <%#= "selected" if yl_intab.who_can_create == 5 %>>일반 관리자</option>
+                    <option value="3" <%#= "selected" if yl_intab.who_can_create == 3 %>>정회원</option>
                     <option value="2" <%#= "selected" if yl_intab.who_can_create == 2 %>>인터넷회원</option>
-                    <option value="1" <%#= "selected" if yl_intab.who_can_create == 1 %>>비회원</option>
-                    <option value="0" <%#= "selected" if yl_intab.who_can_create == 0 %>>방문자</option>
+                    <option value="1" <%#= "selected" if yl_intab.who_can_create == 1 %>>전체</option>
                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span style="float:left; margin-left:20px; margin-right: 10px;">읽기 : &nbsp </span>
                 <select type="text" name="who_can_read" class="form-control" style="width:15%; float:left;">
                     <option value="" selected>-읽기권한-</option>
                     <option value="10" <%#= "selected" if yl_intab.who_can_read == 10 %>>최고관리자</option>
-                    <option value="9" <%#= "selected" if yl_intab.who_can_read == 9 %>>부분 관리자</option>
-                    <option value="8" <%#= "selected" if yl_intab.who_can_read == 8 %>>고위 임직원</option>
-                    <option value="7" <%#= "selected" if yl_intab.who_can_read == 7 %>>일반 임직원</option>
-                    <option value="6" <%#= "selected" if yl_intab.who_can_read == 6 %>>?</option>
-                    <option value="5" <%#= "selected" if yl_intab.who_can_read == 5 %>>?</option>
+                    <option value="9" <%#= "selected" if yl_intab.who_can_read == 9 %>>사이트 관리자</option>
+                    <option value="8" <%#= "selected" if yl_intab.who_can_read == 8 %>>직원</option>
+                    <option value="5" <%#= "selected" if yl_intab.who_can_read == 5 %>>일반 관리자</option>
                     <option value="4" <%#= "selected" if yl_intab.who_can_read == 4 %>>정회원</option>
-                    <option value="3" <%#= "selected" if yl_intab.who_can_read == 3 %>>후원회원</option>
                     <option value="2" <%#= "selected" if yl_intab.who_can_read == 2 %>>인터넷회원</option>
-                    <option value="1" <%#= "selected" if yl_intab.who_can_read == 1 %>>비회원</option>
-                    <option value="0" <%#= "selected" if yl_intab.who_can_read == 0 %>>방문자</option>
+                    <option value="1" <%#= "selected" if yl_intab.who_can_read == 1 %>>전체</option>
                 </select>
             </a>
             <a class="list-group-item li_group_mo">

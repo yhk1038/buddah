@@ -6,4 +6,6 @@ class ApplicationController < ActionController::Base
   
   $templete = ['introduce','map','org','org2','donate','open_board','list', 'center_history']
   $tab = Tab.all.order('turn asc')
+  
+  $myInfo = ['@agree1', '@agree2', '@issolar', '@islady', '@mailling', '@name', '@nickname', '@member_id', '@address', '@phonenumber', '@birth', '@email', '@myinfo_arr', '@myinfo_arr2']
 end
