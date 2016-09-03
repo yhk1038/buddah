@@ -235,7 +235,32 @@
                                 </tr>
                                 <% else %>
                                 <!--읽기권한이 방문자 이상이면(0보다 크면)-->
-                                <!--안보인다-->
+                                <!--비공개라고 보인다-->
+                                <tr class="">
+                                    <!--게시글 번호-->
+                                    <td class="td_num"><%= @intab.posts.count - pst_n %></td>
+                                    <!--게시글 제목-->
+                                    <td class="td_subject">
+                                        <a href="/board/post_read/<%= pst.id %>">
+                                            <%= "[비공개]읽기 권한이 승인되지 않았습니다" %>
+                                        <span class="sound_only">댓글</span><span class="cnt_cmt"><%= pst.replies.count %></span><span class="sound_only">개</span>
+                                        </a>
+                                    </td>
+                                    <!--게시글 글쓴이-->
+                                    <% if pst.anonymous == true %>
+                                        <td class="td_name td_date sv_use">
+                                            <span class="sv_member"><%= "익명" %></span>
+                                        </td>
+                                    <% else %>
+                                        <td class="td_name td_date sv_use">
+                                            <span class="sv_member"><%= pst.author_name %></span>
+                                        </td>
+                                    <% end %>
+                                    <!--게시글 작성일-->
+                                    <td class="td_date"><%= Date.parse(pst.created_at.to_s).to_s.last(5) %></td>
+                                    <!--게시글 조회수-->
+                                    <td class="td_num"><%= pst.view_count_posts.count %></td>
+                                </tr>
                                 <% end %>
                             <% end %>
                           <% end %>
