@@ -69,18 +69,44 @@
                                 dev.times do |d|
                                     eval("@years_#{(dev+1)-(d+1)} = @years.last(6*#{d+1}).first(6)")
                                 end
+                                
+                                # [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008]
+                                # dev == 2    
+                                    # d == 0
+                                        # @years_2 = @years.last(6).first(6)
+                                        # => [2003, 2004, 2005, 2006, 2007, 2008]
+                                    # d == 1
+                                        # @years_1 = @years.last(12).first(6)
+                                        # => [2001, 2002, 2003, 2004, 2005, 2006]
+                                
+                                    # i == 0
+                                        # id='dev_1', value='1', style='display:none;'
+                                            # eval('@years_1') 
+                                            # => [2001, 2002, 2003, 2004, 2005, 2006]
+                                    # i == 1
+                                        # id='dev_2', value='2', style='display:block;'
+                                            # eval('@years_2')
+                                            # => [2003, 2004, 2005, 2006, 2007, 2008]
                             %>
-                            <li id="show_prev" style="width: <%= "12.5%" %>; display:block;">PREV</li>
+                            <li id="show_prev" style="width: <%= "12.5%" %>; display: block;">PREV</li>
                             
+                            <% pick = [] %>
                             <% dev.times do |i| %>
-                                <div id="dev_<%= i+1 %>" value="<%= i+1 %>" style="<%= "display:block;" if i+1 == dev %><%= "display:none;" if i+1 != dev %>">
+                                <div id="dev_<%= i+1 %>" value="<%= i+1 %>" style="<%= "display: block;" if i+1 == dev %><%= "display: none;" if i+1 != dev %>">
+                                <% q = 1 %>
                                 <% eval("@years_#{i+1}").each do |years| %>
+                                    <% 
+                                        if q == 1
+                                            pick << years
+                                        end
+                                        q += 1
+                                    %>
                                     <li rel="tab<%= years.to_s %>" style="width: <%= "12.5%" %>;"><%= years %></li>
                                 <% end %>
                                 </div>
                             <% end %>
                             
-                            <li id="show_next" style="width: <%= "12.5%" %>; display:block;">NEXT</li>
+                            <li id="show_next" style="width: <%= "12.5%" %>; display: block;">NEXT</li>
                             <style>
                                 .lia{
                                     float: left;
@@ -105,25 +131,39 @@
                             </style>
                             <script>
                                 $("#show_prev").click(function(){
-                                    // if ( $("#dev_3").display === true ){
+                                    if ( $("#dev_3").css("display") === "block" ){
                                         $("#dev_3").hide();
                                         $("#dev_2").show();
-                                    // } else if ( $("#dev_2").display === true ){
-                                    //     $("#dev_2").hide();
-                                    //     $("#dev_1").show();
-                                    // } else if ( $("#dev_1").display === true ){
-                                    //     alert("표시할 수 없습니다.");
+                                        $(".tab<%= pick[2-1] %>").show(function(){
+                                            $(this).attr("style","display:block !important;");
+                                        });
+                                    } else if ( $("#dev_2").css("display") === "block" ){
+                                        $("#dev_2").hide();
+                                        $("#dev_1").show();
+                                        $(".tab<%= pick[1-1] %>").show(function(){
+                                            $(this).attr("style","display:block !important;");
+                                        });
+                                    } else if ( $("#dev_1").css("display") === "block" ){
+                                        alert("표시할 수 없습니다.");
+                                    }
                                 });
                                 
                                 $("#show_next").click(function(){
-                                    if ( $("#dev_1").display === true ){
+                                    if ( $("#dev_1").css("display") === "block" ){
                                         $("#dev_1").hide();
                                         $("#dev_2").show();
-                                    } else if ( $("#dev_2").display === true ){
+                                        $(".tab<%= pick[2-1] %>").show(function(){
+                                            $(this).attr("style","display:block !important;");
+                                        });
+                                    } else if ( $("#dev_2").css("display") === "block" ){
                                         $("#dev_2").hide();
                                         $("#dev_3").show();
-                                    } else if ( $("#dev_3").display === true ){
+                                        $(".tab<%= pick[3-1] %>").show(function(){
+                                            $(this).attr("style","display:block !important;");
+                                        });
+                                    } else if ( $("#dev_3").css("display") === "block" ){
                                         alert("표시할 수 없습니다.");
+                                    }
                                 });
                             </script>
                         </ul>
@@ -311,7 +351,7 @@
                             
                             
                             <% @years.reverse.each do |yyyy| %>
-                            <div id="tab<%= yyyy %>" class="tab_content">
+                            <div id="tab<%= yyyy %>" class="tab_content tab<%= yyyy %>">
                                <!--참여불교 재가연대 2014년 내용 시작-->
                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                     <tbody>
@@ -417,21 +457,21 @@
                     </div>
                     <!-- #container -->
                     
-                <script>
-                $(function () {
-                $(".tab_content").hide();
-                $(".tab_content:first").show();
-            
-                $("ul.tabs li").click(function () {
-                    $("ul.tabs li").removeClass("active").css("color", "#333");
-                    //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
-                    $(this).addClass("active").css("color", "darkred");
-                    $(".tab_content").hide()
-                    var activeTab = $(this).attr("rel");
-                    $("#" + activeTab).fadeIn()
-                });
-            });
-                </script>
+                    <script>
+                        $(function () {
+                            $(".tab_content").hide();
+                            $(".tab_content:first").show();
+                        
+                            $("ul.tabs li").click(function () {
+                                $("ul.tabs li").removeClass("active").css("color", "#333");
+                                //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+                                $(this).addClass("active").css("color", "darkred");
+                                $(".tab_content").hide()
+                                var activeTab = $(this).attr("rel");
+                                $("#" + activeTab).fadeIn()
+                            });
+                        });
+                    </script>
 
                     
                   

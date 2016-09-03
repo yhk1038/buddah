@@ -132,19 +132,17 @@
                 <div class="lt_main">
                     <strong class="lt_title">
                         <a href="/board/page/<%= rgt_up.id %>"><%= rgt_up.name %></a>
-                        <!--http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice-->
                     </strong>
                     <ul>
                         <% rgt_up.posts.last(4).reverse.each do |x| %>
                         <li>
                             <a href="/board/post_read/<%= x.id %>">
-                                <% if x.title.length > 25 %>
-                                    <%= x.title.first(25) + '...' %>
+                                <% if x.title.length > 23 %>
+                                    <%= x.title.first(23) + '...' %>
                                 <% else %>
                                     <%= x.title %>
                                 <% end %>
                                 <span class="cnt_cmt"><%= x.replies.count %></span></a><span class="lt_date"><%= Date.parse(x.created_at.to_s).to_s.last(5) %></span>
-                            <!--http://theme.sir.co.kr/gnuboard5/bbs/board.php?bo_table=notice&amp;wr_id=7-->
                         </li>
                         <% end %>
                     </ul>
@@ -161,21 +159,41 @@
         <div class="lt_gal">
             <strong class="lt_title"><a href="/board/page/<%= rgt_dwn.id %>"><%= rgt_dwn.name %></a></strong>
             <ul>
+            <% count = rgt_dwn.posts.count %>
+            <% count = 3 if rgt_dwn.posts.count > 3 %>
+            <% count.times do |i| %>
+                <% posting = rgt_dwn.posts.last(i+1).first %>
                 <li>
                     <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>
-                    <a href="#" class="lt_tit">7월 웹진</a>
-                    <p class="lt_detail">메뉴입니다.&nbsp;&nbsp;메뉴입니다.&nbsp;</p>
+                    <a href="#" class="lt_tit"><%= posting.title %><%= ".." if posting.title.length > 10 %></a>
+                    <p class="lt_detail"><%= posting.ir1.first(30) %><%= "..." if posting.ir1.length > 30 %></p>
                 </li>
+            <% end %>
+            <% (3-count).times do |ii| %>
                 <li>
                     <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>
-                    <a href="#" class="lt_tit">7,500원</a>
-                    <p class="lt_detail">인기상품입니다.&nbsp;두줄에서 세줄까지 작성합니다.나머지 부가 설명은…</p>
+                    <a href="#" class="lt_tit">임시 게시글 입니다.</a>
+                    <% if user_signed_in? %>
+                        <% if current_user.mb_open >= 5 %>
+                        <p class="lt_detail">게시글을 앞으로 <%= (3 - count)  %>개 이상 작성하면 자동으로 사라집니다.</p>
+                        <% else %>
+                        <p class="lt_detail">게시글이 더 작성될 예정입니다. COMMING SOOON!</p>
+                        <% end %>
+                    <% else %>
+                    <p class="lt_detail">게시글이 더 작성될 예정입니다! COMMING SOOON!</p>
+                    <% end %>
                 </li>
-                <li>
-                    <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>
-                    <a href="#" class="lt_tit">인기상품</a>
-                    <p class="lt_detail">ㅋㅋ&nbsp;내용을 입력하세요.</p>
-                </li>
+            <% end %>
+                <!--<li>-->
+                <!--    <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>-->
+                <!--    <a href="#" class="lt_tit">7,500원</a>-->
+                <!--    <p class="lt_detail">인기상품입니다.&nbsp;두줄에서 세줄까지 작성합니다.나머지 부가 설명은…</p>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--    <a href="#" class="lt_image"><img src="/theme/krc/img/thumb_ri.jpg" alt="" width="143" height="89"></a>-->
+                <!--    <a href="#" class="lt_tit">인기상품</a>-->
+                <!--    <p class="lt_detail">ㅋㅋ&nbsp;내용을 입력하세요.</p>-->
+                <!--</li>-->
             
                 </ul>
         
